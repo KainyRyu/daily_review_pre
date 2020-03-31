@@ -1,0 +1,11 @@
+.Timer-circle {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    border: black 3px solid;
+    border-radius: 50%;
+}
+
+.Timer-circle-overlay {
+    
+}
