@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './timer.css';
 
 function timerFc() {
-    const = [ timeSetting, setTimesetting ] = useState(0)
+    const [timeSetting, setTimesetting] = useState(0)
+
 }
 
 
