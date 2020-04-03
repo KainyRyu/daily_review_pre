@@ -1,0 +1,19 @@
+.check-list {
+    margin-top: 5vh;
+}
+
+.check-list-title {
+    margin: 5px;
+}    
+
+.check-list-box {
+    border: black 3px solid;
+    height: 60vh;
+    width: 90%;
+    margin: auto;
+}
+
+.check-list_ul {
+    text-align: left;
+    /* list-style: none; */
+}
