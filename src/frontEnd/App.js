@@ -4,6 +4,7 @@ import Landing from './components/Landing';
 import Header from './components/Header';
 import Priority from './components/Priority'
 import CheckList from './components/CheckList'
+import TimeTable from './components/TimeTable'
 
 
 
@@ -13,7 +14,8 @@ function App() {
       {/* <Landing /> */}
       <Header />
       {/* <Priority /> */}
-      <CheckList />
+      {/* <CheckList /> */}
+      <TimeTable />
     </div>
   );
 }

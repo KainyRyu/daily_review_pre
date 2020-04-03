@@ -1,11 +1,12 @@
 import React from 'react';
+import Today from './Today';
 import './priority.css';
 
 
 export default function Priority() {
     return (
         <div className="main">
-            <div className="main-today">Thursday 2nd April 2020</div>
+            <Today />
             <div className="priority-box red">
                 <h3>Urgent & Significant</h3>
                 <ul>
