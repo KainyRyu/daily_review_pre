@@ -3,4 +3,5 @@
     height: 80vh;
     width: 95vw;
     margin: 0 auto;
+    display: flex;
 }
