@@ -1,5 +1,5 @@
 import React from 'react';
-import Today from './Today';
+import Today from '../Today';
 import './priority.css';
 
 

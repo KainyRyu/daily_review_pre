@@ -1,22 +1,27 @@
 import React from 'react';
 import './App.css';
-import Landing from './components/Landing';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Landing from './components/Landing/Landing';
+import Login from './components/Login';
+import Register from './components/Register/Register'
 import Header from './components/Header';
-import Priority from './components/Priority'
-import CheckList from './components/CheckList'
-import TimeTable from './components/TimeTable'
+import Priority from './components/Priority/Priority'
+import CheckList from './components/CheckList/CheckList'
+import Timetable from './components/Timetable/Timetable'
 
 
 
 function App() {
   return (
-    <div className="App">
-      {/* <Landing /> */}
-      <Header />
-      {/* <Priority /> */}
-      {/* <CheckList /> */}
-      <TimeTable />
-    </div>
+    <Router>
+      {/* <Header /> */}
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        {/* <Route exact path="/" component={} /> */}
+      </Switch>
+    </Router>
   );
 }
 

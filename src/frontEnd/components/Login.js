@@ -1,11 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import GoogleLogin from 'react-google-login';
+import React, { useState, useEffect } from 'react';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core'
+import { BrouserRouter as Router, Switch, Route } from 'react-router-dom';
 
-export default function Login() {
+const theme = createMuiTheme();
+
+
+export default function SignIn(props) {
+    const { classes } = props
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
     return (
-        <div>
-            
-        </div>
+        <MuiThemeProvider theme={theme}>
+            <CssBaseline /> 
+        </MuiThemeProvider>
+
     )
 }

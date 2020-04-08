@@ -1,6 +1,10 @@
+.Landing{
+    text-align: center;
+}
+
 .landing_logo {
     width: 70vw;
-    margin-top: 15vh;
+    margin: 15vh auto;
 }
 
 .sign-in {

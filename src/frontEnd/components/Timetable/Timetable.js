@@ -1,6 +1,6 @@
 import React from 'react';
-import Today from './Today';
-import './timeTable.css';
+import Today from '../Today';
+import './timetable.css';
 
 export default function TimeTable() {
     return (
@@ -23,6 +23,6 @@ export default function TimeTable() {
 
 function times() {
     for(var i = 0; i < 25; i++) {
-        i + 2;
+
     }
 }
