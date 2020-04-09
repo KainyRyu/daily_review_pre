@@ -14,6 +14,7 @@ export default function SignIn(props) {
     return (
         <MuiThemeProvider theme={theme}>
             <CssBaseline /> 
+            <Home />
         </MuiThemeProvider>
 
     )
