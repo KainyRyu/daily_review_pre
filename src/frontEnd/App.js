@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from './components/Landing/Landing';
 import Login from './components/Login';
+import Signup from './components/Signup';
 import Register from './components/Register/Register'
 import Header from './components/Header';
 import Priority from './components/Priority/Priority'
@@ -18,6 +19,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/register" component={Register} />
         {/* <Route exact path="/" component={} /> */}
       </Switch>
