@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Logo from '../../image/DR.svg';
 import './landing.css';
-import firebase from '../../firebase';
+import firebase from '../../utils/firebase';
 
 
 
