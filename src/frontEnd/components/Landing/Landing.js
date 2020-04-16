@@ -55,12 +55,12 @@ export default function Landing() {
                 Sign Up
             </Button>
             {isSignedIn ? (
-                <div>Signed in!</div>
-            ) : (
                 <StyledFirebaseAuth
                     uiConfig={uiConfig}
                     firebaseAuth={firebase.auth()}
                 />
+            ) : (
+                <div>Signed in!</div>
             )}
                 {/* <button onClick={() => app.auth()></button> */}
         </div>
