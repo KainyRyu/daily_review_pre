@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typography, Paper, Avatar, Button } from '@material-ui/core';
 import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined';
 import withStyles from '@material-ui/core/styles/withStyles'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Link } from 'react-router-dom';
 import Logo from '../../image/DR.svg';
 import './landing.css';
@@ -11,7 +12,25 @@ import Signup from '../Signup';
 
 
 export default function Landing() {
-    
+    const [isSignedIn, setIsSignedIn] = useState(false);
+
+    const uiConfig = {
+        signInFlow: "popup",
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+            signInSuccess: () => false
+        }
+    }
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(user => {
+            setIsSignedIn(!isSignedIn)
+        })
+    }, [])
+
     return (
         <div className="Landing">
             <img className="landing_logo" src={Logo} alt="logo" />
@@ -35,7 +54,14 @@ export default function Landing() {
             >
                 Sign Up
             </Button>
-            <Signup />
+            {isSignedIn ? (
+                <div>Signed in!</div>
+            ) : (
+                <StyledFirebaseAuth
+                    uiConfig={uiConfig}
+                    firebaseAuth={firebase.auth()}
+                />
+            )}
                 {/* <button onClick={() => app.auth()></button> */}
         </div>
     )
