@@ -27,43 +27,40 @@ export default function Landing() {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setIsSignedIn(!isSignedIn)
+            setIsSignedIn({ isSignedIn: !!user })
+            console.log(user)
         })
     }, [])
 
+    function signOutBtn() {
+        firebase.auth().signOut()
+        // setIsSignedIn(false)
+    }
     return (
         <div className="Landing">
             <img className="landing_logo" src={Logo} alt="logo" />
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                component={Link}
-                to="/login"
-            >
-                Login
-            </Button>
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                component={Link}
-                to="/signup"
-            >
-                Sign Up
-            </Button>
-            {isSignedIn ? (
+            {!isSignedIn ? (
+                <>
+                    <div>Signed in!</div>
+                    <Button onClick={signOutBtn()}>Sign out</Button>
+
+                </>
+            ) : (
                 <StyledFirebaseAuth
                     uiConfig={uiConfig}
                     firebaseAuth={firebase.auth()}
                 />
-            ) : (
-                <div>Signed in!</div>
             )}
                 {/* <button onClick={() => app.auth()></button> */}
         </div>
     )
+    // async function login() {
+    //     try {
+    //         await firebase.login(email, password)
+    //         props.history.replace('/')
+    //     } catch(error) {
+    //         alert(error.message)
+    //     }
+    // }
 
 }
