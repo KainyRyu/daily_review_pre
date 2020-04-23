@@ -32,17 +32,16 @@ export default function Landing() {
         })
     }, [])
 
-    function signOutBtn() {
-        firebase.auth().signOut()
-        // setIsSignedIn(false)
-    }
+
     return (
         <div className="Landing">
             <img className="landing_logo" src={Logo} alt="logo" />
-            {!isSignedIn ? (
+            {isSignedIn ? (
                 <>
                     <div>Signed in!</div>
-                    <Button onClick={signOutBtn()}>Sign out</Button>
+                    <Button onClick={() => firebase.auth().signOut()}>
+                        Sign out
+                    </Button>
 
                 </>
             ) : (
