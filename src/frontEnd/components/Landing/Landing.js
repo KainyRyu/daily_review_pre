@@ -8,7 +8,7 @@ import Logo from '../../image/DR.svg';
 import './landing.css';
 import firebase from '../../utils/firebase';
 import Signup from '../Signup';
-
+import Login from '../Login'
 
 
 export default function Landing() {
@@ -30,7 +30,7 @@ export default function Landing() {
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
             setIsSignedIn({ isSignedIn: !!user })
-            console.log(user)
+            console.log("user", user)
         })
     }, [])
 
@@ -45,6 +45,7 @@ export default function Landing() {
                         Sign out
                     </Button>
                     <h1>{firebase.auth().displayName}</h1>
+                    <Login />
 
                 </>
             ) : (

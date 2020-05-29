@@ -2,13 +2,17 @@
   text-align: center;
 }
 
-.header {
+.navbar {
+  bottom: 0;
+  border-top: solid black 2px;
   display: flex;
+  height: 60px;
   justify-content: space-between;
-  padding: 10px;
-  border-bottom: solid black 2px;
+  padding: 10px 17px;
+  position: fixed;
+  width: 100vw;
 }
 
-.header_logo {
+.navbar_logo {
   height: 30px;
 }
