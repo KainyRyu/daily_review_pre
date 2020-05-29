@@ -18,6 +18,8 @@ export default function Landing() {
         signInFlow: "popup",
         signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.TwitterAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
         callbacks: {
@@ -36,12 +38,13 @@ export default function Landing() {
     return (
         <div className="Landing">
             <img className="landing_logo" src={Logo} alt="logo" />
-            {isSignedIn ? (
+            {!isSignedIn ? (
                 <>
                     <div>Signed in!</div>
                     <Button onClick={() => firebase.auth().signOut()}>
                         Sign out
                     </Button>
+                    <h1>{firebase.auth().displayName}</h1>
 
                 </>
             ) : (
