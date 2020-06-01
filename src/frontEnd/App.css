@@ -3,6 +3,7 @@
 }
 
 .navbar {
+  background: white;
   bottom: 0;
   border-top: solid black 2px;
   display: flex;

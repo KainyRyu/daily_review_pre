@@ -6,7 +6,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Link } from 'react-router-dom';
 import Logo from '../../image/DR.svg';
 import './landing.css';
-import firebase from '../../utils/firebase';
+import firebase from 'firebase';
 import Signup from '../Signup';
 import Login from '../Login'
 
@@ -26,25 +26,28 @@ export default function Landing() {
             signInSuccess: () => false
         }
     }
-
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setIsSignedIn({ isSignedIn: !!user })
+            setIsSignedIn(!!user)
             console.log("user", user)
         })
     }, [])
 
-
     return (
         <div className="Landing">
             <img className="landing_logo" src={Logo} alt="logo" />
-            {!isSignedIn ? (
+            {isSignedIn !== false ? (
                 <>
                     <div>Signed in!</div>
                     <Button onClick={() => firebase.auth().signOut()}>
                         Sign out
                     </Button>
-                    <h1>{firebase.auth().displayName}</h1>
+                    <h1>Hello, I'm {}</h1>
+                    <h1>{firebase.auth().currentUser.displayName}</h1>
+                    <img
+                        alt="profile picture"
+                        src={firebase.auth().currentUser.photoURL}
+                    />
                     <Login />
 
                 </>

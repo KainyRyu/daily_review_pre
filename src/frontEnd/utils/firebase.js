@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-// import 'firebase/firestore';
+// import 'firebase/firebase-firestore';
 
   // Your web app's Firebase configuration
-  var firebaseConfig = {
+  var config = {
     apiKey: "AIzaSyDJ2KCHI8RuMx2TH7kXJcfR3ESXnVfFq4U",
     authDomain: "dailyreview-7e684.firebaseapp.com",
     databaseURL: "https://dailyreview-7e684.firebaseio.com",
@@ -14,7 +14,26 @@ import 'firebase/auth';
     measurementId: "G-HN9VLB1Z87"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  class Firebase {
+    constructor() {
+      firebase.initializeApp(config)
+      this.auth = firebase.auth()
+      this.db = firebase.firestore()
+    }
+    login(email, password) {
+      return this.auth.signInWithEmailAndPassword(email, password)
+    }
+    logout() {
+      return this.auth.signOut()
+    }
+    
+    async register(name, email, password) {
+      await this.auth.createUserWithEmailAndPassword(email, password)
+      return this.auth.currentUser.updateProfile({
+        displayName: name
+      })
+    }
+  }
 
 
-  export default firebase;
+  export default new Firebase();

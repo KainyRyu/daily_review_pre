@@ -14,13 +14,16 @@ import Timetable from './components/Timetable/Timetable'
 function App() {
   return (
     <Router>
-      <Navbar />
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/schedule" component={Signup} />
+        <Route exact path="/calendar" component={Signup} />
+        <Route exact path="/more" component={Signup} />
         {/* <Route exact path="/" component={} /> */}
       </Switch>
+      <Navbar />
     </Router>
   );
 }
