@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core'
-import { BrouserRouter as Router, Switch, Route } from 'react-router-dom';
+import firebase from 'firebase'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import Logo from '../image/DR.svg'
 
 const theme = createMuiTheme();
 
 
-export default function SignIn(props) {
-    const { classes } = props
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
-    return (
-        <MuiThemeProvider theme={theme}>
-            <CssBaseline /> 
+export default function Login() {
 
-        </MuiThemeProvider>
+    const uiConfig = {
+        signInFlow: "popup",
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+            signInSuccess: () => false
+        }
+    }
+
+    return (
+        <>
+            <img className="landing_logo" src={Logo} alt="logo" />
+            <StyledFirebaseAuth
+                        uiConfig={uiConfig}
+                        firebaseAuth={firebase.auth()}
+                    />
+        </>
 
     )
 }

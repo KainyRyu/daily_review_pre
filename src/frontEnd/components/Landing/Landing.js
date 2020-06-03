@@ -7,9 +7,8 @@ import { Link } from 'react-router-dom';
 import Logo from '../../image/DR.svg';
 import './landing.css';
 import firebase from 'firebase';
-import Signup from '../Signup';
-import Login from '../Login'
-
+import Priority from '../Priority/Priority';
+import Login from '../Login';
 
 export default function Landing() {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -35,26 +34,14 @@ export default function Landing() {
 
     return (
         <div className="Landing">
-            <img className="landing_logo" src={Logo} alt="logo" />
             {isSignedIn !== false ? (
                 <>
-                    <Button onClick={() => firebase.auth().signOut()}>
-                        Sign out
-                    </Button>
-                    {/* <h1>Hello, I'm {}</h1>
-                    <h1>{firebase.auth().currentUser.displayName}</h1>
-                    <img
-                        alt="profile picture"
-                        src={firebase.auth().currentUser.photoURL}
-                    /> */}
-                    <Login />
-
+                    <Priority />
                 </>
             ) : (
-                <StyledFirebaseAuth
-                    uiConfig={uiConfig}
-                    firebaseAuth={firebase.auth()}
-                />
+                <>
+                    <Login />
+                </>
             )}
                 {/* <button onClick={() => app.auth()></button> */}
         </div>
