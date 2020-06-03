@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Loading from './Loading';
 import Landing from './components/Landing/Landing';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -8,6 +9,7 @@ import Navbar from './components/Navbar';
 import Priority from './components/Priority/Priority'
 import CheckList from './components/CheckList/CheckList'
 import Timetable from './components/Timetable/Timetable'
+
 
 import firebase from './utils/firebase'
 
@@ -37,7 +39,7 @@ function App(props) {
       </Switch>
       <Navbar />
     </Router>
-  ) : <div>loadding...</div>
+  ) : <Loading />
 }
 
 export default App;
