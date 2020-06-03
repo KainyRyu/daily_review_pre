@@ -35,6 +35,12 @@ import 'firebase/auth';
       })
     }
 
+    isInitialized() {
+      return new Promise(resolve => {
+        this.auth.onAuthStateChanged(resolve)
+      })
+    }
+
     getCurrentUsername() {
       return this.auth.currentUser.displayName
     }

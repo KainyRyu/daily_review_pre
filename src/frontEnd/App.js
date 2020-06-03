@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from './components/Landing/Landing';
@@ -16,14 +16,15 @@ import firebase from './utils/firebase'
 
 function App(props) {
 
-  // const { classes } = props
+  const [firebaseInitialized, setFirebaseInitialized] = useState(false)
 
-  // if(!firebase.getCurrentUsername()) {
-  //   alert('Please login first')
-  //   return null
-  // }
+  useEffect(() => {
+    firebase.isInitialized().then(value => {
+      setFirebaseInitialized(value)
+    })
+  })
 
-  return (
+  return firebaseInitialized !== false ? (
     <Router>
       <Switch>
         <Route exact path="/" component={Landing} />
@@ -36,7 +37,7 @@ function App(props) {
       </Switch>
       <Navbar />
     </Router>
-  );
+  ) : <div>loadding...</div>
 }
 
 export default App;
