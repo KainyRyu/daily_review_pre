@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Loading from './Loading';
 import Landing from './components/Landing/Landing';
-import Login from './components/Login';
+import Home from './components/Home/Home';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
 import Priority from './components/Priority/Priority'
@@ -32,10 +32,9 @@ function App(props) {
     <Router>
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/schedule" component={Signup} />
-        <Route exact path="/calendar" component={Signup} />
+        <Route exact path="/schedule" component={Home} />
+        <Route exact path="/calendar" component={Home} />
         <Route exact path="/more" component={More} />
         {/* <Route exact path="/" component={} /> */}
       </Switch>

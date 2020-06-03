@@ -4,8 +4,6 @@ import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import Logo from '../image/DR.svg'
 
-const theme = createMuiTheme();
-
 
 export default function Login() {
 
