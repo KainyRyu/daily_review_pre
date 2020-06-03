@@ -1,7 +1,9 @@
 .App {
   text-align: center;
 }
-
+#content {
+  margin-bottom: 70px;
+}
 .navbar {
   background: white;
   bottom: 0;

@@ -1,5 +1,7 @@
 import React from 'react';
-import './Priority/priority.css';
+import { Icon, InlineIcon } from '@iconify/react';
+import listCheck from '@iconify/icons-bi/list-check';
+import './priority.css';
 
 export default function Today() {
     
@@ -16,7 +18,10 @@ export default function Today() {
 
     return (
         <>
-            <div className="main-today">{today()}</div>
+            <div className="main-today">
+                <h4 style={{margin:0}}>{today()}</h4>
+                <Icon icon={listCheck} style={{fontSize: '37px'}} />
+            </div>
         </>
     )
 }

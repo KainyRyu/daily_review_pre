@@ -1,8 +1,10 @@
 .main-today {
-    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3em;
+    height: 40px;
+    padding: 5vw;
     text-align: center;
-    padding: 10% 0 5% 0;
-    font-size: 1.7em;
 }
 .priority-box {
     box-sizing: border-box;
