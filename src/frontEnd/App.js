@@ -6,7 +6,6 @@ import Landing from './components/Landing/Landing';
 import Home from './components/Home/Home';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
-import More from './components/More/More'
 
 
 
@@ -26,19 +25,7 @@ function App(props) {
   })
 
   return firebaseInitialized !== false ? (
-    <Router>
-      <Switch>
-        <div id="content">
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/schedule" component={Home} />
-          <Route exact path="/calendar" component={Home} />
-          <Route exact path="/more" component={More} />
-          {/* <Route exact path="/" component={} /> */}
-        </div>
-      </Switch>
-      <Navbar />
-    </Router>
+    <Landing />
   ) : <Loading />
 }
 

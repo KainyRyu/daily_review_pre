@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase';
 import Login from '../Login';
 import Home from '../Home/Home'
+import More from '../More/More'
+import Navbar from '../Navbar';
 import './landing.css';
 
 export default function Landing() {
@@ -18,7 +21,18 @@ export default function Landing() {
         <div className="Landing">
             {isSignedIn !== false ? (
                 <>
-                    <Home />
+                    <Router>
+                        <Switch>
+                            <div id="content">
+                                <Route exact path="/" component={Home} />
+                                <Route exact path="/schedule" component={Home} />
+                                <Route exact path="/calendar" component={Home} />
+                                <Route exact path="/more" component={More} />
+                                {/* <Route exact path="/" component={} /> */}
+                            </div>
+                        </Switch>
+                        <Navbar />
+                    </Router>
                 </>
             ) : (
                 <>
