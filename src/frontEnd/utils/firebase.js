@@ -23,6 +23,7 @@ import 'firebase/auth';
     login(email, password) {
       return this.auth.signInWithEmailAndPassword(email, password)
     }
+
     logout() {
       return this.auth.signOut()
     }
@@ -32,6 +33,10 @@ import 'firebase/auth';
       return this.auth.currentUser.updateProfile({
         displayName: name
       })
+    }
+
+    getCurrentUsername() {
+      return this.auth.currentUser.displayName
     }
   }
 

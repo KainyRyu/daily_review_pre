@@ -8,10 +8,21 @@ import Navbar from './components/Navbar';
 import Priority from './components/Priority/Priority'
 import CheckList from './components/CheckList/CheckList'
 import Timetable from './components/Timetable/Timetable'
-// import Navbar from './components/Navbar/Navbar'
+
+import firebase from './utils/firebase'
 
 
-function App() {
+
+
+function App(props) {
+
+  // const { classes } = props
+
+  // if(!firebase.getCurrentUsername()) {
+  //   alert('Please login first')
+  //   return null
+  // }
+
   return (
     <Router>
       <Switch>
