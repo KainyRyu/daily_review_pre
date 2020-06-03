@@ -38,16 +38,15 @@ export default function Landing() {
             <img className="landing_logo" src={Logo} alt="logo" />
             {isSignedIn !== false ? (
                 <>
-                    <div>Signed in!</div>
                     <Button onClick={() => firebase.auth().signOut()}>
                         Sign out
                     </Button>
-                    <h1>Hello, I'm {}</h1>
+                    {/* <h1>Hello, I'm {}</h1>
                     <h1>{firebase.auth().currentUser.displayName}</h1>
                     <img
                         alt="profile picture"
                         src={firebase.auth().currentUser.photoURL}
-                    />
+                    /> */}
                     <Login />
 
                 </>

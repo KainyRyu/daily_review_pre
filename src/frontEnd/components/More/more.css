@@ -1,0 +1,29 @@
+.profile {
+    border: black 2px solid;
+    box-sizing: border-box;
+    display: flex;
+    height: 100px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.current_user_img {
+    border-radius: 80px;
+    height: 80px;
+    width: 80px;
+}
+#signout {
+    justify-self: right;
+    background: white;
+}
+
+.mores {
+    border: black 1px solid;
+    box-sizing: border-box;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}

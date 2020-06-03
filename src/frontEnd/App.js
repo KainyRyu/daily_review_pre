@@ -9,6 +9,8 @@ import Navbar from './components/Navbar';
 import Priority from './components/Priority/Priority'
 import CheckList from './components/CheckList/CheckList'
 import Timetable from './components/Timetable/Timetable'
+import More from './components/More/More'
+
 
 
 import firebase from './utils/firebase'
@@ -34,7 +36,7 @@ function App(props) {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/schedule" component={Signup} />
         <Route exact path="/calendar" component={Signup} />
-        <Route exact path="/more" component={Signup} />
+        <Route exact path="/more" component={More} />
         {/* <Route exact path="/" component={} /> */}
       </Switch>
       <Navbar />
