@@ -7,8 +7,6 @@ import Home from './components/Home/Home';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
 
-
-
 import firebase from './utils/firebase'
 
 
