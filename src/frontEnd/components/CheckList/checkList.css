@@ -9,7 +9,6 @@
 .check-list-box {
     border: black 3px solid;
     box-sizing: border-box;
-    width: 90vw;
     margin: auto;
     padding: 10px;
 }
