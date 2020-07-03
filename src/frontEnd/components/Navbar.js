@@ -15,7 +15,7 @@ export default function Navbar() {
         <div className="navbar">
             <Link to="/"><Icon icon={homeIcon} style={{color:'black', fontSize: '45px'}} /></Link>
             <Link to="/schedule"><Icon icon={timeOutIcon} style={{color:'black', fontSize: '45px'}} /></Link>
-            <Link to="/"><Icon icon={calendarIcon} style={{color:'black', fontSize: '45px'}} /></Link>
+            <Link to="/calendar"><Icon icon={calendarIcon} style={{color:'black', fontSize: '45px'}} /></Link>
             <Link to="/more"><Icon icon={moreIcon} style={{color:'black', fontSize: '45px'}} /></Link>
             {/* <Link to="/"><Icon icon={settingIcon} style={{color:'black', fontSize: '42px'}} /> </Link> */}
             {/* <img className="navbar_user" src={User} alt="user" /> */}

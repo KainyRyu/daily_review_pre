@@ -12,6 +12,7 @@
   display: flex;
   height: 60px;
   justify-content: space-between;
+  left: 0;
   padding: 10px 17px;
   position: fixed;
   width: 100%;
