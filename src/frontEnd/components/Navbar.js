@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import calendarIcon from '@iconify/icons-fa/calendar-o';
 import homeIcon from '@iconify/icons-ant-design/home-outlined';
-import settingIcon from '@iconify/icons-ant-design/setting-outlined';
+// import settingIcon from '@iconify/icons-ant-design/setting-outlined';
 import moreIcon from '@iconify/icons-eva/more-horizontal-fill';
 import timeOutIcon from '@iconify/icons-ant-design/field-time-outlined';
-import Logo from '../image/DR.svg';
-import User from '../image/user.png';
+// import User from '../image/user.png';
 import '../App.css';
 
 

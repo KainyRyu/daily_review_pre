@@ -1,6 +1,5 @@
 import React from 'react'
 import firebase from 'firebase'
-import { Typography, Paper, Avatar, Button } from '@material-ui/core';
 import './more.css'
 
 export default function More() {
@@ -9,7 +8,7 @@ export default function More() {
             <div className="profile">
                 <img
                     className="current_user_img"
-                    alt="profile picture"
+                    alt="profile"
                     src={firebase.auth().currentUser.photoURL}
                 />
                 <h1>{firebase.auth().currentUser.displayName}</h1>

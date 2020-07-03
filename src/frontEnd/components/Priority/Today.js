@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import listCheck from '@iconify/icons-bi/list-check';
 import './priority.css';
 

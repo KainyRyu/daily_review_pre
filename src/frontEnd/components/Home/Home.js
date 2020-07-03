@@ -9,10 +9,10 @@ export default function Home() {
 
     return (
         <div id="home">
-            {/* <Priority /> */}
             <Calendar />
-            {/* <DailyPlan /> */}
-            {/* <CheckList /> */}
+            <Priority />
+            <DailyPlan />
+            <CheckList />
         </div>
     )
 }

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import React from 'react';
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import Logo from '../image/DR.svg'
