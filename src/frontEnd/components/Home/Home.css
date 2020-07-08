@@ -1,3 +1,8 @@
-#home {
-  padding: 0 10vw;
+.main-today {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3em;
+    height: 40px;
+    padding: 5vw 0;
+    text-align: center;
 }

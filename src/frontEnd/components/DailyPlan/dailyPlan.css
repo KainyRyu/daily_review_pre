@@ -4,3 +4,27 @@
   border: black 1px solid;
   width: 100%;
 }
+
+table {
+    border: black 2px solid;
+    width: 100%;
+}
+
+tr, th {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.timeslot {
+    flex: 1;
+}
+.event {
+    border-left: solid 1px black;
+    flex: 2;
+}
+
+.review {
+    border-left: solid 1px black;
+    flex: 2;
+}

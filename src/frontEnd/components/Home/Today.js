@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import listCheck from '@iconify/icons-bi/list-check';
-import './priority.css';
+import './home.css';
 
 export default function Today() {
     
