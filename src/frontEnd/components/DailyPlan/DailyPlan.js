@@ -13,15 +13,64 @@ export default function DailyPlan() {
     let hour = newDate.getHours();
     let minute = newDate.getMinutes();
 
-    return `${hour} : ${minute}`;
+    return `${hour} : ${minute < 10 ? `0${minute}` : minute}`;
   }
 //
 
   function timeTable() {
       let newDate = new Date();
-      let event = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'
-            ]
-      let displayHours = event
+      let time = newDate.setTime();
+
+      let events = [{
+        time: 0
+      }, {
+        time: 1
+      }, {
+        time: 2
+    }, {
+        time: 3
+    }, {
+        time: 4
+    }, {
+        time: 5
+    }, {
+        time: 6
+    }, {
+        time: 7
+    }, {
+        time: 8
+    }, {
+        time: 9
+    }, {
+        time: 10
+    }, {
+        time: 11
+    }, {
+        time: 12
+    }, {
+        time: 13
+    }, {
+        time: 14
+    }, {
+        time: 15
+    }, {
+        time: 16
+    }, {
+        time: 17
+    }, {
+        time: 18
+    }, {
+        time: 19
+    }, {
+        time: 20
+    }, {
+        time: 21
+    }, {
+        time: 22
+    }, {
+        time: 23
+    }]
+      let displayHours = events
         .map((event, index) => (<tr>{
             index < 10 ? 
                 <>
@@ -36,12 +85,12 @@ export default function DailyPlan() {
             }</tr>))
   return displayHours;
   }
-// tr > td {index}
   return (
     <div>
       <h1>Daily Review <br /> {current()}</h1>
       <table>
         <th>
+
           <td className="timeslot"></td>
           <td className="event">Plan</td>
           <td className="review">Review</td>
