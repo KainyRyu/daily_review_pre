@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './editplan.css';
 
 export default function EditPlan(props) {
     const [title, setTitle] = useState('New Event');
@@ -9,8 +10,37 @@ export default function EditPlan(props) {
     const [memo, setMemo] = useState('')
 
     return (
-        <form>
-
+        <form id="edit-form">
+            <div>
+                <input type="text" placeholder="Title" value={title}/>
+            </div>
+            <div>
+                <label>Start time </label><input type="time" value={startTime}/>
+            </div>
+            <div>
+                <label>End time </label><input type="time" value={endTime}/>
+            </div>
+            <div>
+                Repeat
+            </div>
+            <div>
+                Alert
+            </div>
+            <div>
+                <h3 style={{margin: 0}}>BOLD</h3>
+                <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                </label>
+                {/* <select>
+                    <option value={priority}>{priority}</option>
+                    <option value={priority}>{priority}</option>
+                    <option value={priority}>{priority}</option>
+                </select> */}
+            </div>
+            <div><textarea placeholder="Notes" rows="4">{memo}</textarea></div>
+            <input type="submit" />
         </form>
     )
 }
+//select > if number === time[i] > add in the object
