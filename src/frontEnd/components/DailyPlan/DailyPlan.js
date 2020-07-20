@@ -20,16 +20,16 @@ export default function DailyPlan() {
 
   function timeTable() {
     let displayHours = timeSlot().map((event, index) => (
-      <tr>
+      <tr key={index}>
         {index < 10 ? (
           <>
             <td className="timeslot">0{index} : 00</td>
-            <td className="event" key={index}></td>
+            <td className="event"></td>
             <td className="review"></td>
           </>
         ) : (
           <>
-            <td className="timeslot" key={index}>{index} : 00</td>
+            <td className="timeslot">{index} : 00</td>
             <td className="event"></td>
             <td className="review"></td>
           </>

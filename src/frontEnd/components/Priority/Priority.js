@@ -6,31 +6,37 @@ export default function Priority() {
   const [uInS, setUInS] = useState([]);
   const [notUS, setNotUS] = useState([]);
   const [notUInS, setNotUInS] = useState([]);
-  const [newToDo, setNewToDo] = useState("");
+  const [item, setItem] = useState("");
   const [selected, setSelected] = useState("");
 
-    const pushTitle = function() {
+    const addItem = function() {
+        // selected === "uS" ? 
+        //     setUS(uS.push(item)):
+            
         switch(selected) {
             case "uS":
-                uS.push(selected);
+                setUS([item, ...uS])
                 break;
             case "uInS":
-                uInS.push(selected);
+                uInS.push(item);
                 break;
             case "notUS":
-                notUS.push(selected);
+                notUS.push(item);
                 break;
-            case "newToDo":
-                newToDo.push(selected);
+            case "notUInS":
+                notUInS.push(item);
                 break;
-        }
+            }
+        // console.log(uS)
     }
+
+    //
 
   return (
     <div className="main">
-        <form id="add_input">
-            <input id="must_to_do" type="text" placeholder="Must to do" name="title" onChange={e => setNewToDo(e.target.value)} value={newToDo} />
-            <select id="priority_selection" name="priority" value={selected} onChange={e => setSelected(e.target.value)}>
+        <div id="add_input">
+            <input  type="text" onChange={e => setItem(e.target.value)} value={item} />
+            <select value={selected} onChange={e => setSelected(e.target.value)}>
                 <option value="uS" style={{ backgroundColor: "red" }}>
                 Urgent & Significant
                 </option>
@@ -44,23 +50,33 @@ export default function Priority() {
                 Not Urgent & Insignificant
                 </option>
             </select>
-            <input type="submit" value="Add" />
-        </form>
+            <button onClick={addItem()}>Add</button>
+        </div>
+
+
         <div className="priority-box red">
             <h3>Urgent & Significant</h3>
-            <ul>{}</ul>
+            <ul>{
+                uS.map((todo, index) => <li key={index}>{todo}</li>)
+                }</ul>
         </div>
         <div className="priority-box orange">
             <h3>Urgent & Insignificant</h3>
-            <ul>{}</ul>
+            <ul>{
+                uInS.map((todo, index) => <li key={index}>{todo}</li>)
+                }</ul>
         </div>
         <div className="priority-box yellow">
             <h3>Not Urgent & Significant</h3>
-            <ul>{}</ul>
+            <ul>{
+                notUS.map((todo, index) => <li key={index}>{todo}</li>)
+                }</ul>
         </div>
         <div className="priority-box gray">
             <h3>Not Urgent & Insignificant</h3>
-            <ul>{}</ul>
+            <ul>{
+                notUInS.map((todo, index) => <li key={index}>{todo}</li>)
+                }</ul>
         </div>
     </div>
   );
