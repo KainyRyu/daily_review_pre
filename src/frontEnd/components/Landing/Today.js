@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import listCheck from '@iconify/icons-bi/list-check';
-import './home.css';
+import './landing.css';
 
 export default function Today() {
     

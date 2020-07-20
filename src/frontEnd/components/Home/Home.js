@@ -1,13 +1,13 @@
 import React from 'react'
 import DailyPlan from '../DailyPlan/DailyPlan'
+import Priority from '../Priority/Priority'
 import './home.css'
-import Today from './Today'
 
 export default function Home() {
 
     return (
         <div id="home">
-            <Today />
+            <Priority />
             <DailyPlan />
         </div>
     )

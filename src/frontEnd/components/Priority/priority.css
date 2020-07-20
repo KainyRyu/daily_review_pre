@@ -1,9 +1,27 @@
+#add_input {
+    display: flex;
+    width: 100%;
+}
+
+#must_to_do {
+    flex: 3;
+}
+
+#priority_selection {
+    flex: 1;
+}
+
+#priority_selection .color {
+    height: 15px;
+    width: 15px;
+}
+
 
 .priority-box {
     box-sizing: border-box;
     color: white;
     width: 100%;
-    margin: 5px auto;
+    /* margin: 5px auto; */
     padding: 5px 10px;
 }
 

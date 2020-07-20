@@ -5,7 +5,9 @@ import Login from "../Login";
 import Home from "../Home/Home";
 import More from "../More/More";
 import Calendar from "../Calendar/Calendar";
+import EditPlan from "../DailyPlan/EditPlan";
 import Navbar from "../Navbar";
+import Today from "./Today";
 import "./landing.css";
 
 export default function Landing() {
@@ -23,10 +25,12 @@ export default function Landing() {
       {isSignedIn !== false ? (
         <>
           <Router>
+            <Today />
             <Switch>
               <div id="content">
                 <Route exact path="/" component={Home} />
                 <Route exact path="/schedule" component={Home} />
+                <Route exact path="/editplan" component={EditPlan} />
                 <Route exact path="/calendar" component={Calendar} />
                 <Route exact path="/more" component={More} />
                 {/* <Route exact path="/" component={} /> */}

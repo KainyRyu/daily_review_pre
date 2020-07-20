@@ -3,6 +3,7 @@ import EditPlan from "./EditPlan";
 import timeSlot from './TimeSlot';
 import "./dailyPlan.css";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
+import { Link } from "react-router-dom";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -23,13 +24,12 @@ export default function DailyPlan() {
         {index < 10 ? (
           <>
             <td className="timeslot">0{index} : 00</td>
-            <td className="event">
-            </td>
+            <td className="event" key={index}></td>
             <td className="review"></td>
           </>
         ) : (
           <>
-            <td className="timeslot">{index} : 00</td>
+            <td className="timeslot" key={index}>{index} : 00</td>
             <td className="event"></td>
             <td className="review"></td>
           </>
@@ -42,16 +42,17 @@ export default function DailyPlan() {
   return (
     <div>
       <h1>
-        Daily Review <br /> {current()}
+        {/* Daily Review <br /> {current()} */}
       </h1>
-      <EditPlan />
       <table>
-        <th>
-          <td className="timeslot"></td>
-          <td className="event">Plan</td>
-          <td className="review">Review</td>
-        </th>
-        <tbody>{timeTable()}</tbody>
+            <thead>
+                <tr>
+                    <th className="timeslot"></th>
+                    <th className="event">Plan</th>
+                    <th className="review">Review</th>
+                </tr>
+            </thead>
+            <tbody>{timeTable()}</tbody>
       </table>
     </div>
   );

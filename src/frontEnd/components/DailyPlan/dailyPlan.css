@@ -1,8 +1,8 @@
 .dailyplan-table {
-  align-items: center;
-  text-align: center;
-  border: black 1px solid;
-  width: 100%;
+    align-items: center;
+    text-align: center;
+    border: black 1px solid;
+    width: 100%;
 }
 
 table {
@@ -11,6 +11,7 @@ table {
 }
 
 tr, th {
+    align-items: center;
     display: flex;
     padding: 0;
     margin: 0;
