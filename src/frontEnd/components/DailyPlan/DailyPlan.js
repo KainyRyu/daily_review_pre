@@ -24,13 +24,13 @@ export default function DailyPlan() {
         {index < 10 ? (
           <>
             <td className="timeslot">0{index} : 00</td>
-            <td className="event"></td>
+            <td className="event" key={index}></td>
             <td className="review"></td>
           </>
         ) : (
           <>
             <td className="timeslot">{index} : 00</td>
-            <td className="event"></td>
+            <td className="event" key={index}></td>
             <td className="review"></td>
           </>
         )}
