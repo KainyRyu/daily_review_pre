@@ -14,6 +14,11 @@ const priorities = [{
   gray:[],
   // backgroundColor: "lightgray"
 }]
+const red = priorities[0].red
+const orange = priorities[0].orange
+const yellow = priorities[0].yellow
+const gray = priorities[0].gray
+
 export default function Priority() {
   const [uS, setUS] = useState([]);
   const [uInS, setUInS] = useState([]);
@@ -33,8 +38,7 @@ export default function Priority() {
                     setNotUInS(notUInS.concat(item))
     }
     function deleteTodo(e) {
-        //select if item ===
-
+        setUS(uS.filter(todo => todo.e !== e))
         console.log(uS)
     }
     
@@ -53,31 +57,31 @@ export default function Priority() {
                     }
                 </select>
             </div>
-            <button onClick={addTodo}>+</button>
+            <button type="submit" onClick={addTodo}>+</button>
         </div>
 
         <div className="priority-box red">
             <h3>Urgent & Significant</h3>
             <ul>{
-                uS.map((todo, index) => <li key={index}>{todo}<button onClick={() => uS.splice(index, 1)}>X</button></li>)
+                uS.map((todo, index) => <li key={index}><span>{todo}</span><button onClick={deleteTodo(todo)}>X</button></li>)
             }</ul>
         </div>
         <div className="priority-box orange">
             <h3>Urgent & Insignificant</h3>
             <ul>{
-                uInS.map((todo, index) => <li key={index}>{todo}<button onClick={() => uInS.splice(index, 1)}>X</button></li>)
+                uInS.map((todo, index) => <li key={index}><span>{todo}</span><button >X</button></li>)
             }</ul>
         </div>
         <div className="priority-box yellow">
             <h3>Not Urgent & Significant</h3>
             <ul>{
-                notUS.map((todo, index) => <li key={index}>{todo}<button onClick={() => notUS.splice(index, 1)}>X</button></li>)
+                notUS.map((todo, index) => <li key={index}><span>{todo}</span><button>X</button></li>)
             }</ul>
         </div>
         <div className="priority-box gray">
             <h3>Not Urgent & Insignificant</h3>
             <ul>{
-                notUInS.map((todo, index) => <li key={index}>{todo}<button onClick={() => notUInS.splice(index, 1)}>X</button></li>)
+                notUInS.map((todo, index) => <li key={index}><span>{todo}</span><button>X</button></li>)
             }</ul>
         </div>
     </div>

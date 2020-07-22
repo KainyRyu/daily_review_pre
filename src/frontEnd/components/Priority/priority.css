@@ -82,3 +82,8 @@
     background-color: lightgray;
     color: black;
 }
+
+.priority-box ul li {
+    align-content: space-between;
+    display: flex;
+}
