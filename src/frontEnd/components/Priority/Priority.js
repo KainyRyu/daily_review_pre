@@ -53,8 +53,8 @@ export default function Priority() {
   return (
     <div className="main">
       <div id="add_input">
-        <div id="new_todo">
-          <input type="text" value={item} onChange={newTodo} />
+        <div className="input_wrapper">
+          <input className="text_input" type="text" value={item} onChange={newTodo} />
           <select
             id="priority_selection"
             value={selected}

@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-#new_todo {
+.input_wrapper {
     border: black solid 2px;
     display: flex;
     flex: 1;
@@ -15,7 +15,7 @@
     width: 80%;
 }
 
-#new_todo input{
+.input_wrapper .text_input{
     border: none;
     flex: 5;
     /* width: 80%; */
