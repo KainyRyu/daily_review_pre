@@ -15,9 +15,10 @@
     width: 80%;
 }
 
-.input_wrapper .text_input{
+.text_input{
     border: none;
     flex: 5;
+    outline: none;
     /* width: 80%; */
 }
 
@@ -44,6 +45,10 @@
 } */
 
 #add_input button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    outline: none;
     width: 30px;
 }
 

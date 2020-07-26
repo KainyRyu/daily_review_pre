@@ -8,6 +8,7 @@ export default function Priority() {
   const [gray, setGray] = useState([]);
   const [item, setItem] = useState("");
   const [selected, setSelected] = useState("");
+  const [newTodoItem, setNewtodoItem] = useState([]);
 
   const priorities = [
     {
@@ -27,16 +28,26 @@ export default function Priority() {
       // backgroundColor: "lightgray"
     },
   ];
+
+  const filtering = [
+    {label: "red", isUrgent: true, isImportant: true},
+    {label: "orange", isUrgent: true, isImportant: false},
+    {label: "yellow", isUrgent: false, isImportant: true},
+    {label: "gray", isUrgent: false, isImportant: false}
+  ]
   // seleted filt the keys (push or concat)(item)
-  function addTodo() {
-    selected === "red" ?
-        setRed(red.concat(item)):
-        selected === "orange" ?
-            setOrange(orange.concat(item)) :
-            selected === "yellow" ?
-                setYellow(yellow.concat(item)) :
-                setGray(gray.concat(item));
-  }
+//   function addTodo() {
+//     selected === "red" ?
+//         setRed(red.concat(item)):
+//         selected === "orange" ?
+//             setOrange(orange.concat(item)) :
+//             selected === "yellow" ?
+//                 setYellow(yellow.concat(item)) :
+//                 setGray(gray.concat(item));
+//   }
+function addTodo() {
+    setNewtodoItem(newTodoItem.concat({title:"", isUrgent: true, imImportant: true}))
+}
   function deleteTodo(e) {
     setGray(gray.filter((todo) => todo.e !== e));
     console.log(gray);
@@ -52,7 +63,7 @@ export default function Priority() {
 
   return (
     <div className="main">
-      <div id="add_input">
+      <form id="add_input">
         <div className="input_wrapper">
           <input className="text_input" type="text" value={item} onChange={newTodo} />
           <select
@@ -66,7 +77,7 @@ export default function Priority() {
         <button type="submit" onClick={addTodo}>
           +
         </button>
-      </div>
+      </form>
 
       <div className="priority-box red">
         <h3>Urgent & Significant</h3>
