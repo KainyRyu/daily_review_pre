@@ -8,6 +8,8 @@ export default function Priority() {
   const [gray, setGray] = useState([]);
   const [item, setItem] = useState("");
   const [selected, setSelected] = useState("");
+  const [isUrgent, setIsUrgent] = useState(ture);
+  const [isSignificant, setIsSignificant] = useState(ture);
   const [newTodoItem, setNewtodoItem] = useState([]);
 
   const priorities = [
@@ -54,12 +56,13 @@ function addTodo() {
   }
 
   const newTodo = (e) => setItem(e.target.value);
-  const getSelected = (e) => setSelected(e.target.value);
-  const selectOptions = priorities.map((option, index) => (
-    <option id={option} key={index}>
-      {Object.keys(option)}
-    </option>
-  ));
+  const urgentB = (e) => setItem
+//   const isUrgent = (e) => setSelected(e.target.value);
+//   const selectOptions = priorities.map((option, index) => (
+//     <option id={option} key={index}>
+//       {Object.keys(option)}
+//     </option>
+//   ));
 
   return (
     <div className="main">
@@ -68,10 +71,14 @@ function addTodo() {
           <input className="text_input" type="text" value={item} onChange={newTodo} />
           <select
             id="priority_selection"
-            value={selected}
-            onChange={getSelected}
+            value={isUrgent}
           >
-            {selectOptions}
+            <option value="">Urgent</option>
+            <option value="">Not Urgent</option>
+          </select>
+          <select>
+              <option value="">Significant</option>
+              <option value="">Insignificant</option>
           </select>
         </div>
         <button type="submit" onClick={addTodo}>
