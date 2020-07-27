@@ -7,23 +7,14 @@ export default function Priority() {
   const [yellow, setYellow] = useState([]);
   const [gray, setGray] = useState([]);
   const [item, setItem] = useState("");
-  const [selected, setSelected] = useState("");
   const [isUrgent, setIsUrgent] = useState(true);
   const [isSignificant, setIsSignificant] = useState(true);
   const [newTodoItem, setNewtodoItem] = useState([]);
 
 
-  const filtering = [
-    {label: "red", isUrgent: true, isImportant: true},
-    {label: "orange", isUrgent: true, isImportant: false},
-    {label: "yellow", isUrgent: false, isImportant: true},
-    {label: "gray", isUrgent: false, isImportant: false}
-  ]
-
-
-
     function addTodo() {
-        setNewtodoItem(newTodoItem.concat({title:{item}, isUrgent: true, imImportant: true}))
+        setNewtodoItem(newTodoItem.concat({title: item, isUrgent: true, imImportant: true}))
+        console.log(newTodoItem)
     }
 
     function deleteTodo(e) {
@@ -32,9 +23,9 @@ export default function Priority() {
     }
 
 
-    const newTodo = (e) => setItem(e.target.value);
-    const urgentSelection = (e) => setIsUrgent((e === "true" ? true : false).target.value);
-    const significatSelection = (e) => setIsSignificant((e === "true" ? true : false).target.value);
+    const newTodo = e => setItem(e.target.value);
+    const urgentSelection = e => setIsUrgent((e.target.value) !== "true" ? false : true);
+    const significatSelection = e => setIsSignificant((e.target.value) === "true" ? true : false);
 
 
   return (
@@ -44,20 +35,22 @@ export default function Priority() {
                 <input className="text_input" type="text" value={item} onChange={newTodo} />
                 <select
                     id="priority_selection"
-                    value={urgentSelection}
+                    value={isUrgent}
+                    onChange={urgentSelection}
                 >
                     <option value="true">Urgent</option>
                     <option value="false">Not Urgent</option>
                 </select>
                 <select
                     id="priority_selection"
-                    value={significatSelection}
+                    value={isSignificant}
+                    onChange={significatSelection}
                 >
                     <option value="true">Significant</option>
                     <option value="false">Insignificant</option>
                 </select>
             </div>
-            <button type="submit" onClick={addTodo}>
+            <button onClick={addTodo}>
             +
             </button>
         </form>
