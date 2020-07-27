@@ -8,28 +8,10 @@ export default function Priority() {
   const [gray, setGray] = useState([]);
   const [item, setItem] = useState("");
   const [selected, setSelected] = useState("");
-  const [isUrgent, setIsUrgent] = useState(ture);
-  const [isSignificant, setIsSignificant] = useState(ture);
+  const [isUrgent, setIsUrgent] = useState(true);
+  const [isSignificant, setIsSignificant] = useState(true);
   const [newTodoItem, setNewtodoItem] = useState([]);
 
-  const priorities = [
-    {
-      red: [],
-      // backgroundColor: 'red'
-    },
-    {
-      orange: [],
-      // backgroundColor: "#FF7E07"
-    },
-    {
-      yellow: [],
-      // backgroundColor: "#FFC107"
-    },
-    {
-      gray: [],
-      // backgroundColor: "lightgray"
-    },
-  ];
 
   const filtering = [
     {label: "red", isUrgent: true, isImportant: true},
@@ -37,54 +19,48 @@ export default function Priority() {
     {label: "yellow", isUrgent: false, isImportant: true},
     {label: "gray", isUrgent: false, isImportant: false}
   ]
-  // seleted filt the keys (push or concat)(item)
-//   function addTodo() {
-//     selected === "red" ?
-//         setRed(red.concat(item)):
-//         selected === "orange" ?
-//             setOrange(orange.concat(item)) :
-//             selected === "yellow" ?
-//                 setYellow(yellow.concat(item)) :
-//                 setGray(gray.concat(item));
-//   }
-function addTodo() {
-    setNewtodoItem(newTodoItem.concat({title:"", isUrgent: true, imImportant: true}))
-}
-  function deleteTodo(e) {
-    setGray(gray.filter((todo) => todo.e !== e));
-    console.log(gray);
-  }
 
-  const newTodo = (e) => setItem(e.target.value);
-  const urgentB = (e) => setItem
-//   const isUrgent = (e) => setSelected(e.target.value);
-//   const selectOptions = priorities.map((option, index) => (
-//     <option id={option} key={index}>
-//       {Object.keys(option)}
-//     </option>
-//   ));
+
+
+    function addTodo() {
+        setNewtodoItem(newTodoItem.concat({title:{item}, isUrgent: true, imImportant: true}))
+    }
+
+    function deleteTodo(e) {
+        setGray(gray.filter((todo) => todo.e !== e));
+        console.log(gray);
+    }
+
+
+    const newTodo = (e) => setItem(e.target.value);
+    const urgentSelection = (e) => setIsUrgent((e === "true" ? true : false).target.value);
+    const significatSelection = (e) => setIsSignificant((e === "true" ? true : false).target.value);
+
 
   return (
     <div className="main">
-      <form id="add_input">
-        <div className="input_wrapper">
-          <input className="text_input" type="text" value={item} onChange={newTodo} />
-          <select
-            id="priority_selection"
-            value={isUrgent}
-          >
-            <option value="">Urgent</option>
-            <option value="">Not Urgent</option>
-          </select>
-          <select>
-              <option value="">Significant</option>
-              <option value="">Insignificant</option>
-          </select>
-        </div>
-        <button type="submit" onClick={addTodo}>
-          +
-        </button>
-      </form>
+        <form id="add_input">
+            <div className="input_wrapper">
+                <input className="text_input" type="text" value={item} onChange={newTodo} />
+                <select
+                    id="priority_selection"
+                    value={urgentSelection}
+                >
+                    <option value="true">Urgent</option>
+                    <option value="false">Not Urgent</option>
+                </select>
+                <select
+                    id="priority_selection"
+                    value={significatSelection}
+                >
+                    <option value="true">Significant</option>
+                    <option value="false">Insignificant</option>
+                </select>
+            </div>
+            <button type="submit" onClick={addTodo}>
+            +
+            </button>
+        </form>
 
       <div className="priority-box red">
         <h3>Urgent & Significant</h3>
