@@ -1,33 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import "./priority.css";
 import Todo from "./Todo";
 
 export default function Priority() {
-    const [task, setTask] = useState("");
-    const [isUrgent, setIsUrgent] = useState(true);
-    const [isSignificant, setIsSignificant] = useState(true);
+    const [todo, setTodo] = useState({
+        id: uuidv4(),
+        task: "",
+        urgency: true,
+        importance: true
+    })
     const [todoList, setTodoList] = useState([]);
-    
 
-    // useEffect(() => {
-    //     const storageTodos = JSON.parse(localStorage.setItem('todoList'))
-    //     if (storageTodos) {
-    //         setTodoList(storageTodos);
-    //     }
-    // }, [])
+    const getTask = e => (setTodo({...todo, task: e.target.value })
+    );
+    const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});
+    const significatSelection = e => setTodo({...todo, importance: (e.target.value) !== "true" ? false : true});
     
-    const getTask = e => setTask(e.target.value);
-    const urgentSelection = e => setIsUrgent((e.target.value) !== "true" ? false : true);
-    const significatSelection = e => setIsSignificant((e.target.value) !== "true" ? false : true);
-    
-    function addTodo() {
-        setTodoList(todoList.concat({
-            id: uuid, 
-            task: task, 
-            urgency: isUrgent, 
-            importance: isSignificant
-        }))
+    function addTodoClick(){
+        setTodoList([todo, ...todoList])
+        console.log(todoList)
+        setTodo({...todo, id: uuidv4()})
     }
 
     function removeTodo(task) {
@@ -35,8 +28,7 @@ export default function Priority() {
     }
 
     function removeClick() {
-        removeTodo(task)
-        console.log(task)
+        removeTodo(todo.task)
     }
 
   
@@ -45,10 +37,10 @@ export default function Priority() {
     <div className="main">
         <div id="add_input">
             <div className="input_wrapper">
-                <input className="text_input" type="text" value={task} onChange={getTask} />
+                <input className="text_input" type="text" value={todo.task} onChange={getTask} />
                 <select
                     id="priority_selection"
-                    value={isUrgent}
+                    value={todo.urgency}
                     onChange={urgentSelection}
                 >
                     <option value="true">Urgent</option>
@@ -56,14 +48,14 @@ export default function Priority() {
                 </select>
                 <select
                     id="priority_selection"
-                    value={isSignificant}
+                    value={todo.importance}
                     onChange={significatSelection}
                 >
                     <option value="true">Significant</option>
                     <option value="false">Insignificant</option>
                 </select>
             </div>
-            <button onClick={addTodo}>
+            <button onClick={addTodoClick}>
             Click
             </button>
         </div>
@@ -75,7 +67,7 @@ export default function Priority() {
             .filter(todo => todo.urgency && todo.importance)
             .map((todo) => (
                 <div id="todo">
-                    <li key={todo.task}>{todo.task}</li><button onClick={removeClick}>X</button>
+                    <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
                 </div>
             ))}
         </ul>
