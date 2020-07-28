@@ -66,24 +66,31 @@ export default function Priority() {
       <div className="priority-box orange">
         <h3>Urgent & Insignificant</h3>
         <ul>
-          {/* {orange.map((todo, index) => (
-            <li key={index}>
-              <span>{todo}</span>
-              <button>X</button>
-            </li>
-          ))} */}
+            {todoList
+                .filter(todo => todo.urgency === false && todo.importance)
+                .map((todo,index) => (
+                    <li key={index}>{todo.title}</li>
+            ))}
         </ul>
       </div>
       <div className="priority-box yellow">
         <h3>Not Urgent & Significant</h3>
         <ul>
-
+            {todoList
+                .filter(todo => todo.urgency && todo.importance === false)
+                .map((todo,index) => (
+                    <li key={index}>{todo.title}</li>
+            ))}
         </ul>
       </div>
       <div className="priority-box gray">
         <h3>Not Urgent & Insignificant</h3>
         <ul>
-
+            {todoList
+                .filter(todo => todo.urgency === false && todo.importance === false  )
+                .map((todo,index) => (
+                    <li key={index}>{todo.title}</li>
+            ))}
         </ul>
       </div>
     </div>
