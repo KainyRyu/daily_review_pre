@@ -10,16 +10,16 @@ export default function Priority() {
     
     const getTitle = e => setTitle(e.target.value);
     const urgentSelection = e => setIsUrgent((e.target.value) !== "true" ? false : true);
-    const significatSelection = e => setIsSignificant((e.target.value) === "true" ? true : false);
+    const significatSelection = e => setIsSignificant((e.target.value) !== "true" ? false : true);
     
     function addTodo() {
         setTodoList(todoList.concat({title: title, urgency: isUrgent, importance: isSignificant}))
+        console.log(todoList)
     }
 
     function getRed() {
         todoList
-            .filter(todo => todo.urgency)
-            .filter(todo => todo.importance)
+            .filter(todo => todo.urgency && todo.importance)
             .map((todo,index) => {
                 return <li key={index}>{todo.title}</li>
             })
