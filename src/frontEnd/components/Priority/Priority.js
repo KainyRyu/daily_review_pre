@@ -14,7 +14,8 @@ export default function Priority() {
     
     function addTodo() {
         setTodoList(todoList.concat({title: title, urgency: isUrgent, importance: isSignificant}))
-        console.log(todoList)
+
+        console.log(getRed())
     }
 
     function getRed() {
@@ -55,7 +56,11 @@ export default function Priority() {
       <div className="priority-box red">
         <h3>Urgent & Significant</h3>
         <ul>
-          {getRed}
+            {todoList
+            .filter(todo => todo.urgency && todo.importance)
+            .map((todo,index) => (
+                <li key={index}>{todo.title}</li>
+            ))}
         </ul>
       </div>
       <div className="priority-box orange">
