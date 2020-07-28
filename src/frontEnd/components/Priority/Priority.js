@@ -1,36 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { v4 as uuid } from "uuid";
 import "./priority.css";
+import Todo from "./Todo";
 
 export default function Priority() {
-  const [title, setTitle] = useState("");
-  const [isUrgent, setIsUrgent] = useState(true);
-  const [isSignificant, setIsSignificant] = useState(true);
-  const [todoList, setTodoList] = useState([]);
-
+    const [task, setTask] = useState("");
+    const [isUrgent, setIsUrgent] = useState(true);
+    const [isSignificant, setIsSignificant] = useState(true);
+    const [todoList, setTodoList] = useState([]);
     
-    const getTitle = e => setTitle(e.target.value);
+
+    // useEffect(() => {
+    //     const storageTodos = JSON.parse(localStorage.setItem('todoList'))
+    //     if (storageTodos) {
+    //         setTodoList(storageTodos);
+    //     }
+    // }, [])
+    
+    const getTask = e => setTask(e.target.value);
     const urgentSelection = e => setIsUrgent((e.target.value) !== "true" ? false : true);
     const significatSelection = e => setIsSignificant((e.target.value) !== "true" ? false : true);
     
     function addTodo() {
-        setTodoList(todoList.concat({title: title, urgency: isUrgent, importance: isSignificant}))
-
-        console.log(getRed())
+        setTodoList(todoList.concat({
+            id: uuid, 
+            task: task, 
+            urgency: isUrgent, 
+            importance: isSignificant
+        }))
     }
 
-    function getRed() {
-        todoList
-            .filter(todo => todo.urgency && todo.importance)
-            .map((todo,index) => {
-                return <li key={index}>{todo.title}</li>
-            })
+    function removeTodo(task) {
+        setTodoList(todoList.filter(todo => todo.task !== task))
     }
+
+    function removeClick() {
+        removeTodo(task)
+        console.log(task)
+    }
+
+  
 
   return (
     <div className="main">
         <div id="add_input">
             <div className="input_wrapper">
-                <input className="text_input" type="text" value={title} onChange={getTitle} />
+                <input className="text_input" type="text" value={task} onChange={getTask} />
                 <select
                     id="priority_selection"
                     value={isUrgent}
@@ -58,18 +73,22 @@ export default function Priority() {
         <ul>
             {todoList
             .filter(todo => todo.urgency && todo.importance)
-            .map((todo,index) => (
-                <li key={index}>{todo.title}</li>
+            .map((todo) => (
+                <div id="todo">
+                    <li key={todo.task}>{todo.task}</li><button onClick={removeClick}>X</button>
+                </div>
             ))}
         </ul>
       </div>
-      <div className="priority-box orange">
+      {/* <div className="priority-box orange">
         <h3>Urgent & Insignificant</h3>
         <ul>
             {todoList
                 .filter(todo => todo.urgency === false && todo.importance)
                 .map((todo,index) => (
-                    <li key={index}>{todo.title}</li>
+                    <div id="todo">
+                        <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
+                    </div>
             ))}
         </ul>
       </div>
@@ -79,7 +98,9 @@ export default function Priority() {
             {todoList
                 .filter(todo => todo.urgency && todo.importance === false)
                 .map((todo,index) => (
-                    <li key={index}>{todo.title}</li>
+                    <div id="todo">
+                        <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
+                    </div>
             ))}
         </ul>
       </div>
@@ -89,10 +110,12 @@ export default function Priority() {
             {todoList
                 .filter(todo => todo.urgency === false && todo.importance === false  )
                 .map((todo,index) => (
-                    <li key={index}>{todo.title}</li>
+                    <div id="todo">
+                        <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
+                    </div>
             ))}
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }

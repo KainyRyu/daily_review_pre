@@ -60,9 +60,9 @@
 
 .priority-box {
     box-sizing: border-box;
-    color: white;
+    /* color: white; */
     width: 100%;
-    /* margin: 5px auto; */
+    margin: 5px auto;
     padding: 5px 10px;
 }
 
@@ -88,7 +88,9 @@
     color: black;
 }
 
-.priority-box ul li {
-    align-content: space-between;
+#todo {
     display: flex;
+    justify-content: space-between;
+    text-align: none;
+    width: 100%;
 }
