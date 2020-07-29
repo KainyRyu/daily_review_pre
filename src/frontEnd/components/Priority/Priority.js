@@ -21,13 +21,6 @@ export default function Priority() {
     const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});
     const significatSelection = e => setTodo({...todo, importance: (e.target.value) !== "true" ? false : true});
 
-    function addTodoClick(){
-        // setTodo({id: uuidv4(), ...todo})
-        // setTodoList([todo, ...todoList])
-        // if (todo.task !== '') {
-        //     setTodo({task: ''})
-        // }
-    }
     function submitHandler(e) {
         e.preventDefault();
         if (todo.task.trim()) {

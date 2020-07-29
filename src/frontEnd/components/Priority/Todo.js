@@ -1,10 +1,9 @@
 import React from 'react'
 
 export default function Todo({ todoList, removeTodo }) {
-    let randomKey = Math.random().toString(16).slice(2)
 
     return todoList
-                .filter(todo => todo.urgency && todo.importance)
+                .filter(({urgency, importance}) => urgency && importance)
                 .map(({id, task}) => {
                     console.log(id, task)
                     return (
