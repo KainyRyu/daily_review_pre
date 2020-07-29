@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function Todo({ todoList, removeTodo }) {
     let randomKey = Math.random().toString(16).slice(2)
@@ -14,12 +14,9 @@ export default function Todo({ todoList, removeTodo }) {
                     )
                 }
             )
-        
 }
 
 function RemoveItem({removeTodo, id}) {
-    function removeBtn() {
-        removeTodo(id)
-    }
+    const removeBtn = () => removeTodo(id)
     return <button onClick={removeBtn}>X</button>
 }

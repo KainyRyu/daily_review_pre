@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Todos from './Todo';
 import "./priority.css";
@@ -11,21 +11,29 @@ export default function Priority() {
         importance: true
     })
     const [todoList, setTodoList] = useState([]);
+    
+    useEffect(() =>{
 
-
-    const getTask = e => (setTodo({...todo, task: e.target.value, id: uuidv4() }));
+    },[todoList]) 
+    
+    let randomId = Math.random().toString(16).slice(2)
+    const getTask = e => (setTodo({...todo, task: e.target.value, id: randomId}));
     const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});
     const significatSelection = e => setTodo({...todo, importance: (e.target.value) !== "true" ? false : true});
-    
+
     function addTodoClick(){
-        setTodo({id: uuidv4(), ...todo})
-        setTodoList([todo, ...todoList])
-        if (todo.task !== '') {
-            setTodo({task: ''})
-        }
+        // setTodo({id: uuidv4(), ...todo})
+        // setTodoList([todo, ...todoList])
+        // if (todo.task !== '') {
+        //     setTodo({task: ''})
+        // }
     }
     function submitHandler(e) {
         e.preventDefault();
+        if (todo.task.trim()) {
+            setTodoList([todo, ...todoList])
+            setTodo({id: "", task: "", urgency: true, importance: true})
+        }
     }
 
     function removeTodo(id) {
@@ -58,7 +66,7 @@ export default function Priority() {
                     <option value="false">Insignificant</option>
                 </select>
             </div>
-            <button onClick={addTodoClick}>+</button>
+            <button type="submit">+</button>
         </form>
 
       <div className="priority-box red">
