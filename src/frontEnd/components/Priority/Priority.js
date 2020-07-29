@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./priority.css";
-import Todo from "./Todo";
+
 
 export default function Priority() {
     const [todo, setTodo] = useState({
@@ -12,15 +12,15 @@ export default function Priority() {
     })
     const [todoList, setTodoList] = useState([]);
 
-    const getTask = e => (setTodo({...todo, task: e.target.value })
-    );
+
+    const getTask = e => (setTodo({...todo, task: e.target.value }));
     const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});
     const significatSelection = e => setTodo({...todo, importance: (e.target.value) !== "true" ? false : true});
     
     function addTodoClick(){
+        setTodo({id: uuidv4(), ...todo})
         setTodoList([todo, ...todoList])
         console.log(todoList)
-        setTodo({...todo, id: uuidv4()})
     }
 
     function removeTodo(task) {
@@ -30,8 +30,6 @@ export default function Priority() {
     function removeClick() {
         removeTodo(todo.task)
     }
-
-  
 
   return (
     <div className="main">
@@ -65,9 +63,9 @@ export default function Priority() {
         <ul>
             {todoList
             .filter(todo => todo.urgency && todo.importance)
-            .map((todo) => (
+            .map(({id, task}) => (
                 <div id="todo">
-                    <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
+                    <li key={id}>{task}</li><button onClick={removeClick}>X</button>
                 </div>
             ))}
         </ul>
