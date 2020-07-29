@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Todos from './Todo';
 import "./priority.css";
 
@@ -12,11 +11,7 @@ export default function Priority() {
     })
     const [todoList, setTodoList] = useState([]);
     
-    useEffect(() =>{
-
-    },[todoList]) 
-    
-    let randomId = Math.random().toString(16).slice(2)
+    const randomId = Math.random().toString(16).slice(2)
     const getTask = e => (setTodo({...todo, task: e.target.value, id: randomId}));
     const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});
     const significatSelection = e => setTodo({...todo, importance: (e.target.value) !== "true" ? false : true});
@@ -65,55 +60,47 @@ export default function Priority() {
       <div className="priority-box red">
         <h3>Urgent & Significant</h3>
         <ul>
-            <Todos todoList={todoList} removeTodo={removeTodo}/>
-            {/* {todoList
-            .filter(({urgency, importance}) => urgency && importance)
-            .map(({id, task}) => {
-                let randomKey = Math.random().toString(16).slice(2)
-                return (
-                    <div id="todo" key={id}>
-                        <li>{task}</li><button onClick={removeTodo}>X</button>
-                    </div>
-            )}
-            )} */}
+            {todoList
+                .filter(({urgency, importance}) => urgency && importance)
+                .map(({id, task}) => {
+                    return <Todos key={id} id={id} task={task} removeTodo={removeTodo}/>
+                })
+            }
         </ul>
       </div>
-      {/* <div className="priority-box orange">
+      <div className="priority-box orange">
         <h3>Urgent & Insignificant</h3>
         <ul>
             {todoList
-                .filter(todo => todo.urgency === false && todo.importance)
-                .map((todo,index) => (
-                    <div id="todo">
-                        <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
-                    </div>
-            ))}
+                .filter(({urgency, importance}) => urgency && !importance)
+                .map(({id, task}) => {
+                    return <Todos key={id} id={id} task={task} removeTodo={removeTodo}/>
+                })
+            }
         </ul>
       </div>
       <div className="priority-box yellow">
         <h3>Not Urgent & Significant</h3>
         <ul>
             {todoList
-                .filter(todo => todo.urgency && todo.importance === false)
-                .map((todo,index) => (
-                    <div id="todo">
-                        <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
-                    </div>
-            ))}
+                .filter(({urgency, importance}) => !urgency && importance)
+                .map(({id, task}) => {
+                    return <Todos key={id} id={id} task={task} removeTodo={removeTodo}/>
+                })
+            }
         </ul>
       </div>
       <div className="priority-box gray">
         <h3>Not Urgent & Insignificant</h3>
         <ul>
             {todoList
-                .filter(todo => todo.urgency === false && todo.importance === false  )
-                .map((todo,index) => (
-                    <div id="todo">
-                        <li key={todo.id}>{todo.task}</li><button onClick={removeClick}>X</button>
-                    </div>
-            ))}
+                .filter(({urgency, importance}) => !urgency && !importance)
+                .map(({id, task}) => {
+                    return <Todos key={id} id={id} task={task} removeTodo={removeTodo}/>
+                })
+            }
         </ul>
-      </div> */}
+      </div>
     </div>
   );
 }
