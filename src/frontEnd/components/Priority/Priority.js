@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Todos from './Todo';
 import "./priority.css";
 
 
 export default function Priority() {
     const [todo, setTodo] = useState({
-        id: uuidv4(),
         task: "",
         urgency: true,
         importance: true
@@ -13,27 +13,32 @@ export default function Priority() {
     const [todoList, setTodoList] = useState([]);
 
 
-    const getTask = e => (setTodo({...todo, task: e.target.value }));
+    const getTask = e => (setTodo({...todo, task: e.target.value, id: uuidv4() }));
     const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});
     const significatSelection = e => setTodo({...todo, importance: (e.target.value) !== "true" ? false : true});
     
     function addTodoClick(){
         setTodo({id: uuidv4(), ...todo})
         setTodoList([todo, ...todoList])
-        console.log(todoList)
+        if (todo.task !== '') {
+            setTodo({task: ''})
+        }
+    }
+    function submitHandler(e) {
+        e.preventDefault();
     }
 
-    function removeTodo(task) {
-        setTodoList(todoList.filter(todo => todo.task !== task))
+    function removeTodo(id) {
+        setTodoList(todoList.filter(todo => todo.id !== id))
     }
 
-    function removeClick() {
-        removeTodo(todo.task)
+    function removeClick(id) {
+        removeTodo(id)
     }
 
   return (
     <div className="main">
-        <div id="add_input">
+        <form id="add_input" onSubmit={submitHandler}>
             <div className="input_wrapper">
                 <input className="text_input" type="text" value={todo.task} onChange={getTask} />
                 <select
@@ -53,21 +58,23 @@ export default function Priority() {
                     <option value="false">Insignificant</option>
                 </select>
             </div>
-            <button onClick={addTodoClick}>
-            Click
-            </button>
-        </div>
+            <button onClick={addTodoClick}>+</button>
+        </form>
 
       <div className="priority-box red">
         <h3>Urgent & Significant</h3>
         <ul>
-            {todoList
-            .filter(todo => todo.urgency && todo.importance)
-            .map(({id, task}) => (
-                <div id="todo">
-                    <li key={id}>{task}</li><button onClick={removeClick}>X</button>
-                </div>
-            ))}
+            <Todos todoList={todoList} removeTodo={removeTodo}/>
+            {/* {todoList
+            .filter(({urgency, importance}) => urgency && importance)
+            .map(({id, task}) => {
+                let randomKey = Math.random().toString(16).slice(2)
+                return (
+                    <div id="todo" key={id}>
+                        <li>{task}</li><button onClick={removeTodo}>X</button>
+                    </div>
+            )}
+            )} */}
         </ul>
       </div>
       {/* <div className="priority-box orange">
