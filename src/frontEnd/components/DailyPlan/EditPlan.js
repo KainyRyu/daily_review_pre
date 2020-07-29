@@ -2,24 +2,26 @@ import React, { useState } from 'react';
 import './editplan.css';
 
 export default function EditPlan(props) {
-    const [title, setTitle] = useState('');
-    const [startTime,setStartTime] = useState(0);
-    const [endTime,setEndTime] = useState(0);
+    const [newEvent, setNewEvent] = useState('');
+    const [starts,setStarts] = useState(0);
+    const [ends,setEnds] = useState(0);
     const [due,setDue] = useState(0);
     const [priority, setPriority] = useState('');
     const [memo, setMemo] = useState('')
 
-
+    const getEvent = e => setNewEvent(e.target.value)
+    const getStarts = e => setStarts(e.target.value)
+    const getEnds = e => setEnds(e.target.value)
     return (
         <form id="edit-form">
             <div>
-                <input type="text" placeholder="New Event" onChange={(e) => setTitle(e.target.value)} value={title}/>
+                <input type="text" placeholder="New Event" onChange={getEvent} value={newEvent}/>
             </div>
             <div>
-                <label>Start time </label><input type="time" onChange={(e) => setStartTime(e.target.value)} value={startTime}/>
+                <label>Starts </label><input type="time" onChange={getStarts} value={starts}/>
             </div>
             <div>
-                <label>End time </label><input type="time" onChange={(e) => setEndTime(e.target.value)} value={endTime}/>
+                <label>Ends </label><input type="time" onChange={getEnds} value={ends}/>
             </div>
             <div>
                 Repeat
@@ -33,15 +35,9 @@ export default function EditPlan(props) {
                     <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
-                {/* <select>
-                    <option value={priority}>{priority}</option>
-                    <option value={priority}>{priority}</option>
-                    <option value={priority}>{priority}</option>
-                </select> */}
             </div>
             <div><textarea placeholder="Notes" rows="4">{memo}</textarea></div>
             <input type="submit" />
         </form>
     )
 }
-//select > if number === time[i] > add in the object

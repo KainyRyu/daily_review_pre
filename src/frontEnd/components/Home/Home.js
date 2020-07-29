@@ -1,12 +1,13 @@
 import React from 'react'
-import Priority from '../Priority/Priority'
+import DailyPlan from '../DailyPlan/DailyPlan'
+import EditPlan from '../DailyPlan/EditPlan'
 import './home.css'
 
 export default function Home() {
 
     return (
         <div id="home">
-            <Priority />
+            <DailyPlan />
         </div>
     )
 }

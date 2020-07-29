@@ -17,10 +17,11 @@
 }
 
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 55px;
-    height: 34px;
+  display: inline-block;
+  height: 34px;
+  outline: red;
+  position: relative;
+  width: 55px;
   }
   
   /* Hide default HTML checkbox */
