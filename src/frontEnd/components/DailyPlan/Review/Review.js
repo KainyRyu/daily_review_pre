@@ -2,14 +2,18 @@ import React, {useState} from 'react';
 import '../dailyPlan.css'
 import './review.css'
 
+//relate with <Priority todo={todo}/> - Else
+//send percentage, elseTitle, PorN
+
 export default function Review() {
-    const [percent, setPercent] = useState(0)
+    const [productivity, setProductivity] = useState()
+    const [somethingElse, setSomethingElse] = useState([])
 
     function addElses() {
         return (
             <form className="input_wrapper">
                 <input className="text_input" type="text"/>
-                <input className="percentages" type="number" value={percent} onChange={setPercent(e => e.target.value)} />
+                <input className="percentages" type="number" value={percent} onChange={} />
             </form>
         )
     }
@@ -28,6 +32,9 @@ export default function Review() {
             <div>
                 <div style={{ display: "flex"}}>
                     <h2>Else</h2>
+                    {
+                        //if button clicked add
+                    }
                     <button onClick={addElses}>+</button>
                 </div>
                 <div className="add-else-warpper">
