@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EditPlan from "./EditPlan";
+import Review from "./Review";
 import timeSlot from './TimeSlot';
 import "./dailyPlan.css";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
@@ -16,6 +17,7 @@ export default function DailyPlan() {
     let minute = newDate.getMinutes();
 
     return `${hour} : ${minute < 10 ? `0${minute}` : minute}`;
+    //the slot time passed, alert for reveiwing
   }
 
   function timeTable() {
@@ -25,6 +27,7 @@ export default function DailyPlan() {
           <>
             <td className="timeslot">0{index} : 00</td>
             <td className="event" key={index}></td>
+          {/* if empty ->  <EditPlan starts={starts}/> and create a new event */}
             <td className="review"></td>
           </>
         ) : (
@@ -42,8 +45,9 @@ export default function DailyPlan() {
   return (
     <div>
       <h1>
-        {/* Daily Review <br /> {current()} */}
+        Daily Review <br /> {current()}
       </h1>
+      <Review />
       <table>
             <thead>
                 <tr>

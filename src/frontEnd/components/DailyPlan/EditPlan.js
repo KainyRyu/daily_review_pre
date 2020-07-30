@@ -6,22 +6,29 @@ export default function EditPlan(props) {
     const [starts,setStarts] = useState(0);
     const [ends,setEnds] = useState(0);
     const [due,setDue] = useState(0);
-    const [priority, setPriority] = useState('');
     const [memo, setMemo] = useState('')
 
     const getEvent = e => setNewEvent(e.target.value)
     const getStarts = e => setStarts(e.target.value)
     const getEnds = e => setEnds(e.target.value)
+    const getMemo = e => setMemo(e.target.value)
     return (
         <form id="edit-form">
             <div>
-                <input type="text" placeholder="New Event" onChange={getEvent} value={newEvent}/>
+                <input 
+                    type="text" 
+                    placeholder="New Event" 
+                    onChange={getEvent} 
+                    value={newEvent}
+                />
             </div>
             <div>
-                <label>Starts </label><input type="time" onChange={getStarts} value={starts}/>
+                <label>Starts </label>
+                <input type="time" onChange={getStarts} value={starts}/>
             </div>
             <div>
-                <label>Ends </label><input type="time" onChange={getEnds} value={ends}/>
+                <label>Ends </label>
+                <input type="time" onChange={getEnds} value={ends}/>
             </div>
             <div>
                 Repeat
@@ -36,7 +43,11 @@ export default function EditPlan(props) {
                     <span class="slider round"></span>
                 </label>
             </div>
-            <div><textarea placeholder="Notes" rows="4">{memo}</textarea></div>
+            <div>
+                <textarea placeholder="Notes" rows="4" onChange={getMemo}>
+                    {memo}
+                </textarea>
+            </div>
             <input type="submit" />
         </form>
     )
