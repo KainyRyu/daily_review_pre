@@ -1,0 +1,55 @@
+
+.review_page {
+    text-align: left;
+}
+
+.review_input_wrapper {
+    display: flex;
+    height: 35px;
+    margin: 10px 0;
+}
+
+.review_input {
+    border: 2px solid black;
+    width: 85%;
+}
+
+.percentages{
+    border: none;
+    font-size: 20px;
+    width: 15%
+}
+
+.review_button {
+    align-self: right;
+    background-color: white;
+    border: black solid 2px;
+    display: block;
+    font-size: 20px;
+    height: 35px;
+    width: 20%;
+    margin: 20px 0 0 80%;
+}
+
+.add-else-warpper {
+    border: 2px solid black;
+    padding: 10px 5px;
+    margin: 20px 0;
+}
+
+#review_related_select {
+    border: 2px solid black;
+    flex: 3;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.checkbox {
+    border: 2px solid black;
+    height: 30px;
+    width: 30px;
+}
+

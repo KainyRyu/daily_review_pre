@@ -13,6 +13,7 @@ table {
 tr, th {
     align-items: center;
     display: flex;
+    /* height: 30px; */
     padding: 0;
     margin: 0;
 }
@@ -20,43 +21,12 @@ tr, th {
 .timeslot {
     flex: 1;
 }
-.event {
+.event-slot {
     border-left: solid 1px black;
     flex: 2;
 }
 
-.review {
+.review-slot {
     border-left: solid 1px black;
     flex: 2;
-}
-
-.review_page {
-    text-align: left;
-}
-
-.review_input_wrapper {
-    display: flex;
-    height: 35px;
-}
-
-.review_input {
-    border: 2px solid black;
-    width: 85%;
-}
-
-.percentages{
-    border: none;
-    font-size: 20px;
-    width: 15%
-}
-
-.review_button {
-    align-self: right;
-    background-color: white;
-    border: black solid 2px;
-    display: block;
-    font-size: 20px;
-    height: 35px;
-    width: 20%;
-    margin: 20px 0 0 80%;
 }

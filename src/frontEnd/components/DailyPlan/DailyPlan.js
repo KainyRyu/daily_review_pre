@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditPlan from "./EditPlan";
-import Review from "./Review";
+import Review from "./Review/Review";
 import timeSlot from './TimeSlot';
 import "./dailyPlan.css";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
@@ -26,15 +26,15 @@ export default function DailyPlan() {
         {index < 10 ? (
           <>
             <td className="timeslot">0{index} : 00</td>
-            <td className="event" key={index}></td>
+            <td className="event-slot" key={index}></td>
           {/* if empty ->  <EditPlan starts={starts}/> and create a new event */}
-            <td className="review"></td>
+            <td className="review-slot"></td>
           </>
         ) : (
           <>
             <td className="timeslot">{index} : 00</td>
-            <td className="event" key={index}></td>
-            <td className="review"></td>
+            <td className="event-slot" key={index}></td>
+            <td className="review-slot"></td>
           </>
         )}
       </tr>
@@ -52,8 +52,8 @@ export default function DailyPlan() {
             <thead>
                 <tr>
                     <th className="timeslot"></th>
-                    <th className="event">Plan</th>
-                    <th className="review">Review</th>
+                    <th className="event-slot">Plan</th>
+                    <th className="review-slot">Review</th>
                 </tr>
             </thead>
             <tbody>{timeTable()}</tbody>
