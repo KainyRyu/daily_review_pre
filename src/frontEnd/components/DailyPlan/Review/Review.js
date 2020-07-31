@@ -11,7 +11,19 @@ function AddElses() {
         <div className="add-else-warpper">
             <div className="review_input_wrapper" style={{ display: "flex"}}>
                 <input className="review_input" type="text"/>
-                <input className="percentages" type="number"/>%
+                <select className="percentages">
+                        <option value="100">100%</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                        <option value="30">30%</option>
+                        <option value="20">20%</option>
+                        <option value="10">10%</option>
+                        <option value="0">0%</option>
+                    </select>
             </div>
             <div className="review_input_wrapper" style={{ display: "flex"}}>
                 <span style={{flex: 1}}>related to</span>
@@ -39,21 +51,21 @@ export default function Review() {
                 <h3>time - time</h3>
                 <div className="review_input_wrapper">
                     <input className="review_input" type="text" placeholder="" />
-                    <option>
-                        <select>100</select>
-                        <select>90</select>
-                        <select>80</select>
-                        <select>70</select>
-                        <select>60</select>
-                        <select>50</select>
-                        <select>40</select>
-                        <select>30</select>
-                        <select>20</select>
-                        <select>10</select>
-                        <select value="direct"></select>
-                    </option>
-                    <input type="text" id="selboxDirect" name="selboxDirect"/>
-                    <input className="percentages" type="number" placeholder="100"/>%
+                    <select className="percentages">
+                        <option value="100">100%</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                        <option value="30">30%</option>
+                        <option value="20">20%</option>
+                        <option value="10">10%</option>
+                        <option value="0">0%</option>
+                    </select>
+                    {/* <input type="text" id="selboxDirect" name="selboxDirect"/> */}
+                    {/* <input className="percentages" type="number" placeholder="100"/>% */}
                 </div>
                 <input className="review_button" type="submit" value="Done" />
             </div>
