@@ -21,14 +21,11 @@
 }
 
 .review_button {
-    align-self: right;
     background-color: white;
     border: black solid 2px;
-    display: block;
     font-size: 20px;
     height: 35px;
     width: 20%;
-    margin: 20px 0 0 80%;
 }
 
 .add-else-warpper {

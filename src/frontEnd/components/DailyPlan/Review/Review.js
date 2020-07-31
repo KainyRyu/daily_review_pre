@@ -28,8 +28,8 @@ function AddElses() {
             <div className="review_input_wrapper" style={{ display: "flex"}}>
                 <span style={{flex: 1}}>related to</span>
                 <select id="review_related_select">
-                    <option>
-                    </option>
+                    <option>None</option>
+                    <option>None</option>
                 </select>
             </div>
             <div className="checkboxes">
@@ -40,15 +40,21 @@ function AddElses() {
     )
 }
 export default function Review() {
-    const [productivity, setProductivity] = useState(0)
-    const [somethingElse, setSomethingElse] = useState([])
+    const [selectedTiem, setSelectedTime] = useState(0)
+    const [elseList, setElseList] = useState([
+        { currentEvent: "", defaultProductivity: 100 }
+    ]);
+    const [newElse, setNewElse] = useState({ elseEvent: "", elseProductivity: 0 });
 
     
 
     return (
         <div className="review_page">
             <div className="review_wrapper">
-                <h3>time - time</h3>
+                <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <h3>time - time</h3>
+                    <input className="review_button" type="submit" value="Done" />
+                </div>
                 <div className="review_input_wrapper">
                     <input className="review_input" type="text" placeholder="" />
                     <select className="percentages">
@@ -67,7 +73,6 @@ export default function Review() {
                     {/* <input type="text" id="selboxDirect" name="selboxDirect"/> */}
                     {/* <input className="percentages" type="number" placeholder="100"/>% */}
                 </div>
-                <input className="review_button" type="submit" value="Done" />
             </div>
             <div>
                 <div>
