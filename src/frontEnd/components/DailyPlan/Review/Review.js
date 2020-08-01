@@ -6,12 +6,17 @@ import './review.css'
 //send percentage, elseTitle, positive%, negative%
 //if productivity !== 100% ? Else default 100 - productivity%, Negative, placeholder="Something Else"
 
-function AddElses() {
+function AddElses({ addElse }) {
+    const [newElse, setNewElse] = useState({ elseEvent: "", elseProductivity: 0 });
+    const getNewElseEvent = e => newElse({...newElse, elseEvent: e.target.value })
+    const getNewElseProductivity = e => newElse({...newElse, elseProductivity: e.target.value })
+
     return (
         <div className="add-else-warpper">
-            <div className="review_input_wrapper" style={{ display: "flex"}}>
-                <input className="review_input" type="text"/>
-                <select className="percentages">
+            <div className="review_input_wrapper" style={{ display: "flex" }}>
+                {/* get {title} from daily plan */}
+                <input className="review_input" type="text" onChange={getNewElseEvent} value={newElse.elseEvent}/>
+                <select className="percentages" onChange={getNewElseProductivity} value={newElse.elseProductivity}>
                         <option value="100">100%</option>
                         <option value="90">90%</option>
                         <option value="80">80%</option>
@@ -25,7 +30,7 @@ function AddElses() {
                         <option value="0">0%</option>
                     </select>
             </div>
-            <div className="review_input_wrapper" style={{ display: "flex"}}>
+            <div className="review_input_wrapper" >
                 <span style={{flex: 1}}>related to</span>
                 <select id="review_related_select">
                     <option>None</option>
@@ -44,8 +49,10 @@ export default function Review() {
     const [elseList, setElseList] = useState([
         { currentEvent: "", defaultProductivity: 100 }
     ]);
-    const [newElse, setNewElse] = useState({ elseEvent: "", elseProductivity: 0 });
 
+    function addElse(newElse) {
+        setElseList(...elseList, newElse)
+    }
     
 
     return (
@@ -77,7 +84,7 @@ export default function Review() {
             <div>
                 <div>
                     <h2>Else</h2>
-                    <AddElses />
+                    <AddElses addElse={addElse}/>
                     <button>+</button>
                 </div>
                 
