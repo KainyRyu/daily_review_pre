@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NewElse from "./NewElse";
+import NewElseForm from "./NewElseForm";
 import "../dailyPlan.css";
 import "./review.css";
 
@@ -10,51 +10,108 @@ import "./review.css";
 
 export default function Review() {
     const [selectedTime, setSelectedTime] = useState(0);
-    const [elseList, setElseList] = useState([
-      { currentEvent: "", defaultProductivity: 100 },
-    ]);
+    const [elseList, setElseList] = useState([]);
+    const [newElse, setNewElse] = useState({
+        elseEvent: "",
+        elseProductivity: 0,
+    });
 
-    function addElse(newElse) {
-        setElseList([...elseList, newElse]);
+    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value });
+    const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: e.target.value });
+
+    function submitHandler(e) {
+        e.preventDefault()
+        if (newElse.elseEvent.trim()) {
+            setElseList([...elseList, newElse]);
+            setNewElse({ elseEvent: "", elseProductivity: 0})
+            console.log(newElse.elseEvnet)
+
+        }
+        console.log("outside: " + elseList)
     }
 
-    function moreElse() {
-        setElseList([...elseList, {}])
-    }
-
-  return (
-    <div className="review_page">
-      <div className="review_wrapper">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <h3>time - time</h3>
-          <input className="review_button" type="submit" value="Done" />
+    return (
+        <div className="review_page">
+        <div className="review_wrapper">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h3>time - time</h3>
+            {/* get {title} from daily plan (NOT INPUT)*/}
+            <input className="review_button" type="submit" value="Done" />
+            </div>
+            <div className="review_input_wrapper">
+            <input className="review_input" type="text" placeholder="" />
+            <select className="percentages">
+                <option value="100">100%</option>
+                <option value="90">90%</option>
+                <option value="80">80%</option>
+                <option value="70">70%</option>
+                <option value="60">60%</option>
+                <option value="50">50%</option>
+                <option value="40">40%</option>
+                <option value="30">30%</option>
+                <option value="20">20%</option>
+                <option value="10">10%</option>
+                <option value="0">0%</option>
+            </select>
+            {/* <input type="text" id="selboxDirect" name="selboxDirect"/> */}
+            {/* <input className="percentages" type="number" placeholder="100"/>% */}
+            </div>
         </div>
-        <div className="review_input_wrapper">
-          <input className="review_input" type="text" placeholder="" />
-          <select className="percentages">
-            <option value="100">100%</option>
-            <option value="90">90%</option>
-            <option value="80">80%</option>
-            <option value="70">70%</option>
-            <option value="60">60%</option>
-            <option value="50">50%</option>
-            <option value="40">40%</option>
-            <option value="30">30%</option>
-            <option value="20">20%</option>
-            <option value="10">10%</option>
-            <option value="0">0%</option>
-          </select>
-          {/* <input type="text" id="selboxDirect" name="selboxDirect"/> */}
-          {/* <input className="percentages" type="number" placeholder="100"/>% */}
-        </div>
-      </div>
-      <div>
         <div>
-          <h2>Else</h2>
-            <NewElse addElse={addElse}/>
-          <button type="submit" onClick={addElse}>+</button>
+            <div>
+                <h2>Else</h2>
+                <div className="else-list">
+                    {/* <table>
+                        {elseList.map((index, elseEvent) => {
+                            return <tr key={index}>
+                                    <td>{elseEvent.elseEvent}</td>
+                                    <td>{elseEvent.elseProductivity}</td>
+                                </tr>
+                            }
+                        )}
+                    </table> */}
+                </div>
+                <form className="add-else-warpper" onSubmit={submitHandler}>
+                    <div className="review_input_wrapper" style={{ display: "flex" }}>
+                        <input
+                            className="review_input"
+                            type="text"
+                            onChange={getNewElseEvent}
+                            value={newElse.elseEvent}
+                        />
+                        <select
+                            className="percentages"
+                            onChange={getNewElseProductivity}
+                            value={newElse.elseProductivity}
+                        >
+                            <option value="100">100%</option>
+                            <option value="90">90%</option>
+                            <option value="80">80%</option>
+                            <option value="70">70%</option>
+                            <option value="60">60%</option>
+                            <option value="50">50%</option>
+                            <option value="40">40%</option>
+                            <option value="30">30%</option>
+                            <option value="20">20%</option>
+                            <option value="10">10%</option>
+                            <option value="0">0%</option>
+                        </select>
+                    </div>
+                                        {/* <div className="review_input_wrapper">
+                                            <span style={{ flex: 1 }}>related to</span>
+                                            <select id="review_related_select">
+                                                <option>None</option>
+                                                <option>None</option>
+                                            </select>
+                                        </div>
+                                        <div className="checkboxes">
+                                            <input type="checkbox" className="checkbox" value="positive"/>
+                                            <input type="checkbox" className="checkbox" value="negative"/>
+                                        </div> */}
+                    <button type="submit">Add</button>
+                </form>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }

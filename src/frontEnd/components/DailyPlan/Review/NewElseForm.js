@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function NewElse({ addElse }) {
+export default function NewElseForm ({ addElse }) {
     const [newElse, setNewElse] = useState({
       elseEvent: "",
       elseProductivity: 0,
@@ -15,10 +15,11 @@ export default function NewElse({ addElse }) {
       if (newElse.elseEvent.trim()) {
         addElse({ ...newElse });
         setNewElse({ elseEvent: "", elseProductivity: 0})
+        console.log(newElse)
       }
     }
     return (
-      <input className="add-else-warpper">
+      <form className="add-else-warpper">
         <div className="review_input_wrapper" style={{ display: "flex" }}>
           {/* get {title} from daily plan */}
           <input
@@ -56,6 +57,6 @@ export default function NewElse({ addElse }) {
           <input type="checkbox" className="checkbox" />
           <input type="checkbox" className="checkbox" />
         </div>
-      </input>
+      </form>
     );
   }
