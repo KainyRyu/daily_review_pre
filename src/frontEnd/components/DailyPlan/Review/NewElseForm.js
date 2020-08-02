@@ -11,15 +11,15 @@ export default function NewElseForm ({ addElse }) {
     const getNewElseProductivity = (e) =>
       setNewElse({ ...newElse, elseProductivity: e.target.value });
   
-    function submitHandler() {
+    function submitHandler(e) {
+      e.preventDefault()
+      addElse({ newElse })
       if (newElse.elseEvent.trim()) {
-        addElse({ ...newElse });
         setNewElse({ elseEvent: "", elseProductivity: 0})
-        console.log(newElse)
       }
     }
     return (
-      <form className="add-else-warpper">
+      <form className="add-else-warpper" onSubmit={submitHandler}>
         <div className="review_input_wrapper" style={{ display: "flex" }}>
           {/* get {title} from daily plan */}
           <input
@@ -46,7 +46,7 @@ export default function NewElseForm ({ addElse }) {
             <option value="0">0%</option>
           </select>
         </div>
-        <div className="review_input_wrapper">
+        {/* <div className="review_input_wrapper">
           <span style={{ flex: 1 }}>related to</span>
           <select id="review_related_select">
             <option>None</option>
@@ -56,7 +56,7 @@ export default function NewElseForm ({ addElse }) {
         <div className="checkboxes">
           <input type="checkbox" className="checkbox" />
           <input type="checkbox" className="checkbox" />
-        </div>
+        </div> */}
       </form>
     );
   }

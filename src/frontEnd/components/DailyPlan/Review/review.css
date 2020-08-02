@@ -50,3 +50,11 @@
     width: 30px;
 }
 
+#else-list {
+    border: none
+}
+
+#else-lists {
+    border-bottom: solid 2px black;
+    margin: 0;
+}

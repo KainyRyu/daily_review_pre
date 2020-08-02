@@ -16,19 +16,11 @@ export default function Review() {
         elseProductivity: 0,
     });
 
-    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value });
-    const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: e.target.value });
-
-    function submitHandler(e) {
-        e.preventDefault()
-        if (newElse.elseEvent.trim()) {
-            setElseList([...elseList, newElse]);
-            setNewElse({ elseEvent: "", elseProductivity: 0})
-            console.log(newElse.elseEvnet)
-
-        }
-        console.log("outside: " + elseList)
+    function addElse(newElse) {
+        setElseList([ newElse, ...elseList])
+        console.log(elseList)
     }
+
 
     return (
         <div className="review_page">
@@ -60,56 +52,23 @@ export default function Review() {
         <div>
             <div>
                 <h2>Else</h2>
-                <div className="else-list">
-                    {/* <table>
-                        {elseList.map((index, elseEvent) => {
-                            return <tr key={index}>
-                                    <td>{elseEvent.elseEvent}</td>
-                                    <td>{elseEvent.elseProductivity}</td>
-                                </tr>
-                            }
-                        )}
-                    </table> */}
-                </div>
-                <form className="add-else-warpper" onSubmit={submitHandler}>
-                    <div className="review_input_wrapper" style={{ display: "flex" }}>
-                        <input
-                            className="review_input"
-                            type="text"
-                            onChange={getNewElseEvent}
-                            value={newElse.elseEvent}
-                        />
-                        <select
-                            className="percentages"
-                            onChange={getNewElseProductivity}
-                            value={newElse.elseProductivity}
-                        >
-                            <option value="100">100%</option>
-                            <option value="90">90%</option>
-                            <option value="80">80%</option>
-                            <option value="70">70%</option>
-                            <option value="60">60%</option>
-                            <option value="50">50%</option>
-                            <option value="40">40%</option>
-                            <option value="30">30%</option>
-                            <option value="20">20%</option>
-                            <option value="10">10%</option>
-                            <option value="0">0%</option>
-                        </select>
-                    </div>
-                                        {/* <div className="review_input_wrapper">
-                                            <span style={{ flex: 1 }}>related to</span>
-                                            <select id="review_related_select">
-                                                <option>None</option>
-                                                <option>None</option>
-                                            </select>
-                                        </div>
-                                        <div className="checkboxes">
-                                            <input type="checkbox" className="checkbox" value="positive"/>
-                                            <input type="checkbox" className="checkbox" value="negative"/>
-                                        </div> */}
-                    <button type="submit">Add</button>
-                </form>
+                    {
+                        elseList ? 
+                        <table id="else-list">
+                            <tbody>
+                                {elseList.map(({elseEvent, elseProductivity}, index) => {
+                                    return <tr key={index} className="else-lists">
+                                            <td>{elseEvent}</td>
+                                            <td>{elseProductivity}</td>
+                                        </tr>
+                                    }
+                                )}
+                            </tbody>
+                        </table>
+                        
+                        : <></>
+                    }
+                <NewElseForm addElse={addElse}/>
             </div>
         </div>
         </div>
