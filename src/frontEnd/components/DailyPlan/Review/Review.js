@@ -21,7 +21,6 @@ export default function Review() {
         console.log(elseList)
     }
 
-
     return (
         <div className="review_page">
         <div className="review_wrapper">
@@ -54,18 +53,17 @@ export default function Review() {
                 <h2>Else</h2>
                     {
                         elseList ? 
-                        <table id="else-list">
-                            <tbody>
-                                {elseList.map(({elseEvent, elseProductivity}, index) => {
-                                    return <tr key={index} className="else-lists">
-                                            <td>{elseEvent}</td>
-                                            <td>{elseProductivity}</td>
-                                        </tr>
-                                    }
-                                )}
-                            </tbody>
-                        </table>
-                        
+                            <table id="else-list">
+                                <tbody>
+                                    {elseList.map(({elseEvent, elseProductivity}, index) => {
+                                        return <tr key={index} className="else-lists">
+                                                <td>{elseEvent}</td>
+                                                <td>{elseProductivity}</td>
+                                            </tr>
+                                        }
+                                    )}
+                                </tbody>
+                            </table>
                         : <></>
                     }
                 <NewElseForm addElse={addElse}/>

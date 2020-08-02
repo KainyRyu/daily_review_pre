@@ -13,7 +13,7 @@ export default function NewElseForm ({ addElse }) {
   
     function submitHandler(e) {
       e.preventDefault()
-      addElse({ newElse })
+      addElse(newElse)
       if (newElse.elseEvent.trim()) {
         setNewElse({ elseEvent: "", elseProductivity: 0})
       }
