@@ -13,18 +13,14 @@ export default function Review() {
     const [elseList, setElseList] = useState([]);
 
     function addElse(newElse) {
-        setElseList([ newElse, ...elseList])
+        setElseList([newElse, ...elseList])
         console.log(elseList)
     }
 
-    function removeElse(number) {
-        setElseList(elseList.filter((elseIndividual, index) => number !== index))
+    function removeElse(deleteThis) {
+        setElseList(elseList.filter(thing => thing.elseEvent !== deleteThis))
     }
 
-    function removeButton() {
-
-        return <button onClick={}>Delete</button>
-    }
 
     return (
         <div className="review_page">
@@ -71,7 +67,7 @@ export default function Review() {
                                     // position: "absolute",
                                     width: `${elseProductivity}%`
                                 }}>{elseProductivity}%</div>
-                                <button>Delete</button>
+                                <DeleteButton removeElse={removeElse} elseEvent={elseEvent} />
                                 {/* <div className="display-percentage"></div> */}
                             </div>
                             }
@@ -83,4 +79,11 @@ export default function Review() {
         </div>
         </div>
     );
+
+}
+function DeleteButton({ removeElse, elseEvent }) {
+    const buttonClicked = () => {
+        removeElse(elseEvent)
+    }
+    return <button onClick={buttonClicked}>Delete</button>
 }
