@@ -17,6 +17,15 @@ export default function Review() {
         console.log(elseList)
     }
 
+    function removeElse(number) {
+        setElseList(elseList.filter((elseIndividual, index) => number !== index))
+    }
+
+    function removeButton() {
+
+        return <button onClick={}>Delete</button>
+    }
+
     return (
         <div className="review_page">
         <div className="review_wrapper">
@@ -47,28 +56,28 @@ export default function Review() {
         <div>
             <div>
                 <h2>Else</h2>
-                    {
-                    elseList ? 
-                        <div id="else-wrapper">
-                                {elseList.map(({elseEvent, elseProductivity, elseChecked}, index) => {
-                                    return <div key={index} className="else-list">
-                                            <div>{elseEvent}</div>
-                                            <div style={{
-                                                backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
-                                                // left: 0,
-                                                textAlign: "right",
-                                                justifySelf: "flex-end",
-                                                opacity: 0.5,
-                                                // position: "absolute",
-                                                width: `${elseProductivity}%`
-                                            }}>{elseProductivity}%</div>
-                                            <div>Delete</div>
-                                            {/* <div className="display-percentage"></div> */}
-                                        </div>
-                                    }
-                                )}
-                        </div> : <></>
-                    }
+                {
+                elseList ? 
+                    <div id="else-wrapper">
+                        {elseList.map(({elseEvent, elseProductivity, elseChecked}, index) => {
+                            return <div key={index} className="else-list">
+                                <div>{elseEvent}</div>
+                                <div style={{
+                                    backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
+                                    // left: 0,
+                                    textAlign: "right",
+                                    justifySelf: "flex-end",
+                                    opacity: 0.5,
+                                    // position: "absolute",
+                                    width: `${elseProductivity}%`
+                                }}>{elseProductivity}%</div>
+                                <button>Delete</button>
+                                {/* <div className="display-percentage"></div> */}
+                            </div>
+                            }
+                        )}
+                    </div> : <></>
+                }
                 <NewElseForm addElse={addElse}/>
             </div>
         </div>
