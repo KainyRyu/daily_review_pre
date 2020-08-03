@@ -18,6 +18,7 @@ export default function NewElseForm ({ addElse }) {
         setNewElse({ elseEvent: "", elseProductivity: 0})
       }
     }
+
     return (
       <form className="add-else-warpper" onSubmit={submitHandler}>
         <div className="review_input_wrapper" style={{ display: "flex" }}>
@@ -46,17 +47,19 @@ export default function NewElseForm ({ addElse }) {
             <option value="0">0%</option>
           </select>
         </div>
-        {/* <div className="review_input_wrapper">
+        <div className="review_input_wrapper">
           <span style={{ flex: 1 }}>related to</span>
           <select id="review_related_select">
             <option>None</option>
             <option>None</option>
           </select>
         </div>
-        <div className="checkboxes">
-          <input type="checkbox" className="checkbox" />
-          <input type="checkbox" className="checkbox" />
-        </div> */}
+
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="switch-slider"></span>
+          </label>
+
       </form>
     );
   }

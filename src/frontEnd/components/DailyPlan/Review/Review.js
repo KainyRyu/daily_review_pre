@@ -11,10 +11,6 @@ import "./review.css";
 export default function Review() {
     const [selectedTime, setSelectedTime] = useState(0);
     const [elseList, setElseList] = useState([]);
-    const [newElse, setNewElse] = useState({
-        elseEvent: "",
-        elseProductivity: 0,
-    });
 
     function addElse(newElse) {
         setElseList([ newElse, ...elseList])
@@ -52,19 +48,17 @@ export default function Review() {
             <div>
                 <h2>Else</h2>
                     {
-                        elseList ? 
-                            <table id="else-list">
-                                <tbody>
-                                    {elseList.map(({elseEvent, elseProductivity}, index) => {
-                                        return <tr key={index} className="else-lists">
-                                                <td>{elseEvent}</td>
-                                                <td>{elseProductivity}</td>
-                                            </tr>
-                                        }
-                                    )}
-                                </tbody>
-                            </table>
-                        : <></>
+                    elseList ? 
+                        <div id="else-wrapper">
+                                {elseList.map(({elseEvent, elseProductivity}, index) => {
+                                    return <div key={index} className="else-list">
+                                            <div>{elseEvent}</div>
+                                            <div>{elseProductivity}%</div>
+                                            {/* <div className="display-percentage"></div> */}
+                                        </div>
+                                    }
+                                )}
+                        </div> : <></>
                     }
                 <NewElseForm addElse={addElse}/>
             </div>
