@@ -13,7 +13,10 @@ export default function Review() {
     const [elseList, setElseList] = useState([]);
 
     function addElse(newElse) {
-        setElseList([newElse, ...elseList])
+        setElseList([newElse
+            //if newElse.elseEvent !== elseList.map(otherElse.elseEvent) ? newElse : none(select the same elseEvent)
+            //if elseList.elseProductivity reduce !== error
+            , ...elseList])
         console.log(elseList)
     }
 
