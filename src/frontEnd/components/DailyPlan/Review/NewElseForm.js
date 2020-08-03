@@ -4,24 +4,27 @@ export default function NewElseForm ({ addElse }) {
     const [newElse, setNewElse] = useState({
       elseEvent: "",
       elseProductivity: 0,
+      elseChecked: false
     });
   
-    const getNewElseEvent = (e) =>
-      setNewElse({ ...newElse, elseEvent: e.target.value });
-    const getNewElseProductivity = (e) =>
-      setNewElse({ ...newElse, elseProductivity: e.target.value });
+    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value });
+    const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: e.target.value });
+    const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
   
     function submitHandler(e) {
       e.preventDefault()
       addElse(newElse)
       if (newElse.elseEvent.trim()) {
-        setNewElse({ elseEvent: "", elseProductivity: 0})
+        setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
       }
     }
 
     return (
-      <form className="add-else-warpper" onSubmit={submitHandler}>
-        <div className="review_input_wrapper" style={{ display: "flex" }}>
+      <form 
+        className="add-else-warpper" 
+        onSubmit={submitHandler}
+      >
+        <div className="review-input-wrapper">
           {/* get {title} from daily plan */}
           <input
             className="review_input"
@@ -47,19 +50,26 @@ export default function NewElseForm ({ addElse }) {
             <option value="0">0%</option>
           </select>
         </div>
-        <div className="review_input_wrapper">
+        <div className="review-input-wrapper">
           <span style={{ flex: 1 }}>related to</span>
           <select id="review_related_select">
             <option>None</option>
             <option>None</option>
           </select>
         </div>
-
+        <div className="review-input-wrapper">
           <label class="switch">
-            <input type="checkbox" />
+            <input type="checkbox" 
+            onChange={getCheckbox} 
+            value={newElse.elseChecked}/>
             <span class="switch-slider"></span>
           </label>
-
+          <button 
+            className="review_button" 
+            type="submit" >
+              Add
+          </button>
+        </div>
       </form>
     );
   }

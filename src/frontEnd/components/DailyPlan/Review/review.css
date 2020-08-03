@@ -3,21 +3,24 @@
     text-align: left;
 }
 
-.review_input_wrapper {
+.review-input-wrapper {
     display: flex;
     height: 35px;
-    margin: 10px 0;
+    justify-content: space-between;
+    margin: 5px;
 }
 
 .review_input {
     border: 2px solid black;
-    width: 85%;
+    height: 35px;
+    width: 80%;
 }
 
 .percentages{
+    background: none;
     border: none;
     font-size: 20px;
-    width: 25%
+    width: 20%
 }
 
 .review_button {
@@ -30,18 +33,18 @@
 
 .add-else-warpper {
     border: 2px solid black;
-    padding: 10px 5px;
+    /* padding: 10px 5px; */
     margin: 20px 0;
 }
 
 #review_related_select {
     border: 2px solid black;
     flex: 3;
+    margin-top: 5px;
 }
 
 /* The switch - the box around the slider */
             .switch {
-                border: black 1px solid;
                 position: relative;
                 display: inline-block;
                 width: 60px;
@@ -49,14 +52,20 @@
             }
             
             /* Hide default HTML checkbox */
-            .switch input {
+            .switch>input {
                 opacity: 0;
                 width: 0;
                 height: 0;
             }
+
+            .switch>input:focus {
+                outline: black;
+            }
             
             /* The slider */
             .switch-slider {
+                border: black 1px solid;
+                border-radius: 34px;
                 position: absolute;
                 cursor: pointer;
                 top: 0;
@@ -69,36 +78,38 @@
             }
             
             .switch-slider:before {
-                position: absolute;
+                background-color: white;
+                bottom: 4px;
                 content: "";
+                position: absolute;
                 height: 26px;
                 width: 26px;
                 left: 4px;
-                bottom: 4px;
-                background-color: white;
                 -webkit-transition: .2s;
                 transition: .2s;
+                border-radius: 50%;
             }
             
-            input:checked + .switch-slider {
+            .switch>input:checked + .switch-slider {
                 background-color: dodgerblue;
             }
             
-            input:focus + .switch-slider {
+            .switch>input:focus + .switch-slider {
                 box-shadow: 0 0 1px dodgerblue;
             }
             
-            input:checked + .switch-slider:before {
+            .switch>input:checked + .switch-slider:before {
                 -webkit-transform: translateX(26px);
                 -ms-transform: translateX(26px);
                 transform: translateX(26px);
             }
 
 #else-wrapper {
-    border: none
+    border: none;
 }
 
 .else-list {
+    /* background-color: dodgerblue; */
     border-bottom: solid 2px black;
     display: flex;
     font-size: 20px;

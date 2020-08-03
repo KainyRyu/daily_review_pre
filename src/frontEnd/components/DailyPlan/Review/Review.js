@@ -20,12 +20,12 @@ export default function Review() {
     return (
         <div className="review_page">
         <div className="review_wrapper">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h3>time - time</h3>
-            {/* get {title} from daily plan (NOT INPUT)*/}
-            <input className="review_button" type="submit" value="Done" />
+            <div className="review-input-wrapper">
+                <h3>time - time</h3>
+                {/* get {title} from daily plan (NOT INPUT)*/}
+                <input className="review_button" type="submit" value="Done" />
             </div>
-            <div className="review_input_wrapper">
+            <div className="review-input-wrapper">
             <input className="review_input" type="text" placeholder="" />
             <select className="percentages">
                 <option value="100">100%</option>
@@ -50,10 +50,19 @@ export default function Review() {
                     {
                     elseList ? 
                         <div id="else-wrapper">
-                                {elseList.map(({elseEvent, elseProductivity}, index) => {
+                                {elseList.map(({elseEvent, elseProductivity, elseChecked}, index) => {
                                     return <div key={index} className="else-list">
                                             <div>{elseEvent}</div>
-                                            <div>{elseProductivity}%</div>
+                                            <div style={{
+                                                backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
+                                                // left: 0,
+                                                textAlign: "right",
+                                                justifySelf: "flex-end",
+                                                opacity: 0.5,
+                                                // position: "absolute",
+                                                width: `${elseProductivity}%`
+                                            }}>{elseProductivity}%</div>
+                                            <div>Delete</div>
                                             {/* <div className="display-percentage"></div> */}
                                         </div>
                                     }
