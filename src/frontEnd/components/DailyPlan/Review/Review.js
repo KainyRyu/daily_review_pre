@@ -60,24 +60,20 @@ export default function Review() {
                     <div id="else-wrapper">
                         {elseList.map(({elseEvent, elseProductivity, elseChecked}, index) => {
                             return <div key={index} className="else-list">
-                                <div>{elseEvent}</div>
-
                                 <div 
                                     className="percentage-overlay"
                                     style={{
-                                    backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
-                                    width: `${elseProductivity}%`
-                                }}>{elseProductivity}%</div>
-
-
+                                        backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
+                                        width: `${elseProductivity}%`
+                                    }}>{elseProductivity}%</div>
+                                <div>{elseEvent}</div>
                                 <DeleteButton removeElse={removeElse} elseEvent={elseEvent} />
-                                {/* <div className="display-percentage"></div> */}
                             </div>
                             }
                         )}
                     </div> : <></>
                 }
-                <NewElseForm addElse={addElse}/>
+                <NewElseForm addElse={addElse} elseList={elseList} />
             </div>
         </div>
         </div>
@@ -88,5 +84,5 @@ function DeleteButton({ removeElse, elseEvent }) {
     const buttonClicked = () => {
         removeElse(elseEvent)
     }
-    return <button onClick={buttonClicked}>Delete</button>
+    return <button className="else-delete-button" onClick={buttonClicked}>X</button>
 }

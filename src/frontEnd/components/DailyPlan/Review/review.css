@@ -111,7 +111,7 @@
     left: 0;
     opacity: 0.5;
     position: absolute;
-    right: 20px;
+    right: 30px;
 }
 
 #else-wrapper {
@@ -132,4 +132,12 @@
     background-color: red;
     position: relative;
     width: 60%;;
+}
+
+.else-delete-button {
+    background: white;
+    border: none;
+    /* box-sizing: border-box; */
+    height: 100%;
+    z-index: 2;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function NewElseForm ({ addElse }) {
+export default function NewElseForm ({ addElse, elseList }) {
     const [newElse, setNewElse] = useState({
       elseEvent: "",
       elseProductivity: 0,
@@ -8,9 +8,19 @@ export default function NewElseForm ({ addElse }) {
     });
   
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value });
-    const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: e.target.value });
+
+    function getNewElseProductivity (e) {
+      const toNumber = Number(e.target.value)
+      const total = elseList.map(thing => thing.elseProductivity)
+      .reduce((total, number) => 
+        total + number
+      , 0)
+      const sum = toNumber + total
+      return total + toNumber <= 100 ? setNewElse({ ...newElse, elseProductivity: toNumber}) : alert("Cannot over 100%")
+    };
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
-  
+    
+
     function submitHandler(e) {
       e.preventDefault()
       addElse(newElse)
