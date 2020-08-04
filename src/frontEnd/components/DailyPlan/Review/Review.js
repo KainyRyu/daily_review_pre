@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NewElseForm from "./NewElseForm";
+import SwipeToDelete from "./SwipeDelete";
 import "../dailyPlan.css";
 import "./review.css";
 
@@ -67,7 +68,7 @@ export default function Review() {
                                         width: `${elseProductivity}%`
                                     }}>{elseProductivity}%</div>
                                 <div>{elseEvent}</div>
-                                <DeleteButton removeElse={removeElse} elseEvent={elseEvent} />
+                                <SwipeToDelete removeElse={removeElse} elseEvent={elseEvent} />
                             </div>
                             }
                         )}

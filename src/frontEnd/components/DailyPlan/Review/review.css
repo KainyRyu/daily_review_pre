@@ -108,10 +108,10 @@
 .percentage-overlay {
     text-align: right;
     justify-self: flex-end;
-    left: 0;
+    /* left: 0; */
     opacity: 0.5;
     position: absolute;
-    right: 30px;
+    right: 0;
 }
 
 #else-wrapper {
