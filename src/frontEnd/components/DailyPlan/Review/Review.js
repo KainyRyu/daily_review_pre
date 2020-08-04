@@ -61,15 +61,15 @@ export default function Review() {
                         {elseList.map(({elseEvent, elseProductivity, elseChecked}, index) => {
                             return <div key={index} className="else-list">
                                 <div>{elseEvent}</div>
-                                <div style={{
+
+                                <div 
+                                    className="percentage-overlay"
+                                    style={{
                                     backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
-                                    // left: 0,
-                                    textAlign: "right",
-                                    justifySelf: "flex-end",
-                                    opacity: 0.5,
-                                    // position: "absolute",
                                     width: `${elseProductivity}%`
                                 }}>{elseProductivity}%</div>
+
+
                                 <DeleteButton removeElse={removeElse} elseEvent={elseEvent} />
                                 {/* <div className="display-percentage"></div> */}
                             </div>

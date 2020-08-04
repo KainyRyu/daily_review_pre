@@ -105,6 +105,15 @@
                 transform: translateX(26px);
             }
 
+.percentage-overlay {
+    text-align: right;
+    justify-self: flex-end;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    right: 20px;
+}
+
 #else-wrapper {
     border: none;
 }
@@ -115,9 +124,9 @@
     display: flex;
     font-size: 20px;
     justify-content: space-between;
+    position: relative;
     margin: 0;
 }
-
 
 .display-percentage {
     background-color: red;
