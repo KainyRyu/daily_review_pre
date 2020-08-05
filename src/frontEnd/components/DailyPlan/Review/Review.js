@@ -32,6 +32,7 @@ export default function Review() {
             <div className="review-input-wrapper">
                 <h3>time - time</h3>
                 {/* get {title} from daily plan (NOT INPUT)*/}
+                {/* With the Done button check weather the percentage is 100% */}
                 <input className="review_button" type="submit" value="Done" />
             </div>
             <div className="review-input-wrapper">

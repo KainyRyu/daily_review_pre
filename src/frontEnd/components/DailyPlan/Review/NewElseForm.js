@@ -35,6 +35,9 @@ export default function NewElseForm ({ addElse, elseList }) {
     }
     
     function submitFilter() {
+      //check the title if the same value or none otherwise push
+      //check productivity if 0 or if over 100
+      
       const isAHundred = elseList
       .map(thing => thing.elseProductivity)
       .reduce((total, number) => 
