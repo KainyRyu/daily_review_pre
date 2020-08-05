@@ -1,30 +1,66 @@
 import React, { useState } from "react";
 
 export default function NewElseForm ({ addElse, elseList }) {
+    
     const [newElse, setNewElse] = useState({
       elseEvent: "",
       elseProductivity: 0,
       elseChecked: false
     });
-  
-    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value });
 
-    function getNewElseProductivity (e) {
-      const toNumber = Number(e.target.value)
-      const total = elseList.map(thing => thing.elseProductivity)
-      .reduce((total, number) => 
-        total + number
-      , 0)
-      const sum = toNumber + total
-      return total + toNumber <= 100 ? setNewElse({ ...newElse, elseProductivity: toNumber}) : alert("Cannot over 100%")
-    };
+    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value });
+    const getNewElseProductivity = e => setNewElse({ ...NewElseForm, elseProductivity: e.target.value })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
+
+    function isPercentageAHundred () {
+      const toNumber = Number(newElse.elseProductivity)
+      const total = elseList.map(thing => thing.elseProductivity)
+        .reduce((total, number) => 
+          total + number
+        , 0)
+        return total + toNumber > 100 ? 
+          alert(`You can't add more than ${100 - total}%`) :
+          total + toNumber < 100 ?
+            alert(`The total is less than 100%`) :
+            setNewElse({ ...newElse, elseProductivity: toNumber})
+    };
     
+    const isTheSameEvent = () => {
+      const newEvent = newElse.elseEvent.trim()
+      return newEvent === "" ?
+      "Nothing" :
+      elseList.filter(event => event.elseEvent === newEvent) ?
+      `${newEvent} is already exist!` :
+      newEvent
+    }
+    
+    function submitFilter() {
+      const isAHundred = elseList
+      .map(thing => thing.elseProductivity)
+      .reduce((total, number) => 
+      total + number
+      , 0)
+      const toNumber = Number(newElse.elseProductivity)
+      const productivityFilter = () => (
+        toNumber === 0 ?
+        alert(`Percentage have no value`) :
+        isAHundred + toNumber > 100 ?
+        alert(`You can't add more than ${100 - isAHundred}%`) :
+        setNewElse({ ...newElse, elseProductivity: toNumber })
+      )
+      const newEvent = newElse.elseEvent.trim()
+    }
 
     function submitHandler(e) {
       e.preventDefault()
-      addElse(newElse)
-      if (newElse.elseEvent.trim()) {
+
+      addElse({
+        elseEvent: isTheSameEvent(), 
+        elseProductivity: newElse.elseProductivity, 
+        elseChecked: newElse.elseChecked
+      })
+      
+      if (newElse.elseEvent) {
         setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
       }
     }
@@ -68,11 +104,11 @@ export default function NewElseForm ({ addElse, elseList }) {
           </select>
         </div>
         <div className="review-input-wrapper">
-          <label class="switch">
+          <label className="switch">
             <input type="checkbox" 
             onChange={getCheckbox} 
             value={newElse.elseChecked}/>
-            <span class="switch-slider"></span>
+            <span className="switch-slider"></span>
           </label>
           <button 
             className="review_button" 
