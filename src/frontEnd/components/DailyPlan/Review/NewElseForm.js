@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function NewElseForm ({ addElse, elseList }) {
     
@@ -7,7 +7,12 @@ export default function NewElseForm ({ addElse, elseList }) {
       elseProductivity: 0,
       elseChecked: false
     });
-    const [filted, setFilted] = useState(0)
+    let filted = []
+
+    useEffect(() => {
+      const filtedElse = []
+      
+    })
 
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim() });
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
@@ -16,14 +21,16 @@ export default function NewElseForm ({ addElse, elseList }) {
     //check the title if the same value or none otherwise push
     const isTheSameEvent = () => {
       const newEvent = newElse.elseEvent
-      return newEvent === "" ?
-       setFilted({...filted, elseEvent: "Nothing"}) :
-        elseList.filter(event => event.elseEvent === newEvent ?
-          alert(`${newEvent} is already exist!`) :
-          setFilted({...filted, elseEvent: newEvent})
+      return elseList.filter(event => event.elseEvent === newEvent ?
+          alert(`'${newEvent}' is already exist!`) :
+          filted = {...filted, elseEvent: newEvent}
         )
     }
-    
+
+    const isTheEventEmpty = () => {
+      return newElse.elseEvent === "" ? "Nothing" : newElse.elseEvent
+    }
+
     function productivity() {
       //check productivity if 0 or if over 100
       const total = elseList
@@ -36,16 +43,17 @@ export default function NewElseForm ({ addElse, elseList }) {
         alert(`Percentage is 0`) :
         total + toNumber > 100 ?
           alert(`You can't add more than ${100 - total}%`) :
-          setFilted({ ...filted, elseProductivity: toNumber })   
+          filted = { ...filted, elseProductivity: toNumber }
     }
 
     function submitHandler(e) {
       e.preventDefault()
       isTheSameEvent()
+      productivity()
       console.log(`elseList : ${elseList} and filted object : ${[filted]}`)
       if (filted.elseProductivity) {
-        addElse(filted)
-        setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
+      addElse(filted)
+      setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
       }
     }
 
