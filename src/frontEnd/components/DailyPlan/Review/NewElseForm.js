@@ -8,27 +8,32 @@ export default function NewElseForm ({ addElse, elseList }) {
       elseChecked: false
     });
     let filted = []
+    // const [filted, setFilted] = useState([])
+    // useEffect(() => {
+    //   // const filtedElse = [] 
+    //   newElse.elseProductivity !== 0 ? 
+    //     alert("Percentage is 0%") :
+    //     newElse.elseProductivity
 
-    useEffect(() => {
-      const filtedElse = []
-      
-    })
+    // }, [filted])
 
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim() });
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
-    //check the title if the same value or none otherwise push
+    const elseTitleFilter = e => {
+      isTheEventEmpty(e)
+    }
     const isTheSameEvent = () => {
-      const newEvent = newElse.elseEvent
-      return elseList.filter(event => event.elseEvent === newEvent ?
-          alert(`'${newEvent}' is already exist!`) :
-          filted = {...filted, elseEvent: newEvent}
+      return elseList.filter(event => event.elseEvent === newElse.elseEvent ?
+          alert(`'${newElse.elseEvent}' is already exist!`) :
+          filted = {...filted, elseEvent: newElse.elseEvent}
         )
     }
 
     const isTheEventEmpty = () => {
-      return newElse.elseEvent === "" ? "Nothing" : newElse.elseEvent
+      const filter = newElse.elseEvent === "" ? "Nothing" : newElse.elseEvent
+      return filted = {...filted, elseEvent: filter}
     }
 
     function productivity() {
@@ -37,20 +42,19 @@ export default function NewElseForm ({ addElse, elseList }) {
         .map(event => event.elseProductivity)
         .reduce((total, number) => 
           total + number
-        , 0) //
-      const toNumber = newElse.elseProductivity
-      return toNumber === 0 ?
+        , 0) 
+      return newElse.elseProductivity === 0 ?
         alert(`Percentage is 0`) :
-        total + toNumber > 100 ?
+        total + newElse.elseProductivity > 100 ?
           alert(`You can't add more than ${100 - total}%`) :
-          filted = { ...filted, elseProductivity: toNumber }
+          filted = { ...filted, elseProductivity: newElse.elseProductivity }
     }
 
     function submitHandler(e) {
       e.preventDefault()
       isTheSameEvent()
       productivity()
-      console.log(`elseList : ${elseList} and filted object : ${[filted]}`)
+      console.log(newElse)
       if (filted.elseProductivity) {
       addElse(filted)
       setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
