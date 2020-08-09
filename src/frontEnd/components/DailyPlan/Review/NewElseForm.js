@@ -8,36 +8,31 @@ export default function NewElseForm ({ addElse, elseList }) {
       elseChecked: false
     });
     let filted = []
+
     // const [filted, setFilted] = useState([])
-    // useEffect(() => {
-    //   // const filtedElse = [] 
-    //   newElse.elseProductivity !== 0 ? 
-    //     alert("Percentage is 0%") :
-    //     newElse.elseProductivity
+    useEffect(() => {
+      productivity()
+      filted = { ...filted, elseEvent: eventFilter(newElse.elseEvent)}
+    }, [])
 
-    // }, [filted])
-
+    const toFilted = async () => {
+      eventFilter(newElse.elseEvent)
+    }
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim() });
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
-    const elseTitleFilter = e => {
-      isTheEventEmpty(e)
-    }
-    const isTheSameEvent = () => {
-      return elseList.filter(event => event.elseEvent === newElse.elseEvent ?
-          alert(`'${newElse.elseEvent}' is already exist!`) :
-          filted = {...filted, elseEvent: newElse.elseEvent}
+
+    const eventFilter = (eventTitle) => {
+      return elseList.filter(event => event.elseEvent === eventTitle ? 
+        alert(`'${eventTitle}' is already exist!`) :
+        eventTitle === "" ?
+          "Nothing" :
+          eventTitle
         )
     }
 
-    const isTheEventEmpty = () => {
-      const filter = newElse.elseEvent === "" ? "Nothing" : newElse.elseEvent
-      return filted = {...filted, elseEvent: filter}
-    }
-
     function productivity() {
-      //check productivity if 0 or if over 100
       const total = elseList
         .map(event => event.elseProductivity)
         .reduce((total, number) => 
@@ -52,9 +47,7 @@ export default function NewElseForm ({ addElse, elseList }) {
 
     function submitHandler(e) {
       e.preventDefault()
-      isTheSameEvent()
-      productivity()
-      console.log(newElse)
+      console.log(filted)
       if (filted.elseProductivity) {
       addElse(filted)
       setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
