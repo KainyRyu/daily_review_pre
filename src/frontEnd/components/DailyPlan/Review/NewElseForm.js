@@ -7,17 +7,19 @@ export default function NewElseForm ({ addElse, elseList }) {
       elseProductivity: 0,
       elseChecked: false
     });
+    
     let filted = []
 
     // const [filted, setFilted] = useState([])
-    useEffect(() => {
-      productivity()
-      filted = { ...filted, elseEvent: eventFilter(newElse.elseEvent)}
-    }, [])
-
+    // useEffect(() => {
+      //   productivity()
+      //   filted = { ...filted, elseEvent: eventFilter(newElse.elseEvent)}
+      // }, [])
+      
     const toFilted = async () => {
       eventFilter(newElse.elseEvent)
     }
+    
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim() });
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
