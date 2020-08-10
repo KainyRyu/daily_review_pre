@@ -12,12 +12,13 @@ export default function NewElseForm ({ addElse, elseList }) {
     // when newElse.elseEvent, elseProductivity is triggered update filted
     // const [filted, setFilted] = useState([])
     // useEffect(() => {
-      //   productivity()
+      //   productivityFilter()
       //   filted = { ...filted, elseEvent: eventFilter(newElse.elseEvent)}
       // }, [])
       
     const toFilted = async () => {
       eventFilter(newElse.elseEvent)
+      productivityFilter(newElse.elseProductivity)
     }
     
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim() });
@@ -34,17 +35,17 @@ export default function NewElseForm ({ addElse, elseList }) {
         )
     }
 
-    function productivity() {
+    function productivityFilter(percentageInput) {
       const total = elseList
         .map(event => event.elseProductivity)
         .reduce((total, number) => 
           total + number
         , 0) 
-      return newElse.elseProductivity === 0 ?
+      return percentageInput === 0 ?
         alert(`Percentage is 0`) :
-        total + newElse.elseProductivity > 100 ?
+        total + percentageInput > 100 ?
           alert(`You can't add more than ${100 - total}%`) :
-          filted = { ...filted, elseProductivity: newElse.elseProductivity }
+          filted = { ...filted, elseProductivity: percentageInput }
     }
 
     function submitHandler(e) {
