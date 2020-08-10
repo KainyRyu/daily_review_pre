@@ -21,18 +21,21 @@ export default function NewElseForm ({ addElse, elseList }) {
       productivityFilter(newElse.elseProductivity)
     }
     
-    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim() });
+    const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim()})
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
 
     const eventFilter = (eventTitle) => {
-      return elseList.filter(event => event.elseEvent === eventTitle ? 
-        alert(`'${eventTitle}' is already exist!`) :
-        eventTitle === "" ?
-          "Nothing" :
-          eventTitle
+
+      return elseList
+        .filter(event => event.elseEvent === eventTitle ? 
+          alert(`'${eventTitle}' is already exist!`) :
+          eventTitle === "" ?
+            filted = { ... filted, elseEvent: "Nothing" } :
+            filted = { ... filted, elseEvent: eventTitle }
         )
+        console.log(filted)
     }
 
     function productivityFilter(percentageInput) {
