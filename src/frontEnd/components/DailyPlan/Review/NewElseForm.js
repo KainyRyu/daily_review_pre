@@ -37,7 +37,7 @@ export default function NewElseForm ({ addElse, elseList }) {
               )
         console.log(filted)
         resolve()
-        })
+      })
     }
 
     function productivityFilter(percentageInput) {
@@ -58,10 +58,12 @@ export default function NewElseForm ({ addElse, elseList }) {
 
     function submitHandler(e) {
       e.preventDefault()
-      productivityFilter(newElse.elseProductivity)
-        .then(eventFilter(newElse.elseEvent))
+      eventFilter(newElse.elseEvent)
+        .then(productivityFilter(newElse.elseProductivity))
+        .then(addElse(filted))
+        .then(() => console.log(filted, elseList))
       if (filted.elseProductivity) {
-      addElse(filted)
+
       setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
       }
     }
