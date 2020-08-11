@@ -27,15 +27,17 @@ export default function NewElseForm ({ addElse, elseList }) {
     
 
     const eventFilter = (eventTitle) => {
-
-      return elseList
-        .filter(event => event.elseEvent === eventTitle ? 
-          alert(`'${eventTitle}' is already exist!`) :
-          eventTitle === "" ?
-            filted = { ... filted, elseEvent: "Nothing" } :
-            filted = { ... filted, elseEvent: eventTitle }
-        )
+      return new Promise(resolve => {
+        elseList
+          .filter(event => event.elseEvent === eventTitle ? 
+            alert(`'${eventTitle}' is already exist!`) :
+            eventTitle === "" ?
+              filted = { ... filted, elseEvent: "Nothing" } :
+              filted = { ... filted, elseEvent: eventTitle },
+              )
         console.log(filted)
+        resolve()
+        })
     }
 
     function productivityFilter(percentageInput) {
@@ -44,16 +46,20 @@ export default function NewElseForm ({ addElse, elseList }) {
         .reduce((total, number) => 
           total + number
         , 0) 
-      return percentageInput === 0 ?
-        alert(`Percentage is 0`) :
-        total + percentageInput > 100 ?
-          alert(`You can't add more than ${100 - total}%`) :
-          filted = { ...filted, elseProductivity: percentageInput }
+      return new Promise(resolve => {
+        percentageInput === 0 ?
+          alert(`Percentage is 0`) :
+          total + percentageInput > 100 ?
+            alert(`You can't add more than ${100 - total}%`) :
+            filted = { ...filted, elseProductivity: percentageInput }
+        resolve()
+      })
     }
 
     function submitHandler(e) {
       e.preventDefault()
-      console.log(filted)
+      productivityFilter(newElse.elseProductivity)
+        .then(eventFilter(newElse.elseEvent))
       if (filted.elseProductivity) {
       addElse(filted)
       setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
