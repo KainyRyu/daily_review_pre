@@ -15,11 +15,6 @@ export default function NewElseForm ({ addElse, elseList }) {
       //   productivityFilter()
       //   filted = { ...filted, elseEvent: eventFilter(newElse.elseEvent)}
       // }, [])
-      
-    const toFilted = async () => {
-      eventFilter(newElse.elseEvent)
-      productivityFilter(newElse.elseProductivity)
-    }
     
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim()})
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
@@ -35,7 +30,6 @@ export default function NewElseForm ({ addElse, elseList }) {
               filted = { ... filted, elseEvent: "Nothing" } :
               filted = { ... filted, elseEvent: eventTitle },
               )
-        console.log(filted)
         resolve()
       })
     }
