@@ -25,7 +25,7 @@ export default function NewElseForm ({ addElse, elseList }) {
       return eventTitle === "" ?
         "Nothing" :
         elseList
-          .ever(event => event.elseEvent !== eventTitle) ? 
+          .every(event => event.elseEvent !== eventTitle) ? 
             eventTitle :
             alert(`'${eventTitle}' is already exist!`) 
     }
