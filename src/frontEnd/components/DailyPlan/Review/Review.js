@@ -10,7 +10,7 @@ import "./review.css";
 
 
 export default function Review() {
-    const [selectedTime, setSelectedTime] = useState(0);
+    // const [selectedTime, setSelectedTime] = useState(0);
     const [elseList, setElseList] = useState([]);
 
     function addElse(newElse) {

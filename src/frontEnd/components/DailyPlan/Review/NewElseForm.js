@@ -8,27 +8,21 @@ export default function NewElseForm ({ addElse, elseList }) {
       elseChecked: false
     });
     
-    let filted = []
-    // when newElse.elseEvent, elseProductivity is triggered update filted
-    // const [filted, setFilted] = useState([])
-    // useEffect(() => {
-      //   productivityFilter()
-      //   filted = { ...filted, elseEvent: eventFilter(newElse.elseEvent)}
-      // }, [])
+    let filted = {}
     
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim()})
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
 
-    async function eventFilter(eventTitle) {
+    const eventFilter = async(eventTitle) => {
       return elseList
-          .filter(event => event.elseEvent === eventTitle ? 
+          .some(event => event.elseEvent === eventTitle) ? 
             alert(`'${eventTitle}' is already exist!`) :
             eventTitle === "" ?
-              filted = { ... filted, elseEvent: "Nothing" } :
-              filted = { ... filted, elseEvent: eventTitle },
-              )
+              "Nothing" :
+              eventTitle
+              
     }
 
     async function productivityFilter(percentageInput) {
@@ -41,19 +35,33 @@ export default function NewElseForm ({ addElse, elseList }) {
           alert(`Percentage is 0`) :
           total + percentageInput > 100 ?
             alert(`You can't add more than ${100 - total}%`) :
-            filted = { ...filted, elseProductivity: percentageInput }
+            percentageInput
+    }
+
+    async function filterHandler() {
+      let filtedTitle = await eventFilter(newElse.elseEvent)
+      let filtedProductivity = await productivityFilter(newElse.elseProductivity)
+
+      return filtedTitle && filtedProductivity ? 
+        {elseEvent: filtedTitle, elseProductivity: filtedProductivity} : 
+        false
     }
 
     function submitHandler(e) {
       e.preventDefault()
-      eventFilter(newElse.elseEvent)
-        .then(() => productivityFilter(newElse.elseProductivity))
-        .then(() => addElse(filted))
-        .then(() => console.log(filted, elseList))
-      if (filted.elseProductivity) {
+      filterHandler().then((filtedElse) => addElse(filtedElse))
+      return filted.elseProductivity ? 
+        setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false}) :
+        false
+      // eventFilter((eventTitle) => filted = {...filted, elseEvent: eventTitle}
+      //   .then(() => console.log(filted))
+      //   .then(() => productivityFilter(newElse.elseProductivity))
+      //   .then(() => addElse(filted))
+      //   .then(() => console.log(filted, elseList))
+      // if (filted.elseProductivity) {
 
-      setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
-      }
+      // setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
+      // }
     }
 
     return (
