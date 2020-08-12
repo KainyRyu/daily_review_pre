@@ -21,40 +21,34 @@ export default function NewElseForm ({ addElse, elseList }) {
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
 
-    const eventFilter = (eventTitle) => {
-      return new Promise(resolve => {
-        elseList
+    async function eventFilter(eventTitle) {
+      return elseList
           .filter(event => event.elseEvent === eventTitle ? 
             alert(`'${eventTitle}' is already exist!`) :
             eventTitle === "" ?
               filted = { ... filted, elseEvent: "Nothing" } :
               filted = { ... filted, elseEvent: eventTitle },
               )
-        resolve()
-      })
     }
 
-    function productivityFilter(percentageInput) {
+    async function productivityFilter(percentageInput) {
       const total = elseList
         .map(event => event.elseProductivity)
         .reduce((total, number) => 
           total + number
         , 0) 
-      return new Promise(resolve => {
-        percentageInput === 0 ?
+      return percentageInput === 0 ?
           alert(`Percentage is 0`) :
           total + percentageInput > 100 ?
             alert(`You can't add more than ${100 - total}%`) :
             filted = { ...filted, elseProductivity: percentageInput }
-        resolve()
-      })
     }
 
     function submitHandler(e) {
       e.preventDefault()
       eventFilter(newElse.elseEvent)
-        .then(productivityFilter(newElse.elseProductivity))
-        .then(addElse(filted))
+        .then(() => productivityFilter(newElse.elseProductivity))
+        .then(() => addElse(filted))
         .then(() => console.log(filted, elseList))
       if (filted.elseProductivity) {
 
