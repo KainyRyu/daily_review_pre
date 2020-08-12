@@ -8,21 +8,26 @@ export default function NewElseForm ({ addElse, elseList }) {
       elseChecked: false
     });
     
-    let filted = {}
-    
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim()})
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
 
     const eventFilter = async(eventTitle) => {
-      return elseList
-          .some(event => event.elseEvent === eventTitle) ? 
-            alert(`'${eventTitle}' is already exist!`) :
-            eventTitle === "" ?
-              "Nothing" :
-              eventTitle
-              
+      try{
+        await eventTitle === "" ? "Nothing" : eventTitle
+      } catch(error) {
+        if (elseList.ever(event => event.elseEvent !== eventTitle)) {
+          alert(`'${eventTitle}' is already exist!`) 
+        }
+      }
+//---
+      return eventTitle === "" ?
+        "Nothing" :
+        elseList
+          .ever(event => event.elseEvent !== eventTitle) ? 
+            eventTitle :
+            alert(`'${eventTitle}' is already exist!`) 
     }
 
     async function productivityFilter(percentageInput) {
@@ -49,19 +54,10 @@ export default function NewElseForm ({ addElse, elseList }) {
 
     function submitHandler(e) {
       e.preventDefault()
-      filterHandler().then((filtedElse) => addElse(filtedElse))
-      return filted.elseProductivity ? 
-        setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false}) :
-        false
-      // eventFilter((eventTitle) => filted = {...filted, elseEvent: eventTitle}
-      //   .then(() => console.log(filted))
-      //   .then(() => productivityFilter(newElse.elseProductivity))
-      //   .then(() => addElse(filted))
-      //   .then(() => console.log(filted, elseList))
-      // if (filted.elseProductivity) {
-
-      // setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false})
-      // }
+      filterHandler()
+        .then((filtedElse) => addElse(filtedElse))
+        // .catch(error => error(error))
+        .then(() => setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false}))
     }
 
     return (
