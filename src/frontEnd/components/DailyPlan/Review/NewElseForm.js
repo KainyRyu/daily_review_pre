@@ -14,13 +14,13 @@ export default function NewElseForm ({ addElse, elseList }) {
     
 
     const eventFilter = async(eventTitle) => {
-      try{
-        await eventTitle === "" ? "Nothing" : eventTitle
-      } catch(error) {
-        if (elseList.ever(event => event.elseEvent !== eventTitle)) {
-          alert(`'${eventTitle}' is already exist!`) 
-        }
-      }
+      // try{
+      //   await eventTitle === "" ? "Nothing" : eventTitle
+      // } catch(error) {
+      //   if (elseList.ever(event => event.elseEvent !== eventTitle)) {
+      //     alert(`'${eventTitle}' is already exist!`) 
+      //   }
+      // }
 //---
       return eventTitle === "" ?
         "Nothing" :
