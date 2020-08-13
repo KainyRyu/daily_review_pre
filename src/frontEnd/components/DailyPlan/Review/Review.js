@@ -19,7 +19,6 @@ export default function Review() {
         setElseList(elseList.filter(thing => thing.elseEvent !== deleteThis))
     }
 
-
     return (
         <div className="review_page">
         <div className="review_wrapper">
@@ -62,7 +61,7 @@ export default function Review() {
                                     style={{
                                         backgroundColor: elseChecked ? "dodgerblue" : "#b22222",
                                         width: `${elseProductivity}%`
-                                    }}>{elseProductivity}%</div>
+                                    }}><span>{elseProductivity}%</span></div>
                                 <div>{elseEvent}</div>
                                 <SwipeToDelete removeElse={removeElse} elseEvent={elseEvent} />
                             </div> : <></>
