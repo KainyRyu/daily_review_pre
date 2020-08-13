@@ -61,7 +61,8 @@ export default function Review() {
                 elseList ? 
                     <div id="else-wrapper">
                         {elseList.map(({elseEvent, elseProductivity, elseChecked}, index) => {
-                            return <div key={index} className="else-list">
+                            return elseEvent && elseProductivity ?
+                            <div key={index} className="else-list">
                                 <div 
                                     className="percentage-overlay"
                                     style={{
@@ -70,7 +71,7 @@ export default function Review() {
                                     }}>{elseProductivity}%</div>
                                 <div>{elseEvent}</div>
                                 <SwipeToDelete removeElse={removeElse} elseEvent={elseEvent} />
-                            </div>
+                            </div> : <></>
                             }
                         )}
                     </div> : <></>
