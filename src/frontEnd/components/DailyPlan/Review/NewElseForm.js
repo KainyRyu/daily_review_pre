@@ -14,14 +14,6 @@ export default function NewElseForm ({ addElse, elseList }) {
     
 
     const eventFilter = async(eventTitle) => {
-      // try{
-      //   await eventTitle === "" ? "Nothing" : eventTitle
-      // } catch(error) {
-      //   if (elseList.ever(event => event.elseEvent !== eventTitle)) {
-      //     alert(`'${eventTitle}' is already exist!`) 
-      //   }
-      // }
-//---
       return eventTitle === "" ?
         "Nothing" :
         elseList
@@ -46,17 +38,15 @@ export default function NewElseForm ({ addElse, elseList }) {
     async function filterHandler() {
       let filtedTitle = await eventFilter(newElse.elseEvent)
       let filtedProductivity = await productivityFilter(newElse.elseProductivity)
-
       return filtedTitle && filtedProductivity ? 
-        {elseEvent: filtedTitle, elseProductivity: filtedProductivity} : 
-        false
+        {elseEvent: filtedTitle, elseProductivity: filtedProductivity, elseChecked: newElse.elseChecked} : 
+        0
     }
 
     function submitHandler(e) {
       e.preventDefault()
       filterHandler()
-        .then((filtedElse) => addElse(filtedElse))
-        // .catch(error => error(error))
+        .then((filtedElse) => filtedElse !== 0 ? addElse(filtedElse) : false)
         .then(() => setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false}))
     }
 

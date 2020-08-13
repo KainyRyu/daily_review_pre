@@ -6,19 +6,13 @@ import "./review.css";
 
 //relate with <Priority todo={todo}/> - Else
 //send percentage, elseTitle, positive%, negative%
-//if productivity !== 100% ? Else default 100 - productivity%, Negative, placeholder="Something Else"
-
 
 export default function Review() {
     // const [selectedTime, setSelectedTime] = useState(0);
     const [elseList, setElseList] = useState([]);
 
     function addElse(newElse) {
-        setElseList([newElse
-            //if newElse.elseEvent !== elseList.map(otherElse.elseEvent) ? newElse : none(select the same elseEvent)
-            //if elseList.elseProductivity reduce !== error
-            , ...elseList])
-        console.log(elseList)
+        setElseList([newElse, ...elseList])
     }
 
     function removeElse(deleteThis) {
