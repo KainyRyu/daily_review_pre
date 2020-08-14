@@ -13,7 +13,7 @@ export default function NewElseForm ({ addElse, elseList }) {
     const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
     
 
-    const eventFilter = async(eventTitle) => {
+    const eventFilter = (eventTitle) => {
       return eventTitle === "" ?
         "Nothing" :
         elseList
@@ -22,7 +22,7 @@ export default function NewElseForm ({ addElse, elseList }) {
             alert(`'${eventTitle}' is already exist!`) 
     }
 
-    async function productivityFilter(percentageInput) {
+    const productivityFilter = (percentageInput) => {
       const total = elseList
         .map(event => event.elseProductivity)
         .reduce((total, number) => 
@@ -35,19 +35,18 @@ export default function NewElseForm ({ addElse, elseList }) {
             percentageInput
     }
 
-    async function filterHandler() {
-      let filtedTitle = await eventFilter(newElse.elseEvent)
-      let filtedProductivity = await productivityFilter(newElse.elseProductivity)
+    const filterHandler = () => {
+      let filtedTitle = eventFilter(newElse.elseEvent)
+      let filtedProductivity = productivityFilter(newElse.elseProductivity)
       return filtedTitle && filtedProductivity ? 
-        {elseEvent: filtedTitle, elseProductivity: filtedProductivity, elseChecked: newElse.elseChecked} : 
+        addElse({elseEvent: filtedTitle, elseProductivity: filtedProductivity, elseChecked: newElse.elseChecked}) : 
         0
     }
 
     function submitHandler(e) {
       e.preventDefault()
       filterHandler()
-        .then((filtedElse) => filtedElse !== 0 ? addElse(filtedElse) : false)
-        .then(() => setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false}))
+      setNewElse({ elseEvent: "", elseProductivity: 0, elseChecked: false })
     }
 
     return (

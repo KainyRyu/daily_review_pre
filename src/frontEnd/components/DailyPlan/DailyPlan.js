@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditPlan from "./EditPlan";
-// import Review from "./Review/Review";
+import Review from "./Review/Review";
 import timeSlot from './TimeSlot';
 import "./dailyPlan.css";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
@@ -47,6 +47,7 @@ export default function DailyPlan() {
       <h1>
         Daily Review <br /> {current()}
       </h1>
+      <Review />
       <EditPlan />
       <table>
             <thead>
