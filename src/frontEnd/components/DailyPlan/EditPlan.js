@@ -10,6 +10,8 @@ export default function EditPlan(props) {
     const [memo, setMemo] = useState('')
 
     const getEvent = e => setNewEvent(e.target.value)
+    //on DailyPlan: mapping timeSlot component
+    //EditPlan: push the item if time === index or timeSlot.time ? timeSlot.title : null
     const getStarts = e => setStarts(e.target.value)
     const getEnds = e => setEnds(e.target.value)
     const getMemo = e => setMemo(e.target.value)
@@ -54,3 +56,4 @@ export default function EditPlan(props) {
         </form>
     )
 }
+
