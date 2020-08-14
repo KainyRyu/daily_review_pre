@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardDatePicker } from  "@material-ui/pickers"
+import timeSlot from "./TimeSlot"
 import './editplan.css';
 
 export default function EditPlan(props) {
@@ -28,7 +29,14 @@ export default function EditPlan(props) {
             </div>
             <div className="input-wrapper">
                 <label>Starts </label>
-                <input type="time" onChange={getStarts} value={starts}/>
+                <select>
+                    {
+                        timeSlot().map(hour => {
+                            return <option key="hour">{hour.time}</option>
+                        })
+                    }
+                </select>
+                {/* <input type="time" onChange={getStarts} value={starts}/> */}
             </div>
             <div className="input-wrapper">
                 <label>Ends </label>
@@ -49,7 +57,6 @@ export default function EditPlan(props) {
             </div>
             <div>
                 <textarea placeholder="Notes" rows="4" onChange={getMemo}>
-                    {memo}
                 </textarea>
             </div>
             <input type="submit" />

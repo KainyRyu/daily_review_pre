@@ -51,8 +51,8 @@ export default function DailyPlan() {
       <h1>
         Daily Review <br /> {current()}
       </h1>
-      <Review />
-      {/* <EditPlan /> */}
+      {/* <Review /> */}
+       <EditPlan />
       <div className="timeslot-wrapper">
         <div className="timeslot-row">
             <div className="timeslot"></div>
