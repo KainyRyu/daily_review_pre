@@ -10,7 +10,7 @@ export default function NewElseForm ({ addElse, elseList }) {
     
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim()})
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
-    const getCheckbox = e => setNewElse({ ...newElse, elseChecked: e.target.value})
+    const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
 
     const eventFilter = (eventTitle) => {
       return eventTitle === "" ?
@@ -92,7 +92,7 @@ export default function NewElseForm ({ addElse, elseList }) {
               <input 
                 type="checkbox" 
                 onChange={getCheckbox} 
-                value={newElse.elseChecked}
+                checked={newElse.elseChecked}
               />
               <span className="switch-slider"></span>
             </label>

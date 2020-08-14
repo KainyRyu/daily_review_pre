@@ -23,7 +23,10 @@
     flex: 1;
 }
 .event-slot, .review-slot {
-    flex: 2;
+    flex: 3;
+}
+.review-slot {
+    border-left: dashed 1px gray;
 }
 
 .plan-wrapper {

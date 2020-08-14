@@ -29,15 +29,15 @@ export default function DailyPlan() {
             <div className="plan-wrapper">
               <div className="event-slot"><Link></Link></div>
             {/* if empty ->  <EditPlan starts={starts}/> and create a new event */}
-              <div className="review-slot">ㅎ</div>
+              <div className="review-slot">  </div>
             </div>
           </>
         ) : (
           <>
             <div className="timeslot">{index} : 00</div>
             <div className="plan-wrapper">
-              <div className="event-slot">d</div>
-              <div className="review-slot">d</div>
+              <div className="event-slot">  </div>
+              <div className="review-slot">  </div>
             </div>
           </>
         )}
@@ -51,7 +51,7 @@ export default function DailyPlan() {
       <h1>
         Daily Review <br /> {current()}
       </h1>
-      {/* <Review /> */}
+      <Review />
        <EditPlan />
       <div className="timeslot-wrapper">
         <div className="timeslot-row">

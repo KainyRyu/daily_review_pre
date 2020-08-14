@@ -4,7 +4,9 @@ import timeSlot from "./TimeSlot"
 import './editplan.css';
 
 export default function EditPlan(props) {
-    const [newEvent, setNewEvent] = useState('');
+    const [newEvent, setNewEvent] = useState({
+        
+    });
     const [starts,setStarts] = useState(0);
     const [ends,setEnds] = useState(0);
     const [due,setDue] = useState(0);
@@ -29,7 +31,7 @@ export default function EditPlan(props) {
             </div>
             <div className="input-wrapper">
                 <label>Starts </label>
-                <select>
+                <select className="edit-plan-time">
                     {
                         timeSlot().map(hour => {
                             return <option key="hour">{hour.time}</option>
@@ -40,7 +42,14 @@ export default function EditPlan(props) {
             </div>
             <div className="input-wrapper">
                 <label>Ends </label>
-                <input type="time" onChange={getEnds} value={ends}/>
+                <select className="edit-plan-time">
+                    {
+                        timeSlot().map(hour => {
+                            return <option key="hour">{hour.time}</option>
+                        })
+                    }
+                </select>
+                {/* <input type="time" onChange={getEnds} value={ends}/> */}
             </div>
             {/* <div className="input-wrapper">
                 Repeat
@@ -48,13 +57,13 @@ export default function EditPlan(props) {
             <div className="input-wrapper">
                 <span>Alert</span><span>></span>
             </div>
-            <div className="input-wrapper">
+            {/* <div className="input-wrapper">
                 <h3 style={{margin: 0}}>BOLD</h3>
                 <label class="switch">
                     <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
-            </div>
+            </div> */}
             <div>
                 <textarea placeholder="Notes" rows="4" onChange={getMemo}>
                 </textarea>
