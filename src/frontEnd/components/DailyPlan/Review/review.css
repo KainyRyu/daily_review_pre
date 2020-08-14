@@ -104,6 +104,21 @@
                 -ms-transform: translateX(26px);
                 transform: translateX(26px);
             }
+            
+#else-wrapper {
+    border: none;
+}
+
+.else-list {
+    border-bottom: solid 2px black;
+    display: flex;
+    font-size: 20px;
+    height: 35px;
+    justify-content: space-between;
+    /* padding: 5px 10px; */
+    position: relative;
+    margin: 0;
+}
 
 .percentage-overlay {
     text-align: right;
@@ -119,21 +134,6 @@
     position: absolute;
     right: 35px;
     margin: 5px 0;
-}
-
-#else-wrapper {
-    border: none;
-}
-
-.else-list {
-    border: solid 2px black;
-    display: flex;
-    font-size: 20px;
-    height: 35px;
-    justify-content: space-between;
-    padding: auto 10px;
-    position: relative;
-    margin: 0;
 }
 
 .display-percentage {

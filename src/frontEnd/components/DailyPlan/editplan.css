@@ -2,7 +2,7 @@
     border: black 2px solid;
 }
 
-#edit-form div {
+.input-wrapper {
     border-bottom: lightgray 1px solid;
     display: flex;
     font-size: 20px;
@@ -11,9 +11,14 @@
     padding: 10px 0;
 }
 
-#edit-form div input {
+.input-wrapper input {
     border: none;
     font-size: 20px;
+    height: 35px;
+}
+
+#new-event-input {
+  width: 100%;
 }
 
 .switch {

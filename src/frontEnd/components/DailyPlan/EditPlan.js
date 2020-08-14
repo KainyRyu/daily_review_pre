@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { KeyboardDatePicker } from  "@material-ui/pickers"
 import './editplan.css';
 
 export default function EditPlan(props) {
@@ -14,29 +15,30 @@ export default function EditPlan(props) {
     const getMemo = e => setMemo(e.target.value)
     return (
         <form id="edit-form">
-            <div>
+            <div className="input-wrapper">
                 <input 
+                    id="new-event-input"
                     type="text" 
                     placeholder="New Event" 
                     onChange={getEvent} 
                     value={newEvent}
                 />
             </div>
-            <div>
+            <div className="input-wrapper">
                 <label>Starts </label>
                 <input type="time" onChange={getStarts} value={starts}/>
             </div>
-            <div>
+            <div className="input-wrapper">
                 <label>Ends </label>
                 <input type="time" onChange={getEnds} value={ends}/>
             </div>
-            <div>
+            {/* <div className="input-wrapper">
                 Repeat
+            </div> */}
+            <div className="input-wrapper">
+                <span>Alert</span><span>></span>
             </div>
-            <div>
-                Alert
-            </div>
-            <div>
+            <div className="input-wrapper">
                 <h3 style={{margin: 0}}>BOLD</h3>
                 <label class="switch">
                     <input type="checkbox" />
