@@ -15,29 +15,33 @@ export default function DailyPlan() {
     let newDate = new Date();
     let hour = newDate.getHours();
     let minute = newDate.getMinutes();
-
+    console.log(5)
     return `${hour} : ${minute < 10 ? `0${minute}` : minute}`;
     //the slot time passed, alert for reveiwing
   }
 
   function timeTable() {
     let displayHours = timeSlot().map((event, index) => (
-      <tr key={index}>
+      <div key={index} className="timeslot-row">
         {index < 10 ? (
           <>
-            <td className="timeslot">0{index} : 00</td>
-            <td className="event-slot"></td>
-          {/* if empty ->  <EditPlan starts={starts}/> and create a new event */}
-            <Link><td className="review-slot"></td></Link>
+            <div className="timeslot">0{index} : 00</div>
+            <div className="plan-wrapper">
+              <div className="event-slot"><Link></Link></div>
+            {/* if empty ->  <EditPlan starts={starts}/> and create a new event */}
+              <div className="review-slot">ㅎ</div>
+            </div>
           </>
         ) : (
           <>
-            <td className="timeslot">{index} : 00</td>
-            <td className="event-slot"></td>
-            <Link to="/"><td className="review-slot"></td></Link>
+            <div className="timeslot">{index} : 00</div>
+            <div className="plan-wrapper">
+              <div className="event-slot">d</div>
+              <div className="review-slot">d</div>
+            </div>
           </>
         )}
-      </tr>
+      </div>
     ));
     return displayHours;
   }
@@ -48,17 +52,17 @@ export default function DailyPlan() {
         Daily Review <br /> {current()}
       </h1>
       <Review />
-      <EditPlan />
-      <table>
-            <thead>
-                <tr>
-                    <th className="timeslot"></th>
-                    <th className="event-slot">Plan</th>
-                    <th className="review-slot">Review</th>
-                </tr>
-            </thead>
-            <tbody>{timeTable()}</tbody>
-      </table>
+      {/* <EditPlan /> */}
+      <div className="timeslot-wrapper">
+        <div className="timeslot-row">
+            <div className="timeslot"></div>
+            <div className="plan-wrapper">
+              <div className="event-slot">Plan</div>
+              <div className="review-slot">Review</div>
+            </div>
+        </div>
+        <div>{timeTable()}</div>
+      </div>
     </div>
   );
 }

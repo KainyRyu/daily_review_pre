@@ -5,15 +5,16 @@
     width: 100%;
 }
 
-table {
+.timeslot-wrapper {
     border: black 2px solid;
     width: 100%;
 }
 
-tr, th {
+.timeslot-row {
     align-items: center;
+    border-bottom: dodgerblue 1px double;
     display: flex;
-    /* height: 30px; */
+    height: 30px;
     padding: 0;
     margin: 0;
 }
@@ -21,12 +22,16 @@ tr, th {
 .timeslot {
     flex: 1;
 }
-.event-slot {
-    border-left: solid 1px black;
+.event-slot, .review-slot {
     flex: 2;
 }
 
-.review-slot {
-    border-left: solid 1px black;
-    flex: 2;
+.plan-wrapper {
+    border-style: none none none double;
+    border-left-color: red;
+    display: flex;
+    flex: 4;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }

@@ -10,8 +10,7 @@ export default function NewElseForm ({ addElse, elseList }) {
     
     const getNewElseEvent = e => setNewElse({ ...newElse, elseEvent: e.target.value.trim()})
     const getNewElseProductivity = e => setNewElse({ ...newElse, elseProductivity: Number(e.target.value) })
-    const getCheckbox = e => setNewElse({ ...newElse, elseChecked: !newElse.elseChecked})
-    
+    const getCheckbox = e => setNewElse({ ...newElse, elseChecked: e.target.value})
 
     const eventFilter = (eventTitle) => {
       return eventTitle === "" ?
@@ -88,12 +87,17 @@ export default function NewElseForm ({ addElse, elseList }) {
           </select>
         </div>
         <div className="review-input-wrapper">
-          <label className="switch">
-            <input type="checkbox" 
-            onChange={getCheckbox} 
-            value={newElse.elseChecked}/>
-            <span className="switch-slider"></span>
-          </label>
+          <div>
+            <label className="switch">
+              <input 
+                type="checkbox" 
+                onChange={getCheckbox} 
+                value={newElse.elseChecked}
+              />
+              <span className="switch-slider"></span>
+            </label>
+            <span>{`${newElse.elseChecked}`}</span>
+          </div>
           <button 
             className="review_button" 
             type="submit" >
