@@ -17,6 +17,11 @@
     height: 35px;
 }
 
+.edit-plan-time {
+  border: none;
+  width: 50px;
+}
+
 #new-event-input {
   width: 100%;
 }
@@ -31,7 +36,7 @@
   
 
 
-  
+
   /* 
   .switch input {
     opacity: 0;

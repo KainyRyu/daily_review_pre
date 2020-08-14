@@ -5,19 +5,19 @@ import './editplan.css';
 
 export default function EditPlan(props) {
     const [newEvent, setNewEvent] = useState({
-        
+        title: '',
+        starts: 0,
+        ends: 0,
+        memo: ''
     });
-    const [starts,setStarts] = useState(0);
-    const [ends,setEnds] = useState(0);
     const [due,setDue] = useState(0);
-    const [memo, setMemo] = useState('')
 
     const getEvent = e => setNewEvent(e.target.value)
     //on DailyPlan: mapping timeSlot component
     //EditPlan: push the item if time === index or timeSlot.time ? timeSlot.title : null
-    const getStarts = e => setStarts(e.target.value)
-    const getEnds = e => setEnds(e.target.value)
-    const getMemo = e => setMemo(e.target.value)
+    const getStarts = e => setNewEvent({... newEvent, title: e.target.value})
+    const getEnds = e => setNewEvent({... newEvent, ends: e.target.value})
+    const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
     return (
         <form id="edit-form">
             <div className="input-wrapper">
@@ -26,15 +26,16 @@ export default function EditPlan(props) {
                     type="text" 
                     placeholder="New Event" 
                     onChange={getEvent} 
-                    value={newEvent}
+                    //if the time's title is empty => "" : timeslot[time].title
+                    value={newEvent.title}
                 />
             </div>
             <div className="input-wrapper">
                 <label>Starts </label>
                 <select className="edit-plan-time">
                     {
-                        timeSlot().map(hour => {
-                            return <option key="hour">{hour.time}</option>
+                        timeSlot().map((hour, index) => {
+                            return <option key={index}>{hour.time}</option>
                         })
                     }
                 </select>
@@ -44,8 +45,8 @@ export default function EditPlan(props) {
                 <label>Ends </label>
                 <select className="edit-plan-time">
                     {
-                        timeSlot().map(hour => {
-                            return <option key="hour">{hour.time}</option>
+                        timeSlot().map((hour, index) => {
+                            return <option key={index}>{hour.time}</option>
                         })
                     }
                 </select>

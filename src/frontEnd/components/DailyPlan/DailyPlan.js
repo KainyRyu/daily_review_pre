@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import EditPlan from "./EditPlan";
-import Review from "./Review/Review";
+// import Review from "./Review/Review";
 import timeSlot from './TimeSlot';
 import "./dailyPlan.css";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import { Link } from "react-router-dom";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
-  const [plan, setPlan] = useState("");
-  const [review, setReview] = useState("");
 
   function current() {
     let newDate = new Date();
@@ -29,7 +26,7 @@ export default function DailyPlan() {
             <div className="plan-wrapper">
               <div className="event-slot"><Link></Link></div>
             {/* if empty ->  <EditPlan starts={starts}/> and create a new event */}
-              <div className="review-slot">  </div>
+              <div className="review-slot"><Link></Link>  </div>
             </div>
           </>
         ) : (
@@ -48,11 +45,11 @@ export default function DailyPlan() {
   
   return (
     <div>
+      {/* <Review /> */}
+      <EditPlan />
       <h1>
         Daily Review <br /> {current()}
       </h1>
-      <Review />
-       <EditPlan />
       <div className="timeslot-wrapper">
         <div className="timeslot-row">
             <div className="timeslot"></div>

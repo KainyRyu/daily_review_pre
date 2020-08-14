@@ -87,17 +87,14 @@ export default function NewElseForm ({ addElse, elseList }) {
           </select>
         </div>
         <div className="review-input-wrapper">
-          <div>
-            <label className="switch">
-              <input 
-                type="checkbox" 
-                onChange={getCheckbox} 
-                checked={newElse.elseChecked}
-              />
-              <span className="switch-slider"></span>
-            </label>
-            <span>{`${newElse.elseChecked}`}</span>
-          </div>
+          <label className="switch">
+            <input 
+              type="checkbox" 
+              onChange={getCheckbox} 
+              checked={newElse.elseChecked}
+            />
+            <span className="switch-slider"></span>
+          </label>
           <button 
             className="review_button" 
             type="submit" >
