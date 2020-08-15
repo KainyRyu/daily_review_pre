@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
 import { KeyboardDatePicker } from  "@material-ui/pickers"
-import timeSlot from "./TimeSlot"
+import timeSlots from "./TimeSlots"
 import './editplan.css';
 
 export default function EditPlan(props) {
     const [newEvent, setNewEvent] = useState({
         title: '',
-        starts: 0,
-        ends: 0,
+        starts: NaN,
+        ends: NaN,
+        // mute: false,
+        // bold: false,
         memo: ''
     });
     const [due,setDue] = useState(0);
 
     const getEvent = e => setNewEvent(e.target.value)
-    //on DailyPlan: mapping timeSlot component
-    //EditPlan: push the item if time === index or timeSlot.time ? timeSlot.title : null
-    const getStarts = e => setNewEvent({... newEvent, title: e.target.value})
-    const getEnds = e => setNewEvent({... newEvent, ends: e.target.value})
+    //on DailyPlan: mapping timeSlots component
+    //EditPlan: push the item if time === index or timeSlots.time ? timeSlots.title : null
+    const getStarts = e => setNewEvent(
+        { 
+            ... newEvent,
+            starts: e.target.value >= newEvent.starts ? 
+                alert('The start time must be before the end time') : 
+                e.target.value 
+        })
+    const getEnds = e => setNewEvent(
+        {
+            ... newEvent,
+            ends: e.target.value <= newEvent.starts ? 
+                alert('The end time must be after the start time') : 
+                e.target.value 
+        })
     const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
+
+    const submitHandler = () => {
+        
+    }
     return (
         <form id="edit-form">
             <div className="input-wrapper">
@@ -26,15 +44,19 @@ export default function EditPlan(props) {
                     type="text" 
                     placeholder="New Event" 
                     onChange={getEvent} 
-                    //if the time's title is empty => "" : timeslot[time].title
+                    //if the time's title is empty => "" : timeslots[time].title
                     value={newEvent.title}
                 />
             </div>
             <div className="input-wrapper">
                 <label>Starts </label>
-                <select className="edit-plan-time">
+                <select 
+                    className="edit-plan-time"
+                    onChange={getStarts}
+                    value={newEvent.starts}
+                >
                     {
-                        timeSlot().map((hour, index) => {
+                        timeSlots().map((hour, index) => {
                             return <option key={index}>{hour.time}</option>
                         })
                     }
@@ -43,9 +65,13 @@ export default function EditPlan(props) {
             </div>
             <div className="input-wrapper">
                 <label>Ends </label>
-                <select className="edit-plan-time">
+                <select 
+                    className="edit-plan-time"
+                    onChange={getEnds}
+                    value={newEvent.ends}
+                >
                     {
-                        timeSlot().map((hour, index) => {
+                        timeSlots().map((hour, index) => {
                             return <option key={index}>{hour.time}</option>
                         })
                     }
