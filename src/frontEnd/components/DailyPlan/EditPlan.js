@@ -6,38 +6,39 @@ import './editplan.css';
 export default function EditPlan(props) {
     const [newEvent, setNewEvent] = useState({
         title: '',
-        starts: NaN,
-        ends: NaN,
+        starts: 0,
+        ends: 0,
         // mute: false,
         // bold: false,
         memo: ''
     });
-    const [due,setDue] = useState(0);
+
+
 
     const getEvent = e => setNewEvent(e.target.value)
     //on DailyPlan: mapping timeSlots component
     //EditPlan: push the item if time === index or timeSlots.time ? timeSlots.title : null
-    const getStarts = e => setNewEvent(
-        { 
-            ... newEvent,
-            starts: e.target.value >= newEvent.starts ? 
-                alert('The start time must be before the end time') : 
-                e.target.value 
-        })
-    const getEnds = e => setNewEvent(
-        {
-            ... newEvent,
-            ends: e.target.value <= newEvent.starts ? 
-                alert('The end time must be after the start time') : 
-                e.target.value 
-        })
+    const getStarts = e => setNewEvent({ ... newEvent, starts: e.target.value })
+    const getEnds = e => setNewEvent({ ... newEvent, ends: e.target.value })
     const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
-
-    const submitHandler = () => {
+        
+    const startsFilter = () => {
+        if (newEvent.starts >= newEvent.ends) {
+            alert('The end time must be after the start time') 
+            setNewEvent({...newEvent, ends: 0})
+        }
+    }
+        
+    const submitHandler = (e) => {
+        e.preventDefault()
+        console.log(newEvent)
         timeSlots().map((timeslot, index) => {
             return
         })
     }
+
+
+
     return (
         <form id="edit-form">
             <div className="input-wrapper">
@@ -71,7 +72,7 @@ export default function EditPlan(props) {
                     className="edit-plan-time"
                     onChange={getEnds}
                     value={newEvent.ends}
-                >
+                >     
                     {
                         timeSlots().map((hour, index) => {
                             return <option key={index}>{hour.time}</option>

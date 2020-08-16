@@ -12,7 +12,6 @@ export default function DailyPlan() {
     let newDate = new Date();
     let hour = newDate.getHours();
     let minute = newDate.getMinutes();
-    console.log(5)
     return `${hour} : ${minute < 10 ? `0${minute}` : minute}`;
     //the slot time passed, alert for reveiwing
   }
@@ -29,12 +28,22 @@ export default function DailyPlan() {
           <>
             <div className="timeslot">{timeSlot.time} : 00</div>
             <div className="plan-wrapper">
-                <div className="event-slot">  </div>
-                <div className="review-slot">  </div>
+                <div className="event-slot">
+                  <Link to={{
+                    to: "/",
+                    state: {num: index}
+                  }}>timeSlot.event</Link>
+                </div>
+                <div className="review-slot">
+                <Link to={{
+                    to: "/edit_plan",
+                    state: {num: index}
+                  }}></Link>
+                  timeSlot.review
+                </div>
             </div>
           </>
         }
-
       </div>
     ));
   }        
