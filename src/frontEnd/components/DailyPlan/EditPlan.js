@@ -34,7 +34,9 @@ export default function EditPlan(props) {
     const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
 
     const submitHandler = () => {
-        
+        timeSlots().map((timeslot, index) => {
+            return
+        })
     }
     return (
         <form id="edit-form">
