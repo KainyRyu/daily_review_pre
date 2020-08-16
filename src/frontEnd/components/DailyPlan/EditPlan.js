@@ -10,7 +10,7 @@ export default function EditPlan(props) {
         ends: 0,
         // mute: false,
         // bold: false,
-        memo: ''
+        // memo: ''
     });
 
 
@@ -20,7 +20,7 @@ export default function EditPlan(props) {
     //EditPlan: push the item if time === index or timeSlots.time ? timeSlots.title : null
     const getStarts = e => setNewEvent({ ... newEvent, starts: e.target.value })
     const getEnds = e => setNewEvent({ ... newEvent, ends: e.target.value })
-    const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
+    // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
         
     const startsFilter = () => {
         if (newEvent.starts >= newEvent.ends) {
@@ -31,16 +31,18 @@ export default function EditPlan(props) {
         
     const submitHandler = (e) => {
         e.preventDefault()
+        startsFilter()
         console.log(newEvent)
-        timeSlots().map((timeslot, index) => {
-            return
-        })
+        setNewEvent({title: '', starts: 0, ends: 0})
+        // timeSlots().map((timeslot, index) => {
+        //     return
+        // })
     }
 
 
 
     return (
-        <form id="edit-form">
+        <form id="edit-form" >
             <div className="input-wrapper">
                 <input 
                     id="new-event-input"
@@ -93,12 +95,12 @@ export default function EditPlan(props) {
                     <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
-            </div> */}
+            </div> 
             <div>
                 <textarea placeholder="Notes" rows="4" onChange={getMemo}>
                 </textarea>
-            </div>
-            <input type="submit" />
+            </div> */}
+            <input type="submit" onClick={submitHandler} />
         </form>
     )
 }
