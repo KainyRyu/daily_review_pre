@@ -32,7 +32,7 @@ export default function DailyPlan() {
                   <Link to={{
                     to: "/",
                     state: {num: index}
-                  }}>timeSlot.event</Link>
+                  }}>{timeSlot.title}</Link>
                 </div>
                 <div className="review-slot">
                 <Link to={{

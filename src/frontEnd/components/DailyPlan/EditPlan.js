@@ -22,23 +22,41 @@ export default function EditPlan(props) {
     const getEnds = e => setNewEvent({ ... newEvent, ends: e.target.value })
     // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
         
-    const startsFilter = () => {
-        if (newEvent.starts >= newEvent.ends) {
-            alert('The end time must be after the start time') 
-            setNewEvent({...newEvent, ends: 0})
-        }
+    const addToTimeslot = () => {
+        return timeSlots().map((timeSlot, index) => (
+            index < newEvent.starts &&
+            index > newEvent.ends ?
+                false : 
+                timeSlot.title !== '' ?
+                    timeSlot = ({ ...timeSlot, title: newEvent.title }) :
+                    alert(`The time is overlapped`)
+                    )
+
+        // timeSlots()[Number(newEvent.starts)]
+        // timeSlots.map((timeslot, index) => {
+        //     index >= Number(newEvent.starts) &&
+        //     index <= Number(newEvent.ends) &&
+        //     timeslot.title !== '' ?
+        //     "":""
+                // timeslot({...timeslot, title: newEvent.title}) :
+        )
+        // Number(newEvent.starts) <= timeSlots. && Number(newEvent.ends)
     }
-        
+
+    // const isTitleEmpty = (i) {
+    //     i.title === '' ?
+    //         fale : newEvent.title
+    // }
     const submitHandler = (e) => {
         e.preventDefault()
-        startsFilter()
-        console.log(newEvent)
+        addToTimeslot()
+        console.log(`newEvent from submitHandler ${newEvent}`)
+        console.log(`timeSlot array from submitHandler: ${timeSlots()}`)
         setNewEvent({title: '', starts: 0, ends: 0})
         // timeSlots().map((timeslot, index) => {
         //     return
         // })
     }
-
 
 
     return (
