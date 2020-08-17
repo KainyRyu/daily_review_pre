@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { KeyboardDatePicker } from  "@material-ui/pickers"
 import timeSlots from "./TimeSlots"
 import './editplan.css';
 
@@ -14,48 +13,27 @@ export default function EditPlan(props) {
     });
 
 
-
-    const getEvent = e => setNewEvent(e.target.value)
+    const getEvent = e => setNewEvent({ ...newEvent, title: e.target.value })
     //on DailyPlan: mapping timeSlots component
     //EditPlan: push the item if time === index or timeSlots.time ? timeSlots.title : null
-    const getStarts = e => setNewEvent({ ... newEvent, starts: e.target.value })
-    const getEnds = e => setNewEvent({ ... newEvent, ends: e.target.value })
+    const getStarts = e => setNewEvent({ ...newEvent, starts: e.target.value})
+    const getEnds = e => setNewEvent({ ...newEvent, ends: e.target.value })
     // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
         
     const addToTimeslot = () => {
-        return timeSlots().map((timeSlot, index) => (
-            index < newEvent.starts &&
-            index > newEvent.ends ?
-                false : 
-                timeSlot.title !== '' ?
-                    timeSlot = ({ ...timeSlot, title: newEvent.title }) :
-                    alert(`The time is overlapped`)
-                    )
-
-        // timeSlots()[Number(newEvent.starts)]
-        // timeSlots.map((timeslot, index) => {
-        //     index >= Number(newEvent.starts) &&
-        //     index <= Number(newEvent.ends) &&
-        //     timeslot.title !== '' ?
-        //     "":""
-                // timeslot({...timeslot, title: newEvent.title}) :
-        )
-        // Number(newEvent.starts) <= timeSlots. && Number(newEvent.ends)
+        const betweenStartsEnd = timeSlots()
+            .map((timeslot, index) => newEvent.starts <= index && newEvent.ends >= index)
+                    // timeslot = ({ ...timeslot, title: newEvent.title }) :
+                    // alert(`The time is overlapped`)
+                    
     }
 
-    // const isTitleEmpty = (i) {
-    //     i.title === '' ?
-    //         fale : newEvent.title
-    // }
     const submitHandler = (e) => {
         e.preventDefault()
         addToTimeslot()
-        console.log(`newEvent from submitHandler ${newEvent}`)
-        console.log(`timeSlot array from submitHandler: ${timeSlots()}`)
+        console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
+        console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeSlots())}`)
         setNewEvent({title: '', starts: 0, ends: 0})
-        // timeSlots().map((timeslot, index) => {
-        //     return
-        // })
     }
 
 
