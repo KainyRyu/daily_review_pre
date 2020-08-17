@@ -12,32 +12,26 @@ export default function EditPlan(props) {
         // memo: ''
     });
 
-
     const getEvent = e => setNewEvent({ ...newEvent, title: e.target.value })
-    //on DailyPlan: mapping timeSlots component
-    //EditPlan: push the item if time === index or timeSlots.time ? timeSlots.title : null
     const getStarts = e => setNewEvent({ ...newEvent, starts: e.target.value})
     const getEnds = e => setNewEvent({ ...newEvent, ends: e.target.value })
     // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
         
     const addToTimeslot = () => {
         const betweenStartsEnd = timeSlots()
-            .filter(timeslot => (newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time) ? 
+            .filter(timeslot => (newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time) &&
+                timeslot.title !== '' ? 
                 console.log(timeslot = {...timeslot, title: newEvent.title}) :
-                console.log(timeslot = {...timeslot})
+                staySame(timeslot)
             )
-            // .filter(
-            //     timeslot => timeslot.title !== '' ? 
-            //         timeslot = {...timeslot, title: newEvent.title} :
-            //         false 
-            // )
-            // && timeslot.title !== '' ? 
-                // timeslot = ({ ...timeslot, title: newEvent.title }) : 
-                // console.log('not working')
 
         return betweenStartsEnd ? betweenStartsEnd : alert('Something went wrong!!')
                     // timeslot = ({ ...timeslot, title: newEvent.title }) :
                     // alert(`The time is overlapped`)               
+    }
+    const staySame = (timeslot) => {
+        timeslot = {...timeslot}
+        alert(`Sleceted time is overlapped`)
     }
 
     const submitHandler = (e) => {
