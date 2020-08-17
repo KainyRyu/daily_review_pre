@@ -19,15 +19,21 @@ export default function EditPlan(props) {
         
     const addToTimeslot = () => {
         const betweenStartsEnd = timeSlots()
-            .filter(timeslot => (newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time) &&
-                timeslot.title !== '' ? 
-                console.log(timeslot = {...timeslot, title: newEvent.title}) :
-                staySame(timeslot)
-            )
+            .filter(timeslot => newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time) 
+            .every(timeslot => timeslot.tilte === '' ? 
+                console.log(timeslot = {...timeslot, title: newEvent.title}) : 
+                alert(`Thie timeslot is not empty`))
+                    // return timeslot.title !== '' ? 
+                    //     console.error('This is not empty') :
+                    //     console.log(timeslot = { ...timeslot, title: newEvent.title })
 
-        return betweenStartsEnd ? betweenStartsEnd : alert('Something went wrong!!')
-                    // timeslot = ({ ...timeslot, title: newEvent.title }) :
-                    // alert(`The time is overlapped`)               
+            // &&
+            //     timeslot.title !== '' ? 
+            //         console.log(timeslot = {...timeslot, title: newEvent.title}) :
+            //         setNewEvent({ ...newEvent, starts: 0, ends: 0 })
+            
+
+        return betweenStartsEnd
     }
     const staySame = (timeslot) => {
         timeslot = {...timeslot}
