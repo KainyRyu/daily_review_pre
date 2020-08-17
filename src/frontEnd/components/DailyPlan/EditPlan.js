@@ -22,10 +22,22 @@ export default function EditPlan(props) {
         
     const addToTimeslot = () => {
         const betweenStartsEnd = timeSlots()
-            .map((timeslot, index) => newEvent.starts <= index && newEvent.ends >= index)
+            .filter(timeslot => (newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time) ? 
+                console.log(timeslot = {...timeslot, title: newEvent.title}) :
+                console.log(timeslot = {...timeslot})
+            )
+            // .filter(
+            //     timeslot => timeslot.title !== '' ? 
+            //         timeslot = {...timeslot, title: newEvent.title} :
+            //         false 
+            // )
+            // && timeslot.title !== '' ? 
+                // timeslot = ({ ...timeslot, title: newEvent.title }) : 
+                // console.log('not working')
+
+        return betweenStartsEnd ? betweenStartsEnd : alert('Something went wrong!!')
                     // timeslot = ({ ...timeslot, title: newEvent.title }) :
-                    // alert(`The time is overlapped`)
-                    
+                    // alert(`The time is overlapped`)               
     }
 
     const submitHandler = (e) => {
