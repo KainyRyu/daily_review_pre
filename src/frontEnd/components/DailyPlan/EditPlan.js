@@ -36,7 +36,7 @@ export default function EditPlan(props) {
         for (let i = newEvent.starts; i <= newEvent.ends; i++) {
             const timeslot = timeslots[i];
             if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
-                console.log(timeslot.title = newEvent.title);
+                timeslot.title = newEvent.title;
             }
         }
     }
@@ -58,7 +58,7 @@ export default function EditPlan(props) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        addTitle()
+        forloop()
         console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
         console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
         // setNewEvent({title: '', starts: 0, ends: 0})
