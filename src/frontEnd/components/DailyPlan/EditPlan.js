@@ -3,6 +3,7 @@ import timeSlots from "./TimeSlots"
 import './editplan.css';
 
 export default function EditPlan(props) {
+    const timeslots = timeSlots()
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
@@ -17,24 +18,39 @@ export default function EditPlan(props) {
     const getEnds = e => setNewEvent({ ...newEvent, ends: e.target.value })
     // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
         
-    const addToTimeslot = () => {
-        const betweenStartsEnd = timeSlots()
-            .filter(timeslot => newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time) 
-            .every(timeslot => timeslot.tilte === '' ? 
-                console.log(timeslot = {...timeslot, title: newEvent.title}) : 
-                alert(`Thie timeslot is not empty`))
-                    // return timeslot.title !== '' ? 
-                    //     console.error('This is not empty') :
-                    //     console.log(timeslot = { ...timeslot, title: newEvent.title })
-
-            // &&
-            //     timeslot.title !== '' ? 
-            //         console.log(timeslot = {...timeslot, title: newEvent.title}) :
-            //         setNewEvent({ ...newEvent, starts: 0, ends: 0 })
-            
-
+    const addTitle = () => {
+        const betweenStartsEnd = timeslots
+            .filter(timeslot => newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time)
+        // const addTitle = betweenStartsEnd.map
         return betweenStartsEnd
+            .every(timeslot => timeslot.title === '') ? 
+            betweenStartsEnd.map(timeslot => timeslot = { ...timeslot, title: newEvent.title }) : 
+            betweenStartsEnd          
     }
+
+    function forloop() {
+        if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
+            return;
+        }
+
+        for (let i = newEvent.starts; i <= newEvent.ends; i++) {
+            const timeslot = timeslots[i];
+            if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
+                console.log(timeslot.title = newEvent.title);
+            }
+        }
+    }
+
+    function hasNoSchedule(start, end) {
+        for (let i = start; i <= end; i++) {
+            const timeslot = timeslots[i];
+            if (timeslot.title !== "") {
+                return false;
+            }
+        }
+        return true;
+    }
+
     const staySame = (timeslot) => {
         timeslot = {...timeslot}
         alert(`Sleceted time is overlapped`)
@@ -42,12 +58,11 @@ export default function EditPlan(props) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        addToTimeslot()
+        addTitle()
         console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
-        console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeSlots())}`)
-        setNewEvent({title: '', starts: 0, ends: 0})
+        console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
+        // setNewEvent({title: '', starts: 0, ends: 0})
     }
-
 
     return (
         <form id="edit-form" >
@@ -69,7 +84,7 @@ export default function EditPlan(props) {
                     value={newEvent.starts}
                 >
                     {
-                        timeSlots().map((hour, index) => {
+                        timeslots.map((hour, index) => {
                             return <option key={index}>{hour.time}</option>
                         })
                     }
@@ -84,7 +99,7 @@ export default function EditPlan(props) {
                     value={newEvent.ends}
                 >     
                     {
-                        timeSlots().map((hour, index) => {
+                        timeslots.map((hour, index) => {
                             return <option key={index}>{hour.time}</option>
                         })
                     }
