@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 
 const timeslots = require('./data');
 
@@ -15,6 +17,17 @@ app.get('/rest/timeslots/:time?', (req, res) => {
     //     res.send(timeslot)
     // }
 });
+
+app.post('/api/timeslots', (req, res) => {
+    // const timeslotIndex = timeslots.length - 1
+    const timeslot = {
+        time: timeslots.length + 1,
+        // time: req.body.timeslots,
+        name: req.body.name
+    }
+    timeslots.push(timeslot);
+    res.send(timeslot);
+})
 
 // app.use((req, res, next) => {
 //     res.send('<form method="POST><input type="text" />')
