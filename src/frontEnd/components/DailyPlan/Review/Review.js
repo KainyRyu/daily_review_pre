@@ -19,7 +19,7 @@ export default function Review() {
         return Array.from(reviewSet);
     }
     console.log(totalProductivity().length)
-
+    
     function addElse(newElse) {
         setElseList([newElse, ...elseList])
     }
