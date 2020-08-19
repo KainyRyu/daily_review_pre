@@ -17,6 +17,14 @@ export default function DailyPlan() {
     //the slot time passed, alert for reveiwing
   }
 
+  function totalProductivity() {
+    const reviews = timeslots.map(timeslot => timeslot.review)
+    const reviewSet = new Set(reviews)
+    reviewSet.delete("")
+    return Array.from(reviewSet);
+}
+console.log('total review else = ',totalProductivity().length)
+
   function timeTable() {
     return timeslots.map((timeslot, index) => (
       <div 

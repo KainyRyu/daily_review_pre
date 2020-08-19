@@ -12,13 +12,7 @@ export default function Review() {
     // const [selectedTime, setSelectedTime] = useState(0);
     const [elseList, setElseList] = useState([]);
     const timeslots = Timeslots()
-    function totalProductivity() {
-        const reviews = timeslots.map(timeslot => timeslot.review)
-        const reviewSet = new Set(reviews)
-        reviewSet.delete("")
-        return Array.from(reviewSet);
-    }
-    console.log(totalProductivity().length)
+    
     
     function addElse(newElse) {
         setElseList([newElse, ...elseList])

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+
 
 const timeslots = require('./data');
 
@@ -19,4 +19,5 @@ app.get('/rest/timeslots/:time?', (req, res) => {
 // app.use((req, res, next) => {
 //     res.send('<form method="POST><input type="text" />')
 // });
-app.listen(port);
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Listening on port ${port}`));
