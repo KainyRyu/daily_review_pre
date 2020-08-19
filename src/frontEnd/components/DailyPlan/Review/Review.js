@@ -3,6 +3,7 @@ import NewElseForm from "./NewElseForm";
 import SwipeToDelete from "./SwipeDelete";
 import "../dailyPlan.css";
 import "./review.css";
+import Timeslots from "../Timeslots";
 
 //relate with <Priority todo={todo}/> - Else
 //send percentage, elseTitle, positive%, negative%
@@ -10,6 +11,14 @@ import "./review.css";
 export default function Review() {
     // const [selectedTime, setSelectedTime] = useState(0);
     const [elseList, setElseList] = useState([]);
+    const timeslots = Timeslots()
+    function totalProductivity() {
+        const reviews = timeslots.map(timeslot => timeslot.review)
+        const reviewSet = new Set(reviews)
+        reviewSet.delete("")
+        return Array.from(reviewSet);
+    }
+    console.log(totalProductivity().length)
 
     function addElse(newElse) {
         setElseList([newElse, ...elseList])
@@ -18,6 +27,7 @@ export default function Review() {
     function removeElse(deleteThis) {
         setElseList(elseList.filter(thing => thing.elseEvent !== deleteThis))
     }
+
 
     return (
         <div className="review_page">
@@ -29,7 +39,7 @@ export default function Review() {
                 <input className="review_button" type="submit" value="Done" />
             </div>
             <div className="review-input-wrapper">
-            <input className="review_input" type="text" placeholder="" />
+            <div className="review_input">timeSlot.review[time]</div>
             <select className="percentages">
                 <option value="100">100%</option>
                 <option value="90">90%</option>
