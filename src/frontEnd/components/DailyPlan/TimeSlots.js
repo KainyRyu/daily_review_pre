@@ -1,4 +1,4 @@
-export default function TimeSlots(){
+export default function Timeslots(){
 return[
         {time: '00', title: '', review: '' },
         {time: '01', title: '', review: '' },

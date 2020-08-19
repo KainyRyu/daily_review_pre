@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import timeSlots from "./TimeSlots"
+import timeSlots from "./Timeslots"
 import './editplan.css';
 
 export default function EditPlan(props) {
@@ -26,11 +26,11 @@ export default function EditPlan(props) {
     //         .every(timeslot => timeslot.title === '') ? 
     //         betweenStartsEnd.map(timeslot => timeslot = { ...timeslot, title: newEvent.title }) : 
     //         betweenStartsEnd          
-    }
+    // }
 
     function addNewEvent() {
         if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
-            alert(`There is an event btween ${newEvent.starts} ~ ${newEvent.ends}`);
+            return; 
         }
 
         for (let i = newEvent.starts; i <= newEvent.ends; i++) {

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import EditPlan from "./EditPlan";
 // import Review from "./Review/Review";
-import timeSlots from './TimeSlots';
+import Timeslots from './Timeslots';
 import "./dailyPlan.css";
 import { Link } from "react-router-dom";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
-  const timeslots = timeSlots()
+  const timeslots = Timeslots()
   function current() {
     let newDate = new Date();
     let hour = newDate.getHours();
