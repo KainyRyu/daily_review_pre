@@ -18,14 +18,14 @@ export default function EditPlan(props) {
     const getEnds = e => setNewEvent({ ...newEvent, ends: e.target.value })
     // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
         
-    const addTitle = () => {
-        const betweenStartsEnd = timeslots
-            .filter(timeslot => newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time)
-        // const addTitle = betweenStartsEnd.map
-        return betweenStartsEnd
-            .every(timeslot => timeslot.title === '') ? 
-            betweenStartsEnd.map(timeslot => timeslot = { ...timeslot, title: newEvent.title }) : 
-            betweenStartsEnd          
+    // const addTitle = () => {
+    //     const betweenStartsEnd = timeslots
+    //         .filter(timeslot => newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time)
+    //     // const addTitle = betweenStartsEnd.map
+    //     return betweenStartsEnd
+    //         .every(timeslot => timeslot.title === '') ? 
+    //         betweenStartsEnd.map(timeslot => timeslot = { ...timeslot, title: newEvent.title }) : 
+    //         betweenStartsEnd          
     }
 
     function addNewEvent() {
