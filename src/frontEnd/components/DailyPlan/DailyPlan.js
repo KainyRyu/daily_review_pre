@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
-
+  const timeslots = timeSlots()
   function current() {
     let newDate = new Date();
     let hour = newDate.getHours();
@@ -16,30 +16,18 @@ export default function DailyPlan() {
     //the slot time passed, alert for reveiwing
   }
 
-  function addToTimeSlots(obj) {
-    timeSlots(...timeSlots, obj)
-  }
-
-
   function timeTable() {
-    return timeSlots().map((timeSlot, index) => (
+    return timeslots.map((timeslot, index) => (
       <div key={index} className="timeslot-row">
         {
           <>
-            <div className="timeslot">{timeSlot.time} : 00</div>
+            <div className="timeslot">{timeslot.time} : 00</div>
             <div className="plan-wrapper">
                 <div className="event-slot">
-                  <Link to={{
-                    to: "/",
-                    state: {num: index}
-                  }}>{timeSlot.title}</Link>
+                  {timeslot.title}
                 </div>
                 <div className="review-slot">
-                <Link to={{
-                    to: "/edit_plan",
-                    state: {num: index}
-                  }}></Link>
-                  timeSlot.review
+                  timeslot.review
                 </div>
             </div>
           </>

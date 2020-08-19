@@ -28,9 +28,9 @@ export default function EditPlan(props) {
             betweenStartsEnd          
     }
 
-    function forloop() {
+    function addNewEvent() {
         if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
-            return;
+            alert(`There is an event btween ${newEvent.starts} ~ ${newEvent.ends}`);
         }
 
         for (let i = newEvent.starts; i <= newEvent.ends; i++) {
@@ -51,14 +51,9 @@ export default function EditPlan(props) {
         return true;
     }
 
-    const staySame = (timeslot) => {
-        timeslot = {...timeslot}
-        alert(`Sleceted time is overlapped`)
-    }
-
     const submitHandler = (e) => {
         e.preventDefault()
-        forloop()
+        addNewEvent()
         console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
         console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
         // setNewEvent({title: '', starts: 0, ends: 0})
