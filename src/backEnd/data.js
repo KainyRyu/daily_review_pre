@@ -1,4 +1,4 @@
-module.exports = function getEvent() {
+module.exports = function getEvent(props) {
     let events = [
         {time: '17', title: '', review: '' },
         {time: '18', title: '', review: '' }, 
@@ -7,5 +7,10 @@ module.exports = function getEvent() {
         {time: '21', title: '', review: '' },
         {time: '22', title: '', review: '' }
     ]
-    return events
+    if (props) {
+        return events.find(hour => hour.time === props);
+    } else {
+        return events;
+    }
+    
 }   
