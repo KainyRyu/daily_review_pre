@@ -8,17 +8,26 @@ import { Link } from "react-router-dom";
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
   const timeslots = Timeslots()
+
+  let newDate = new Date();
+  let hour = newDate.getHours();
+  let minute = newDate.getMinutes();
   function current() {
-    let newDate = new Date();
-    let hour = newDate.getHours();
-    let minute = newDate.getMinutes();
     return `${hour} : ${minute < 10 ? `0${minute}` : minute}`;
     //the slot time passed, alert for reveiwing
   }
 
   function timeTable() {
     return timeslots.map((timeslot, index) => (
-      <div key={index} className="timeslot-row">
+      <div 
+        key={index} 
+        className="timeslot-row"
+        style={{
+          backgroundColor: 
+            timeslot.time < hour ? 'lightgrey' : 'none'
+          
+        }}
+      >
         {
           <>
             <div className="timeslot">{timeslot.time} : 00</div>
