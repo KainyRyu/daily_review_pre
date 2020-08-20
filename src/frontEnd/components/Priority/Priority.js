@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Todos from './Todos';
-import PrioirityRed from './PriorityRed'
-import "./priority.css";
 import PriorityRed from "./PriorityRed";
-
+import "./priority.css";
 
 export default function Priority() {
     const [todo, setTodo] = useState({

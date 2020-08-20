@@ -3,7 +3,7 @@ import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
 import Timeslots from './Timeslots';
 import "./dailyPlan.css";
-import { Link } from "react-router-dom";
+
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);

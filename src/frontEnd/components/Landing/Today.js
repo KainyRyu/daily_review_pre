@@ -21,7 +21,7 @@ export default function Today() {
         <>
             <div className="main-today">
                 <Link to="/"><h4 style={{margin:0}}>{today()}</h4></Link>
-                <Link to="priority"><Icon icon={listCheck} style={{fontSize: '37px'}} /></Link>
+                <Link to="priority" ><Icon icon={listCheck} style={{fontSize: '37px'}} /></Link>
             </div>
         </>
     )

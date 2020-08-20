@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase';
 import Login from '../Login';
 import Home from '../Home/Home';
-import More from '../More/More';
+
 import Priority from '../Priority/Priority'
 import Calendar from '../Calendar/Calendar';
 import EditPlan from '../DailyPlan/EditPlan';
@@ -34,7 +34,7 @@ export default function Landing() {
                 <Route exact path="/schedule" component={Home} />
                 <Route exact path="/editplan" component={EditPlan} />
                 <Route exact path="/calendar" component={Calendar} />
-                <Route exact path="/more" component={More} />
+                {/* <Route exact path="/more" component={More} /> */}
                 {/* <Route exact path="/" component={} /> */}
               </div>
             </Switch>
