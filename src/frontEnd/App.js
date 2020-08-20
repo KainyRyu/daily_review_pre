@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Loading from './Loading';
 import Landing from './components/Landing/Landing';
 import firebase from './utils/firebase'
+import './App.css';
 
 function App(props) {
   const [firebaseInitialized, setFirebaseInitialized] = useState(false)

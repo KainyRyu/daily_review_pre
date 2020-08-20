@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Todos from './Todo';
+import PrioirityRed from './PriorityRed'
 import "./priority.css";
+import PriorityRed from "./PriorityRed";
 
 
 export default function Priority() {
@@ -28,10 +30,6 @@ export default function Priority() {
         setTodoList(todoList.filter(todo => todo.id !== id))
     }
 
-    function removeClick(id) {
-        removeTodo(id)
-    }
-
   return (
     <div className="main">
         <form id="add_input" onSubmit={submitHandler}>
@@ -56,7 +54,7 @@ export default function Priority() {
             </div>
             <button type="submit">+</button>
         </form>
-
+        {/* <PriorityRed todoList={todlList} removeTodo={removeTodo}/> */}
       <div className="priority-box red">
         <h3>Urgent & Significant</h3>
         <ul>

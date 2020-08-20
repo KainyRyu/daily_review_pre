@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import firebase from "firebase";
-import Login from "../Login";
-import Home from "../Home/Home";
-import More from "../More/More";
-import Calendar from "../Calendar/Calendar";
-import EditPlan from "../DailyPlan/EditPlan";
-import Navbar from "../Navbar";
-import Today from "./Today";
-import "./landing.css";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import firebase from 'firebase';
+import Login from '../Login';
+import Home from '../Home/Home';
+import More from '../More/More';
+import Priority from '../Priority/Priority'
+import Calendar from '../Calendar/Calendar';
+import EditPlan from '../DailyPlan/EditPlan';
+import Navbar from '../Navbar';
+import Today from './Today';
+import './landing.css';
 
 export default function Landing() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -16,7 +17,7 @@ export default function Landing() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setIsSignedIn(!!user);
-      console.log("user", user);
+      console.log('user', user);
     });
   }, []);
 
@@ -29,6 +30,7 @@ export default function Landing() {
             <Switch>
               <div id="content">
                 <Route exact path="/" component={Home} />
+                <Route exact path="/priority" component={Priority} />
                 <Route exact path="/schedule" component={Home} />
                 <Route exact path="/editplan" component={EditPlan} />
                 <Route exact path="/calendar" component={Calendar} />

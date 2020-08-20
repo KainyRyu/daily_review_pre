@@ -1,4 +1,5 @@
 import React from 'react';
+import RemoveItem from './RemoveItem';
 
 export default function Todo({ id, task, removeTodo }) {
     return (
@@ -6,9 +7,4 @@ export default function Todo({ id, task, removeTodo }) {
             <li>{task}</li><RemoveItem id={id} removeTodo={removeTodo} />
         </div>
     )
-}
-
-function RemoveItem({removeTodo, id}) {
-    const removeBtn = () => removeTodo(id)
-    return <button onClick={removeBtn}>X</button>
 }
