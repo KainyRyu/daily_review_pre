@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Todos from './Todos';
 import PriorityRed from "./PriorityRed";
 import "./priority.css";
