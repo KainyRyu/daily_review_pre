@@ -13,7 +13,6 @@ export default function Review() {
     const [elseList, setElseList] = useState([]);
     const timeslots = Timeslots()
     
-    
     function addElse(newElse) {
         setElseList([newElse, ...elseList])
     }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-export default function Timeslots(){
+
+export default function Timeslots(props){
   const [timeslots, setTimeslots] = useState([
     {time: '00', title: '', review: '' },
     {time: '01', title: '', review: '' },
