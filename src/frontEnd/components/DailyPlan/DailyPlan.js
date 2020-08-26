@@ -24,6 +24,7 @@ export default function DailyPlan() {
     return Array.from(reviewSet);
 }
 console.log('total review else = ',totalProductivity().length)
+console.log(timeslots)
 
   function timeTable() {
     return timeslots.map((timeslot, index) => (

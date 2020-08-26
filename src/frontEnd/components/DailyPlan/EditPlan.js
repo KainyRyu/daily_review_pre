@@ -37,15 +37,19 @@ export default function EditPlan(props) {
             const timeslot = timeslots[i];
             if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
                 timeslot.title = newEvent.title;
+                // setNewEvent({title: '', starts: 0, ends: 0});
             }
         }
+    
     }
 
     function hasNoSchedule(start, end) {
         for (let i = start; i <= end; i++) {
             const timeslot = timeslots[i];
             if (timeslot.title !== "") {
-                return false;
+                setNewEvent({...newEvent, starts: 0, ends: 0})
+                alert(`There is an event between ${start} - ${end}`);
+                break;
             }
         }
         return true;
@@ -84,7 +88,6 @@ export default function EditPlan(props) {
                         })
                     }
                 </select>
-                {/* <input type="time" onChange={getStarts} value={starts}/> */}
             </div>
             <div className="input-wrapper">
                 <label>Ends </label>
@@ -99,7 +102,6 @@ export default function EditPlan(props) {
                         })
                     }
                 </select>
-                {/* <input type="time" onChange={getEnds} value={ends}/> */}
             </div>
             {/* <div className="input-wrapper">
                 Repeat

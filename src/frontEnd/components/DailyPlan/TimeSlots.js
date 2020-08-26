@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Timeslots(props){
+export default function Timeslots(newData){
   const [timeslots, setTimeslots] = useState([
     {time: '00', title: '', review: '' },
     {time: '01', title: '', review: '' },
@@ -28,8 +28,9 @@ export default function Timeslots(props){
     {time: '23', title: '', review: '' },
   ])
   function addTitle(newTitle) {
-    setTimeslots(timeslots.map(timeslot => timeslot.title = newTitle))
+    setTimeslots([...timeslots, newData])
   }
+  
 
 return timeslots
 } 
