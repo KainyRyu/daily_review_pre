@@ -3,15 +3,13 @@ import NewElseForm from "./NewElseForm";
 import SwipeToDelete from "./SwipeDelete";
 import "../dailyPlan.css";
 import "./review.css";
-import Timeslots from "../Timeslots";
 
 //relate with <Priority todo={todo}/> - Else
 //send percentage, elseTitle, positive%, negative%
 
-export default function Review() {
+export default function Review({ timeslots }) {
     // const [selectedTime, setSelectedTime] = useState(0);
     const [elseList, setElseList] = useState([]);
-    const timeslots = Timeslots()
     
     function addElse(newElse) {
         setElseList([newElse, ...elseList])
