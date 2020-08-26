@@ -33,7 +33,7 @@ export default function EditPlan(props) {
             return; 
         }
 
-        for (let i = newEvent.starts; i <= newEvent.ends; i++) {
+        for (let i = parseInt(newEvent.starts); i <= parseInt(newEvent.ends); i++) {
             const timeslot = timeslots[i];
             if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
                 timeslot.title = newEvent.title;
@@ -44,7 +44,7 @@ export default function EditPlan(props) {
     }
 
     function hasNoSchedule(start, end) {
-        for (let i = start; i <= end; i++) {
+        for (let i = parseInt(start); i <= parseInt(end); i++) {
             const timeslot = timeslots[i];
             if (timeslot.title !== "") {
                 setNewEvent({...newEvent, starts: 0, ends: 0})

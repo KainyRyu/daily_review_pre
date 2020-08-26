@@ -45,7 +45,7 @@ console.log(timeslots)
                   {timeslot.title}
                 </div>
                 <div className="review-slot">
-                  timeslot.review
+                  {timeslot.review}
                 </div>
             </div>
           </>
