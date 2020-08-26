@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import listCheck from '@iconify/icons-bi/list-check';
-import Priority from '../Priority/Priority';
 import './landing.css';
 
 export default function Today() {
@@ -22,7 +21,7 @@ export default function Today() {
         <>
             <div className="main-today">
                 <Link to="/"><h4 style={{margin:0}}>{today()}</h4></Link>
-                <Link to="priority"><Icon icon={listCheck} style={{fontSize: '37px'}} /></Link>
+                <Link to="priority" ><Icon icon={listCheck} style={{fontSize: '37px'}} /></Link>
             </div>
         </>
     )

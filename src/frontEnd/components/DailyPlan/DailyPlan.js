@@ -45,7 +45,7 @@ console.log(timeslots)
                   {timeslot.title}
                 </div>
                 <div className="review-slot">
-                  timeslot.review
+                  {timeslot.review}
                 </div>
             </div>
           </>
@@ -56,7 +56,7 @@ console.log(timeslots)
   
   return (
     <div>
-      <Review />
+      {/* <Review /> */}
       <EditPlan />
       <h1>
         Daily Review <br /> {current()}
