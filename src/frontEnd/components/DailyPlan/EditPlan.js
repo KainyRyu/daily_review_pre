@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import timeSlots from "./Timeslots"
 import './editplan.css';
 
-export default function EditPlan(props) {
-    const timeslots = timeSlots()
+export default function EditPlan({ timeslots, changeTimeSlot }) {
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
@@ -33,18 +31,20 @@ export default function EditPlan(props) {
             return; 
         }
 
-        for (let i = newEvent.starts; i <= newEvent.ends; i++) {
-            const timeslot = timeslots[i];
-            if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
-                timeslot.title = newEvent.title;
-                // setNewEvent({title: '', starts: 0, ends: 0});
-            }
-        }
+        changeTimeSlot(newEvent);
+
+        // for (let i = parseInt(newEvent.starts); i <= parseInt(newEvent.ends); i++) {
+        //     const timeslot = timeslots[i];
+        //     if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
+        //         timeslot.title = newEvent.title;
+        //         // setNewEvent({title: '', starts: 0, ends: 0});
+        //     }
+        // }
     
     }
 
     function hasNoSchedule(start, end) {
-        for (let i = start; i <= end; i++) {
+        for (let i = parseInt(start); i <= parseInt(end); i++) {
             const timeslot = timeslots[i];
             if (timeslot.title !== "") {
                 setNewEvent({...newEvent, starts: 0, ends: 0})
