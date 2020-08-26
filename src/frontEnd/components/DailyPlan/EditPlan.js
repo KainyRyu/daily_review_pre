@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import timeSlots from "./Timeslots"
+import timeSlots from "./TimeSlots"
 import './editplan.css';
 
 export default function EditPlan(props) {

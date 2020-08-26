@@ -3,7 +3,7 @@ import NewElseForm from "./NewElseForm";
 import SwipeToDelete from "./SwipeDelete";
 import "../dailyPlan.css";
 import "./review.css";
-import Timeslots from "../Timeslots";
+import Timeslots from "../TimeSlots";
 
 //relate with <Priority todo={todo}/> - Else
 //send percentage, elseTitle, positive%, negative%

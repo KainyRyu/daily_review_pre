@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
-import Timeslots from './Timeslots';
+import Timeslots from './TimeSlots';
 import "./dailyPlan.css";
 
 
