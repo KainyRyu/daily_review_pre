@@ -1,6 +1,6 @@
 import React from 'react'
 import DailyPlan from '../DailyPlan/DailyPlan'
-import './home.css'
+import './Home.css'
 
 export default function Home() {
 

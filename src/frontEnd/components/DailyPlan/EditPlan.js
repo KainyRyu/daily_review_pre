@@ -32,7 +32,6 @@ export default function EditPlan({ timeslots, changeTimeSlot }) {
         }
 
         changeTimeSlot(newEvent);
-
         // for (let i = parseInt(newEvent.starts); i <= parseInt(newEvent.ends); i++) {
         //     const timeslot = timeslots[i];
         //     if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
@@ -40,7 +39,6 @@ export default function EditPlan({ timeslots, changeTimeSlot }) {
         //         // setNewEvent({title: '', starts: 0, ends: 0});
         //     }
         // }
-    
     }
 
     function hasNoSchedule(start, end) {
