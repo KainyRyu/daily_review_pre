@@ -3,6 +3,8 @@
 Daily Review is an app that will help you to spend your time wisely.
 
 
+## Check your priorities
+Classify your todos depends on importance and urgency.
 
 
 ## Planning your day
