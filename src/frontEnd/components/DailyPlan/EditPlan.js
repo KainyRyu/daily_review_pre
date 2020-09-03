@@ -12,9 +12,8 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     });
 
     function handleValueChange(e) {
-        const newValue = {};
-        newValue[e.target.name] = e.target.value;
-        setNewEvent(newValue);
+        const name = e.target.name;
+        setNewEvent({ ...newEvent, name: e.target.value});
     }
 
     async function eventUpdate() {
