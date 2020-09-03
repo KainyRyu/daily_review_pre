@@ -1,65 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './editplan.css';
 
-export default function EditPlan({ timeslots, changeTimeSlot }) {
+const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
+
+export default function EditPlan({ timeslots, changeTimeSlot, id }) {
+    
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
         ends: 0,
-        // mute: false,
-        // bold: false,
-        // memo: ''
     });
 
-    const getEvent = e => setNewEvent({ ...newEvent, title: e.target.value })
-    const getStarts = e => setNewEvent({ ...newEvent, starts: e.target.value})
-    const getEnds = e => setNewEvent({ ...newEvent, ends: e.target.value })
-    // const getMemo = e => setNewEvent({... newEvent, memo: e.target.value})
-        
-    // const addTitle = () => {
-    //     const betweenStartsEnd = timeslots
-    //         .filter(timeslot => newEvent.starts <= timeslot.time && newEvent.ends >= timeslot.time)
-    //     // const addTitle = betweenStartsEnd.map
-    //     return betweenStartsEnd
-    //         .every(timeslot => timeslot.title === '') ? 
-    //         betweenStartsEnd.map(timeslot => timeslot = { ...timeslot, title: newEvent.title }) : 
-    //         betweenStartsEnd          
-    // }
-
-    function addNewEvent() {
-        if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
-            return; 
-        }
-
-        changeTimeSlot(newEvent);
-        // for (let i = parseInt(newEvent.starts); i <= parseInt(newEvent.ends); i++) {
-        //     const timeslot = timeslots[i];
-        //     if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
-        //         timeslot.title = newEvent.title;
-        //         // setNewEvent({title: '', starts: 0, ends: 0});
-        //     }
-        // }
+    function handleValueChange(e) {
+        const newValue = {};
+        newValue[e.target.name] = e.target.value;
+        setNewEvent(newValue);
     }
 
-    function hasNoSchedule(start, end) {
-        for (let i = parseInt(start); i <= parseInt(end); i++) {
-            const timeslot = timeslots[i];
-            if (timeslot.title !== "") {
-                setNewEvent({...newEvent, starts: 0, ends: 0})
-                alert(`There is an event between ${start} - ${end}`);
-                break;
-            }
+    async function eventUpdate() {
+        const response = await fetch(`${databaseURL}timeslots`,{
+            method: 'POST',
+            body: JSON.stringify(newEvent.title)
+        });
+        const data = await response.json();
+        const timeRange = await data.filter((timeslot, index) => {
+            return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
+        })
+                    
+        if (timeRange.some(timeslot => timeslot.title !== '')) {
+            alert(`There is an event btween ${newEvent.starts} - ${newEvent.ends}`)
+        } else {
+            timeRange.map((timeslot) => {
+                timeslot.title = newEvent.title
+            })
+            setNewEvent({title: '', starts: 0, ends: 0});
         }
-        return true;
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
-        addNewEvent()
-        console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
-        console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
+        eventUpdate()
+        // addNewEvent()
+        // console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
+        // console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
         // setNewEvent({title: '', starts: 0, ends: 0})
     }
+
+    // function addNewEvent() {
+    //     if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
+    //         return; 
+    //     }
+
+    //     changeTimeSlot(newEvent);
+                    // for (let i = parseInt(newEvent.starts); i <= parseInt(newEvent.ends); i++) {
+                    //     const timeslot = timeslots[i];
+                    //     if (timeslot.time >= newEvent.starts && timeslot.time <= newEvent.ends) {
+                    //         timeslot.title = newEvent.title;
+                    //         // setNewEvent({title: '', starts: 0, ends: 0});
+                    //     }
+                    // }
+    // }
+
+    // function hasNoSchedule(start, end) {
+    //     for (let i = parseInt(start); i <= parseInt(end); i++) {
+    //         const timeslot = timeslots[i];
+    //         if (timeslot.title !== "") {
+    //             setNewEvent({...newEvent, starts: 0, ends: 0})
+    //             alert(`There is an event between ${start} - ${end}`);
+    //             break;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     return (
         <form id="edit-form" >
@@ -68,7 +80,8 @@ export default function EditPlan({ timeslots, changeTimeSlot }) {
                     id="new-event-input"
                     type="text" 
                     placeholder="New Event" 
-                    onChange={getEvent} 
+                    name="title"
+                    onChange={handleValueChange} 
                     //if the time's title is empty => "" : timeslots[time].title
                     value={newEvent.title}
                 />
@@ -77,7 +90,8 @@ export default function EditPlan({ timeslots, changeTimeSlot }) {
                 <label>Starts </label>
                 <select 
                     className="edit-plan-time"
-                    onChange={getStarts}
+                    onChange={handleValueChange}
+                    name="starts"
                     value={newEvent.starts}
                 >
                     {
@@ -91,7 +105,8 @@ export default function EditPlan({ timeslots, changeTimeSlot }) {
                 <label>Ends </label>
                 <select 
                     className="edit-plan-time"
-                    onChange={getEnds}
+                    onChange={handleValueChange}
+                    name="ends"
                     value={newEvent.ends}
                 >     
                     {

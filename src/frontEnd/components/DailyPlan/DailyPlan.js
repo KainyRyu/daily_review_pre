@@ -3,15 +3,16 @@ import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
 import {MyContext} from "../../context/timeSlotsContext";
 import "./dailyPlan.css";
+import { Link } from "react-router-dom";
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
+  const [eventTimes, setEventTimes] = useState('');
 
   const {state, dispatch} = useContext(MyContext);
   const {timeslots} = state;
-  const [eventTimes, setEventTimes] = useState('');
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -24,14 +25,13 @@ export default function DailyPlan() {
   async function fetchURL() {
     const response = await fetch(`${databaseURL}timeslots.json`);
     setEventTimes(await response.json());
-    console.log(eventTimes)
-    // debugger;
   }
 
   useEffect(() => {
     fetchURL()
   }, [])
 
+ 
   function totalProductivity() {
     console.log(timeslots)
     const reviews = timeslots.map(timeslot => timeslot.review)
@@ -49,16 +49,6 @@ export default function DailyPlan() {
   }
 
   function timeTable() {
-    // return timeslots.map((timeslot, index) => (
-    //   <div 
-    //     key={index} 
-    //     className="timeslot-row"
-    //     style={{
-    //       backgroundColor: 
-    //         timeslot.time < hour ? 'lightgrey' : 'none'
-          
-    //     }}
-    //   >
     return eventTimes ? eventTimes.map((timeslot, index) => (
       <div 
         key={index} 
@@ -70,22 +60,13 @@ export default function DailyPlan() {
         }}
       >
         {
-          // <>
-          //   <div className="timeslot">{timeslot.time} : 00</div>
-          //   <div className="plan-wrapper">
-          //       <div className="event-slot">
-          //         {timeslot.title}
-          //       </div>
-          //       <div className="review-slot">
-          //         {timeslot.review}
-          //       </div>
-          //   </div>
-          // </>
           <>
-            <div className="timeslot">{index} : 00</div>
+            <div className="timeslot">{
+              index < 10 ? `0${index}` : index
+            } : 00</div>
             <div className="plan-wrapper">
                 <div className="event-slot">
-                  {timeslot.title}
+                  {timeslot.title}<Link to="/"></Link>
                 </div>
                 <div className="review-slot">
                   {timeslot.review}
