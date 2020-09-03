@@ -12,8 +12,9 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     });
 
     function handleValueChange(e) {
-        const name = e.target.name;
-        setNewEvent({ ...newEvent, name: e.target.value});
+        const newValue = {};
+        newValue[e.target.name] = e.target.value;
+        setNewEvent(newValue);
     }
 
     async function eventUpdate() {
@@ -36,9 +37,11 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         }
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault()
-        eventUpdate()
+    const submitHandler = () => {
+        if (!newEvent.title && !newEvent.ends) {
+            return;
+        }
+        eventUpdate();
         // addNewEvent()
         // console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
         // console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
@@ -82,7 +85,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                     name="title"
                     onChange={handleValueChange} 
                     //if the time's title is empty => "" : timeslots[time].title
-                    value={newEvent.title}
+                    value={newEvent.title || ""}
                 />
             </div>
             <div className="input-wrapper">
@@ -91,7 +94,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                     className="edit-plan-time"
                     onChange={handleValueChange}
                     name="starts"
-                    value={newEvent.starts}
+                    value={newEvent.starts || ""}
                 >
                     {
                         timeslots.map((hour, index) => {
@@ -106,7 +109,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                     className="edit-plan-time"
                     onChange={handleValueChange}
                     name="ends"
-                    value={newEvent.ends}
+                    value={newEvent.ends || ""}
                 >     
                     {
                         timeslots.map((hour, index) => {
@@ -132,7 +135,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                 <textarea placeholder="Notes" rows="4" onChange={getMemo}>
                 </textarea>
             </div> */}
-            <input type="submit" onClick={submitHandler} />
+            <button onClick={submitHandler}>Submit</button>
         </form>
     )
 }
