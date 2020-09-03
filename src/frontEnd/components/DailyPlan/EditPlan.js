@@ -10,12 +10,26 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         starts: 0,
         ends: 0,
     });
+    const [apiData, setApiData] = useState([])
 
     function handleValueChange(e) {
         const newValue = {};
         newValue[e.target.name] = e.target.value;
         setNewEvent(newValue);
     }
+
+    useEffect(() => {
+        fetch(`${databaseURL}timeslots.json`)
+        .then(res => {
+            if (res.status != 200) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            setApiData(data[0])
+        }).then(() => console.log(apiData));
+    },[])
 
     async function eventUpdate() {
         const response = await fetch(`${databaseURL}timeslots`,{
