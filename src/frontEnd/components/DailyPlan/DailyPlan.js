@@ -1,15 +1,17 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
 import {MyContext} from "../../context/timeSlotsContext";
 import "./dailyPlan.css";
 
+const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
 
   const {state, dispatch} = useContext(MyContext);
   const {timeslots} = state;
+  const [eventTimes, setEventTimes] = useState('');
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -18,6 +20,17 @@ export default function DailyPlan() {
     return `${hour} : ${minute < 10 ? `0${minute}` : minute}`;
     //the slot time passed, alert for reveiwing
   }
+  
+  async function fetchURL() {
+    const response = await fetch(`${databaseURL}timeslots.json`);
+    setEventTimes(await response.json());
+    console.log(eventTimes)
+    // debugger;
+  }
+
+  useEffect(() => {
+    fetchURL()
+  }, [])
 
   function totalProductivity() {
     console.log(timeslots)
@@ -25,9 +38,8 @@ export default function DailyPlan() {
     const reviewSet = new Set(reviews)
     reviewSet.delete("")
     return Array.from(reviewSet);
-}
-console.log('total review else = ',totalProductivity().length)
-console.log(timeslots)
+  }
+
 
   function changeTimeSlot(newTimeSlot) {
     dispatch({
@@ -37,7 +49,17 @@ console.log(timeslots)
   }
 
   function timeTable() {
-    return timeslots.map((timeslot, index) => (
+    // return timeslots.map((timeslot, index) => (
+    //   <div 
+    //     key={index} 
+    //     className="timeslot-row"
+    //     style={{
+    //       backgroundColor: 
+    //         timeslot.time < hour ? 'lightgrey' : 'none'
+          
+    //     }}
+    //   >
+    return eventTimes ? eventTimes.map((timeslot, index) => (
       <div 
         key={index} 
         className="timeslot-row"
@@ -48,8 +70,19 @@ console.log(timeslots)
         }}
       >
         {
+          // <>
+          //   <div className="timeslot">{timeslot.time} : 00</div>
+          //   <div className="plan-wrapper">
+          //       <div className="event-slot">
+          //         {timeslot.title}
+          //       </div>
+          //       <div className="review-slot">
+          //         {timeslot.review}
+          //       </div>
+          //   </div>
+          // </>
           <>
-            <div className="timeslot">{timeslot.time} : 00</div>
+            <div className="timeslot">{index} : 00</div>
             <div className="plan-wrapper">
                 <div className="event-slot">
                   {timeslot.title}
@@ -61,7 +94,7 @@ console.log(timeslots)
           </>
         }
       </div>
-    ));
+    )): <></>;
   }        
   
   return (
