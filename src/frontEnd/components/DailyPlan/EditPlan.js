@@ -11,12 +11,14 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         ends: 0,
     });
     const [apiData, setApiData] = useState([])
-
-    function handleValueChange(e) {
-        const newValue = {};
-        newValue[e.target.name] = e.target.value;
-        setNewEvent(newValue);
-    }
+    const [addData, setAddData] = useState({
+        title: '',
+        starts: 0,
+        ends: 0
+    })
+    const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value})
+    const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
+    const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
 
     useEffect(() => {
         fetch(`${databaseURL}timeslots.json`)
@@ -26,40 +28,38 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
             }
             return res.json();
         })
-        .then(data => {
-            setApiData(data[0])
-        }).then(() => console.log(apiData));
+        .then(data => setApiData(data));
     },[])
 
-    async function eventUpdate() {
-        const response = await fetch(`${databaseURL}timeslots`,{
+    async function submitHandler(e) {
+        e.preventDefault()
+        const timeRange = await apiData.filter((timeslot, index) => {
+            return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
+        })
+        const titleFilter = await timeRange.some(timeslot => timeslot.title !== '')
+        if (titleFilter) {
+            debugger;
+            alert('there is a value on the selected index');
+        } 
+        return fetch(`${databaseURL}timeslots`,{
             method: 'POST',
             body: JSON.stringify(newEvent.title)
         });
-        const data = await response.json();
-        const timeRange = await data.filter((timeslot, index) => {
-            return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
-        })
-                    
-        if (timeRange.some(timeslot => timeslot.title !== '')) {
-            alert(`There is an event btween ${newEvent.starts} - ${newEvent.ends}`)
-        } else {
-            timeRange.map((timeslot) => {
-                timeslot.title = newEvent.title
-            })
-            setNewEvent({title: '', starts: 0, ends: 0});
-        }
     }
 
-    const submitHandler = () => {
-        if (!newEvent.title && !newEvent.ends) {
-            return;
+    function eventUpdate() {
+        const timeRange = apiData.filter((timeslot, index) => {
+            return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
+        })
+        const titleFilter = timeRange.some(timeslot => timeslot.title !== '')
+        if (titleFilter) {
+            alert('there is a value on the selected index')
+        } else {
+            fetch(`${databaseURL}timeslots`,{
+                method: 'POST',
+                body: JSON.stringify(newEvent.title)
+            });
         }
-        eventUpdate();
-        // addNewEvent()
-        // console.log(`newEvent from submitHandler ${JSON.stringify(newEvent)}`)
-        // console.log(`timeSlot array from submitHandler: ${JSON.stringify(timeslots)}`)
-        // setNewEvent({title: '', starts: 0, ends: 0})
     }
 
     // function addNewEvent() {
@@ -77,18 +77,6 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                     // }
     // }
 
-    // function hasNoSchedule(start, end) {
-    //     for (let i = parseInt(start); i <= parseInt(end); i++) {
-    //         const timeslot = timeslots[i];
-    //         if (timeslot.title !== "") {
-    //             setNewEvent({...newEvent, starts: 0, ends: 0})
-    //             alert(`There is an event between ${start} - ${end}`);
-    //             break;
-    //         }
-    //     }
-    //     return true;
-    // }
-
     return (
         <form id="edit-form" >
             <div className="input-wrapper">
@@ -96,19 +84,16 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                     id="new-event-input"
                     type="text" 
                     placeholder="New Event" 
-                    name="title"
-                    onChange={handleValueChange} 
-                    //if the time's title is empty => "" : timeslots[time].title
-                    value={newEvent.title || ""}
+                    onChange={getTitle} 
+                    value={newEvent.title}
                 />
             </div>
             <div className="input-wrapper">
                 <label>Starts </label>
                 <select 
                     className="edit-plan-time"
-                    onChange={handleValueChange}
-                    name="starts"
-                    value={newEvent.starts || ""}
+                    onChange={getStarts}
+                    value={newEvent.starts}
                 >
                     {
                         timeslots.map((hour, index) => {
@@ -121,9 +106,8 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                 <label>Ends </label>
                 <select 
                     className="edit-plan-time"
-                    onChange={handleValueChange}
-                    name="ends"
-                    value={newEvent.ends || ""}
+                    onChange={getEnds}
+                    value={newEvent.ends}
                 >     
                     {
                         timeslots.map((hour, index) => {
