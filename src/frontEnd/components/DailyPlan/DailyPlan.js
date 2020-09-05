@@ -24,7 +24,8 @@ export default function DailyPlan() {
   
   async function fetchURL() {
     const response = await fetch(`${databaseURL}timeslots.json`);
-    setEventTimes(await response.json());
+    return response.then(data => setEventTimes(data));
+    // setEventTimes(() =>  response.json());
   }
 
   useEffect(() => {

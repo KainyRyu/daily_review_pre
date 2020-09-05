@@ -5,17 +5,13 @@ const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     
+    const [apiData, setApiData] = useState([])
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
         ends: 0,
     });
-    const [apiData, setApiData] = useState([])
-    const [addData, setAddData] = useState({
-        title: '',
-        starts: 0,
-        ends: 0
-    })
+
     const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value})
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
@@ -30,37 +26,65 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         })
         .then(data => setApiData(data));
     },[])
-
-    async function submitHandler(e) {
-        e.preventDefault()
-        const timeRange = await apiData.filter((timeslot, index) => {
-            return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
-        })
-        const titleFilter = await timeRange.some(timeslot => timeslot.title !== '')
-        if (titleFilter) {
-            debugger;
-            alert('there is a value on the selected index');
-        } 
-        return fetch(`${databaseURL}timeslots`,{
-            method: 'POST',
-            body: JSON.stringify(newEvent.title)
-        });
-    }
-
-    function eventUpdate() {
-        const timeRange = apiData.filter((timeslot, index) => {
-            return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
-        })
-        const titleFilter = timeRange.some(timeslot => timeslot.title !== '')
-        if (titleFilter) {
-            alert('there is a value on the selected index')
-        } else {
-            fetch(`${databaseURL}timeslots`,{
+    
+        // const timeRange = (data) => data.filter((timeslot, index) => {
+        //     return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
+        // })
+        // const hasTitle = timeRange(apiData).some(time => time.title !== '')
+    
+        const postingTitle = async(timeslot) => {
+            const response = await fetch(`${databaseURL}timeslots.json`,{
                 method: 'POST',
                 body: JSON.stringify(newEvent.title)
-            });
+            })
+            const result = await response.json();
+            if (response.status != 200) {
+                throw new Error(response.statusText)
+            }
+            Promise.all([result]).then(value => {
+                console.log(value);
+            })
         }
-    }
+        //   .then(postingTitle), promise.all()
+        
+        function submitHandler(e) {
+            e.preventDefault()
+            postingTitle()
+
+            // const isTitleEmpty = await filtering ? setAlert : eventUpdate()
+            // if (hasTitle) {
+            //     alert(`There is an event between starts - ends times`)
+            // } else {
+            //     const newArray = timeRange(apiData).map(timeslot => timeslot.title === newEvent.title)
+            //     postingTitle(newArray)
+    
+            // }
+    
+        }
+
+
+    // const filtering = async(title) => {
+    //     const timeRange = await apiData
+    //         .filter((timeslot, index) => 
+    //         index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end));
+    //     const titleFilter = await timeRange.some(time => time.title !== '')
+    //     const fetchingData = await fetch(`${databaseURL}/timeslots.json`,{
+    //         method: 'POST',
+    //         body: JSON.stringify(title)
+    //     });
+    //     const response = await fetchingData.json()
+    //         !
+    //     }
+    //     return data
+    // }
+    // function eventUpdate() {
+    //     if (!filtering) {
+    //         setApiData(apiData.filter((timeslots,index) => {
+    //             const timeRange = index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
+    //             timeRange.map(timeslot => timeslot.title = newEvent.title)
+    //         }))
+    //     }
+    // }
 
     // function addNewEvent() {
     //     if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
@@ -133,7 +157,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                 <textarea placeholder="Notes" rows="4" onChange={getMemo}>
                 </textarea>
             </div> */}
-            <button onClick={submitHandler}>Submit</button>
+            <button className="submit-btn" onClick={submitHandler}>Submit</button>
         </form>
     )
 }
