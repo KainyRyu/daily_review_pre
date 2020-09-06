@@ -35,22 +35,22 @@ export default function DailyPlan() {
     .then(data => setEventTimes(data))
   }, [])
 
- 
-  function totalProductivity() {
-    console.log(timeslots)
-    const reviews = timeslots.map(timeslot => timeslot.review)
-    const reviewSet = new Set(reviews)
-    reviewSet.delete("")
-    return Array.from(reviewSet);
-  }
+          
+            function totalProductivity() {
+              console.log(timeslots)
+              const reviews = timeslots.map(timeslot => timeslot.review)
+              const reviewSet = new Set(reviews)
+              reviewSet.delete("")
+              return Array.from(reviewSet);
+            }
 
 
-  function changeTimeSlot(newTimeSlot) {
-    dispatch({
-      type: "CHANGE_TIMESLOT",
-      newTimeSlot: newTimeSlot
-    })
-  }
+            function changeTimeSlot(newTimeSlot) {
+              dispatch({
+                type: "CHANGE_TIMESLOT",
+                newTimeSlot: newTimeSlot
+              })
+            }
 
   function timeTable() {
     return eventTimes ? eventTimes.map((timeslot, index) => (

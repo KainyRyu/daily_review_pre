@@ -35,28 +35,18 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         const postingTitle = async(timeslot) => {
             const response = await fetch(`${databaseURL}timeslots.json`,{
                 method: 'POST',
-                body: JSON.stringify(newEvent.title)
+                body: JSON.stringify(newEvent.map(event => event.title))
             })
             const result = await response.json();
             if (response.status != 200) {
                 throw new Error(response.statusText)
             }
-            Promise.all([result])
+            Promise.all([response, result])
         }
-        //   .then(postingTitle), promise.all()
         
         function submitHandler(e) {
             e.preventDefault()
             postingTitle().then(console.log)
-
-            // const isTitleEmpty = await filtering ? setAlert : eventUpdate()
-            // if (hasTitle) {
-            //     alert(`There is an event between starts - ends times`)
-            // } else {
-            //     const newArray = timeRange(apiData).map(timeslot => timeslot.title === newEvent.title)
-            //     postingTitle(newArray)
-    
-            // }
     
         }
 
