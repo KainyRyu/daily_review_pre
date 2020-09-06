@@ -9,7 +9,7 @@ const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function DailyPlan() {
   const [currentTime, setCurrentTime] = useState(0);
-  const [eventTimes, setEventTimes] = useState('');
+  const [eventTimes, setEventTimes] = useState([]);
 
   const {state, dispatch} = useContext(MyContext);
   const {timeslots} = state;
@@ -24,12 +24,15 @@ export default function DailyPlan() {
   
   async function fetchURL() {
     const response = await fetch(`${databaseURL}timeslots.json`);
-    return response.then(data => setEventTimes(data));
+    const makeTimeslots = await setEventTimes(response)
+    Promise.all([response, makeTimeslots]);
     // setEventTimes(() =>  response.json());
   }
 
   useEffect(() => {
-    fetchURL()
+    fetch(`${databaseURL}timeslots.json`)
+    .then(res => res.json())
+    .then(data => setEventTimes(data))
   }, [])
 
  

@@ -41,15 +41,13 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
             if (response.status != 200) {
                 throw new Error(response.statusText)
             }
-            Promise.all([result]).then(value => {
-                console.log(value);
-            })
+            Promise.all([result])
         }
         //   .then(postingTitle), promise.all()
         
         function submitHandler(e) {
             e.preventDefault()
-            postingTitle()
+            postingTitle().then(console.log)
 
             // const isTitleEmpty = await filtering ? setAlert : eventUpdate()
             // if (hasTitle) {
