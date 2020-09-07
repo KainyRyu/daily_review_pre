@@ -23,35 +23,35 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         .then(data => setApiData(Object.values(data)));
     },[])
     
-        const timeRange = apiData
-            .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1))
-            .map(timeslot => timeslot = {...timeslot, title: newEvent.title})
+    const timeRange = apiData
+        .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1))
+        .map(timeslot => timeslot = {...timeslot, title: newEvent.title})
 
+
+    const postingTitle = async() => {
+        const response = await fetch(`${databaseURL}timeslots.json`,{
+            method: 'POST',
+            body: JSON.stringify(timeRange)
+        })
+        const result = await response.json();
+        if (response.status !== 200) {
+            throw new Error(response.statusText)
+        }
+        Promise.all([response, result])
+    }
     
-        const postingTitle = async() => {
-            const response = await fetch(`${databaseURL}timeslots.json`,{
-                method: 'POST',
-                body: JSON.stringify(timeRange)
-            })
-            const result = await response.json();
-            if (response.status !== 200) {
-                throw new Error(response.statusText)
-            }
-            Promise.all([response, result])
-        }
-        
-        function replace() {
-            const timeRange = timeslots
-                .filter((timeslot, index) => index >= newEvent.starts && index <= newEvent.ends)
-                .map(timeslot => timeslot  = {...timeslot, title: newEvent.title})
-                return timeRange
-        }
-        
-        const titleChanged = replace();
-        function toTheArray(data) {
-            return timeslots
-              .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1), data);
-        }
+    function replace() {
+        const timeRange = timeslots
+            .filter((timeslot, index) => index >= newEvent.starts && index <= newEvent.ends)
+            .map(timeslot => timeslot  = {...timeslot, title: newEvent.title})
+            return timeRange
+    }
+    
+    const titleChanged = replace();
+    function toTheArray(data) {
+        return timeslots
+            .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1), data);
+    }
     
     toTheArray(titleChanged);
 
