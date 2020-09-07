@@ -5,49 +5,45 @@ const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     
-    const [apiData, setApiData] = useState([])
+    const [apiData, setApiData] = useState([]);
+    const [updateArray, setUpdateArray] = useState([]);
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
         ends: 0,
     });
 
-    const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value})
+    const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value.trim()})
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
 
     useEffect(() => {
         fetch(`${databaseURL}timeslots.json`)
-        .then(res => {
-            if (res.status != 200) {
-                throw new Error(res.statusText);
-            }
-            return res.json();
-        })
-        .then(data => setApiData(data));
+        .then(res => res.json())
+        .then(data => setApiData(Object.values(data)));
     },[])
     
-        // const timeRange = (data) => data.filter((timeslot, index) => {
-        //     return index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end)
-        // })
-        // const hasTitle = timeRange(apiData).some(time => time.title !== '')
+        const timeRange = apiData
+            .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1))
+            .map(timeslot => timeslot = {...timeslot, title: newEvent.title})
+
     
-        const postingTitle = async(timeslot) => {
+        const postingTitle = async() => {
             const response = await fetch(`${databaseURL}timeslots.json`,{
                 method: 'POST',
-                body: JSON.stringify(newEvent.map(event => event.title))
+                body: JSON.stringify(timeRange)
             })
             const result = await response.json();
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 throw new Error(response.statusText)
             }
             Promise.all([response, result])
         }
         
-        function submitHandler(e) {
+        async function submitHandler(e) {
             e.preventDefault()
-            postingTitle().then(console.log)
-    
+            postingTitle()
+            // postingTitle([]).then(console.log)  
         }
 
 

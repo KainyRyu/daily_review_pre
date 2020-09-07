@@ -8,9 +8,8 @@ import { Link } from "react-router-dom";
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function DailyPlan() {
-  const [currentTime, setCurrentTime] = useState(0);
+  // const [currentTime, setCurrentTime] = useState(0);
   const [eventTimes, setEventTimes] = useState([]);
-
   const {state, dispatch} = useContext(MyContext);
   const {timeslots} = state;
 
@@ -24,27 +23,24 @@ export default function DailyPlan() {
   
   async function fetchURL() {
     const response = await fetch(`${databaseURL}timeslots.json`);
-    const makeTimeslots = await setEventTimes(response)
-    Promise.all([response, makeTimeslots]);
+    const result = await response.json();
+    Promise.all([response, result]);
     // setEventTimes(() =>  response.json());
   }
 
   useEffect(() => {
     fetch(`${databaseURL}timeslots.json`)
     .then(res => res.json())
-    .then(data => setEventTimes(data))
+    .then(data => setEventTimes(Object.values(data)));
   }, [])
-
           
-            function totalProductivity() {
-              console.log(timeslots)
-              const reviews = timeslots.map(timeslot => timeslot.review)
-              const reviewSet = new Set(reviews)
-              reviewSet.delete("")
-              return Array.from(reviewSet);
-            }
-
-
+            // function totalProductivity() {
+            //   console.log(timeslots)
+            //   const reviews = timeslots.map(timeslot => timeslot.review)
+            //   const reviewSet = new Set(reviews)
+            //   reviewSet.delete("")
+            //   return Array.from(reviewSet);
+            // }
             function changeTimeSlot(newTimeSlot) {
               dispatch({
                 type: "CHANGE_TIMESLOT",
