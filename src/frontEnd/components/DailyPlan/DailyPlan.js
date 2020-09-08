@@ -55,7 +55,7 @@ export default function DailyPlan() {
         className="timeslot-row"
         style={{
           backgroundColor: 
-            timeslot.time < hour ? 'lightgrey' : 'none'
+            index < hour ? 'lightgrey' : 'none'
           
         }}
       >
