@@ -80,7 +80,7 @@ export default function DailyPlan() {
   
   return (
     <div>
-      <Review timeslots={timeslots} />
+      {/* <Review timeslots={timeslots} /> */}
       <EditPlan timeslots={timeslots} changeTimeSlot={changeTimeSlot} />
       <h1>
         Daily Review <br /> {current()}

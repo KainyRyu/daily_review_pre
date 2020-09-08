@@ -36,23 +36,19 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     }
     
     function replace() {
-        const timeRange = apiData
-            .filter((timeslot, index) => index >= newEvent.starts && index <= newEvent.ends)
-            .map(timeslot => timeslot  = {...timeslot, title: newEvent.title})
-            return timeRange;
-    }
-    const titleChanged = replace();
-
-    function toTheArray(data) {
         return apiData
-            .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1), data);
+            .map((timeslot, index) => {
+                if(index >= newEvent.starts && index <= newEvent.ends){
+                    return {...timeslot, title: newEvent.title};
+                }
+            return timeslot;
+        });
     }
     
     async function submitHandler(e) {
         e.preventDefault();
-        // postingTitle()
-        console.log(toTheArray(titleChanged));
-        // postingTitle([]).then(console.log)  
+        console.log(replace());
+
     }
 
 
