@@ -22,16 +22,11 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         .then(res => res.json())
         .then(data => setApiData(Object.values(data)));
     },[])
-    
-    const timeRange = apiData
-        .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1))
-        .map(timeslot => timeslot = {...timeslot, title: newEvent.title})
-
 
     const postingTitle = async() => {
         const response = await fetch(`${databaseURL}timeslots.json`,{
             method: 'POST',
-            body: JSON.stringify(timeRange)
+            body: JSON.stringify(apiData)
         })
         const result = await response.json();
         if (response.status !== 200) {
@@ -41,26 +36,24 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     }
     
     function replace() {
-        const timeRange = timeslots
+        const timeRange = apiData
             .filter((timeslot, index) => index >= newEvent.starts && index <= newEvent.ends)
             .map(timeslot => timeslot  = {...timeslot, title: newEvent.title})
-            return timeRange
+            return timeRange;
     }
-    
     const titleChanged = replace();
+
     function toTheArray(data) {
-        return timeslots
+        return apiData
             .splice(newEvent.starts, (newEvent.ends - newEvent.starts + 1), data);
     }
     
-    toTheArray(titleChanged);
-
-
-        async function submitHandler(e) {
-            e.preventDefault()
-            postingTitle()
-            // postingTitle([]).then(console.log)  
-        }
+    async function submitHandler(e) {
+        e.preventDefault();
+        // postingTitle()
+        console.log(toTheArray(titleChanged));
+        // postingTitle([]).then(console.log)  
+    }
 
 
     // const filtering = async(title) => {
