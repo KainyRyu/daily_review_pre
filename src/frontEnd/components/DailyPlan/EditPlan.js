@@ -23,10 +23,10 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         .then(data => setApiData(Object.values(data)));
     },[])
 
-    const postingTitle = async() => {
+    const postingTitle = async(data) => {
         const response = await fetch(`${databaseURL}timeslots.json`,{
-            method: 'POST',
-            body: JSON.stringify(apiData)
+            method: 'PUT',
+            body: JSON.stringify(data)
         })
         const result = await response.json();
         if (response.status !== 200) {
@@ -47,7 +47,8 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     
     async function submitHandler(e) {
         e.preventDefault();
-        console.log(replace());
+        postingTitle(replace());
+        console.log(apiData);
 
     }
 
