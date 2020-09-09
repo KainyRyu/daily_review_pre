@@ -39,7 +39,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
         return apiData
             .map((timeslot, index) => {
                 if(index >= newEvent.starts && index <= newEvent.ends){
-                    return {...timeslot, title: newEvent.title};
+                    return {...timeslot, title: [...timeslot.title, newEvent.title]};
                 }
             return timeslot;
         });
