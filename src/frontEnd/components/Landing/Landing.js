@@ -5,7 +5,7 @@ import Login from '../Login';
 import Home from '../Home/Home';
 import Priority from '../Priority/Priority'
 import EditPlan from '../DailyPlan/EditPlan';
-import Navbar from '../Navbar';
+// import Navbar from '../Navbar';
 import Today from './Today';
 import './landing.css';
 
@@ -35,7 +35,7 @@ export default function Landing() {
                 {/* <Route exact path="/" component={} /> */}
               </div>
             </Switch>
-            <Navbar />
+            {/* <Navbar /> */}
           </Router>
         </>
       ) : (
