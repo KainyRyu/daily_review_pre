@@ -8,7 +8,7 @@ import "./review.css";
 //send percentage, elseTitle, positive%, negative%
 
 export default function Review({ timeslots }) {
-    // const [selectedTime, setSelectedTime] = useState(0);
+
     const [elseList, setElseList] = useState([]);
     
     function addElse(newElse) {
@@ -19,8 +19,7 @@ export default function Review({ timeslots }) {
         setElseList(elseList.filter(thing => thing.elseEvent !== deleteThis))
     }
 
-
-    return (
+    return ( 
         <div className="review_page">
         <div className="review_wrapper">
             <div className="review-input-wrapper">

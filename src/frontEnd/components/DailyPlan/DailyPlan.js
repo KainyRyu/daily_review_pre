@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
-import {MyContext} from "../../context/timeSlotsContext";
+// import {MyContext} from "../../context/timeSlotsContext";
 import "./dailyPlan.css";
 import { Link } from "react-router-dom";
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function DailyPlan() {
-  // const [currentTime, setCurrentTime] = useState(0);
-  const [eventTimes, setEventTimes] = useState([]);
-  const {state, dispatch} = useContext(MyContext);
-  const {timeslots} = state;
+
+  const [timeslots, setTimeslots] = useState([]);
+  // const {state, dispatch} = useContext(MyContext);
+  // const {timeslots} = state;
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -31,7 +31,7 @@ export default function DailyPlan() {
   useEffect(() => {
     fetch(`${databaseURL}timeslots.json`)
     .then(res => res.json())
-    .then(data => setEventTimes(Object.values(data)));
+    .then(data => setTimeslots(Object.values(data)));
   }, [])
           
             // function totalProductivity() {
@@ -41,15 +41,15 @@ export default function DailyPlan() {
             //   reviewSet.delete("")
             //   return Array.from(reviewSet);
             // }
-            function changeTimeSlot(newTimeSlot) {
-              dispatch({
-                type: "CHANGE_TIMESLOT",
-                newTimeSlot: newTimeSlot
-              })
-            }
+            // function changeTimeSlot(newTimeSlot) {
+            //   dispatch({
+            //     type: "CHANGE_TIMESLOT",
+            //     newTimeSlot: newTimeSlot
+            //   })
+            // }
 
   function timeTable() {
-    return eventTimes ? eventTimes.map((timeslot, index) => (
+    return timeslots ? timeslots.map((timeslot, index) => (
       <div 
         key={index} 
         className="timeslot-row"
@@ -66,7 +66,7 @@ export default function DailyPlan() {
             } : 00</div>
             <div className="plan-wrapper">
                 <div className="event-slot">
-                  {timeslot.title}<Link to="/"></Link>
+                  {timeslot.title}<Link to="/" ></Link>
                 </div>
                 <div className="review-slot">
                   {timeslot.review}
@@ -81,7 +81,7 @@ export default function DailyPlan() {
   return (
     <div>
       {/* <Review timeslots={timeslots} /> */}
-      <EditPlan timeslots={timeslots} changeTimeSlot={changeTimeSlot} />
+      <EditPlan timeslots={timeslots} />
       <h1>
         Daily Review <br /> {current()}
       </h1>

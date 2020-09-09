@@ -3,7 +3,7 @@ import './editplan.css';
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
-export default function EditPlan({ timeslots, changeTimeSlot, id }) {
+export default function EditPlan({ timeslots, id }) {
     
     const [apiData, setApiData] = useState([]);
     const [updateArray, setUpdateArray] = useState([]);
@@ -17,11 +17,11 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
 
-    useEffect(() => {
-        fetch(`${databaseURL}timeslots.json`)
-        .then(res => res.json())
-        .then(data => setApiData(Object.values(data)));
-    },[])
+    // useEffect(() => {
+    //     fetch(`${databaseURL}timeslots.json`)
+    //     .then(res => res.json())
+    //     .then(data => setApiData(Object.values(data)));
+    // },[])
 
     const postingTitle = async(data) => {
         const response = await fetch(`${databaseURL}timeslots.json`,{
@@ -36,10 +36,10 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     }
     
     function replace() {
-        return apiData
+        return timeslots
             .map((timeslot, index) => {
                 if(index >= newEvent.starts && index <= newEvent.ends){
-                    return {...timeslot, title: [...timeslot.title, newEvent.title]};
+                    return {...timeslot, title: newEvent.title};
                 }
             return timeslot;
         });
@@ -48,25 +48,10 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     async function submitHandler(e) {
         e.preventDefault();
         postingTitle(replace());
-        console.log(apiData);
+        console.log(timeslots);
 
     }
 
-
-    // const filtering = async(title) => {
-    //     const timeRange = await apiData
-    //         .filter((timeslot, index) => 
-    //         index >= parseInt(newEvent.start) && index <= parseInt(newEvent.end));
-    //     const titleFilter = await timeRange.some(time => time.title !== '')
-    //     const fetchingData = await fetch(`${databaseURL}/timeslots.json`,{
-    //         method: 'POST',
-    //         body: JSON.stringify(title)
-    //     });
-    //     const response = await fetchingData.json()
-    //         !
-    //     }
-    //     return data
-    // }
     // function eventUpdate() {
     //     if (!filtering) {
     //         setApiData(apiData.filter((timeslots,index) => {
@@ -75,11 +60,6 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
     //         }))
     //     }
     // }
-
-    // function addNewEvent() {
-    //     if (!hasNoSchedule(newEvent.starts, newEvent.ends)) {
-    //         return; 
-    //     }
 
     //     changeTimeSlot(newEvent);
                     // for (let i = parseInt(newEvent.starts); i <= parseInt(newEvent.ends); i++) {
@@ -111,7 +91,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                 >
                     {
                         timeslots.map((hour, index) => {
-                            return <option key={index}>{hour.time}</option>
+                            return <option key={index}>{index < 10 ? `0${index}` : index}</option>
                         })
                     }
                 </select>
@@ -125,7 +105,7 @@ export default function EditPlan({ timeslots, changeTimeSlot, id }) {
                 >     
                     {
                         timeslots.map((hour, index) => {
-                            return <option key={index}>{hour.time}</option>
+                            return <option key={index}>{index < 10 ? `0${index}` : index}</option>
                         })
                     }
                 </select>
