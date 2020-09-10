@@ -1,12 +1,12 @@
 .dailyplan-table {
     align-items: center;
     text-align: center;
-    border: black 1px solid;
+    border: #222222 1px solid;
     width: 100%;
 }
 
 .timeslot-wrapper {
-    border: black 2px solid;
+    border: #222222 2px solid;
     width: 100%;
 }
 

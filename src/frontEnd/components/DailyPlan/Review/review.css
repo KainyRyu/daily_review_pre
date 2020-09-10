@@ -11,7 +11,7 @@
 }
 
 .review_input {
-    border: 2px solid black;
+    border: 2px solid #222222;
     font-size: 20px;
     height: 35px;
     width: 80%;
@@ -26,20 +26,20 @@
 
 .review_button {
     background-color: white;
-    border: black solid 2px;
+    border: #222222 solid 2px;
     font-size: 20px;
     height: 35px;
     width: 20%;
 }
 
 .add-else-warpper {
-    border: 2px solid black;
+    border: 2px solid #222222;
     /* padding: 10px 5px; */
     margin: 20px 0;
 }
 
 #review_related_select {
-    border: 2px solid black;
+    border: 2px solid #222222;
     flex: 3;
     margin-top: 5px;
 }
@@ -60,12 +60,12 @@
             }
 
             .switch>input:focus {
-                outline: black;
+                outline: #222222;
             }
             
             /* The slider */
             .switch-slider {
-                border: black 1px solid;
+                border: #222222 1px solid;
                 border-radius: 34px;
                 position: absolute;
                 cursor: pointer;
@@ -110,7 +110,7 @@
 }
 
 .else-list {
-    border-bottom: solid 2px black;
+    border-bottom: solid 2px #222222;
     display: flex;
     font-size: 20px;
     height: 35px;
@@ -144,7 +144,7 @@
 
 .else-delete-button {
     background: white;
-    border: black solid 1px;
+    border: #222222 solid 1px;
     /* box-sizing: border-box; */
     height: 25px;
     margin: 5px;

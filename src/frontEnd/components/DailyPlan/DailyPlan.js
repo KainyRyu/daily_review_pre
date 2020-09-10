@@ -65,11 +65,9 @@ export default function DailyPlan() {
               index < 10 ? `0${index}` : index
             } : 00</div>
             <div className="plan-wrapper">
-
-                  <Link className="event-slot" to={`/editplan`} >{timeslot.title}</Link>
-                {/* <div > */}
-                  <Link className="review-slot" to="/review">{timeslot.review}</Link>
-                {/* </div> */}
+              <Link className="event-slot" to={`/editplan`} >{timeslot.title}</Link>
+              {/* display positive percentage */}
+              <Link className="review-slot" to="/review">{timeslot.review}</Link>
             </div>
           </>
         }
