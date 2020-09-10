@@ -6,7 +6,7 @@ export default function NotFound() {
         <div>
             <div>
                 <h1>404</h1>
-                <p>Page not found</p>
+                <h2>Page not found</h2>
             </div>
             <img src={notfound} />
         </div>

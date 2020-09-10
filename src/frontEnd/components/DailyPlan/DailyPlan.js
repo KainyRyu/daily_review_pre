@@ -65,12 +65,11 @@ export default function DailyPlan() {
               index < 10 ? `0${index}` : index
             } : 00</div>
             <div className="plan-wrapper">
-                <div className="event-slot">
-                  <Link to={`/editplan`} >{timeslot.title}</Link>
-                </div>
-                <div className="review-slot">
-                  <Link to="/review">{timeslot.review}</Link>
-                </div>
+
+                  <Link className="event-slot" to={`/editplan`} >{timeslot.title}</Link>
+                {/* <div > */}
+                  <Link className="review-slot" to="/review">{timeslot.review}</Link>
+                {/* </div> */}
             </div>
           </>
         }
@@ -82,8 +81,7 @@ export default function DailyPlan() {
     <div>
       <Router>
         <Switch>
-          <Route exact path="/edit" component={EditPlan}/>
-          <Route exact path="/review" component={Review}/>
+          
         </Switch>
       </Router>
       {/* <Review timeslots={timeslots} /> */}

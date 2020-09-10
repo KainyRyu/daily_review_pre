@@ -9,6 +9,7 @@ import EditPlan from '../DailyPlan/EditPlan';
 import Today from './Today';
 import './landing.css';
 import NotFound from '../../NotFound';
+import Review from '../DailyPlan/Review/Review';
 
 export default function Landing() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -31,8 +32,9 @@ export default function Landing() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/priority" component={Priority} />
                 <Route exact path="/schedule" component={Home} />
-                <Route exact path="/editplan" component={EditPlan} />
+                <Route exact path="/edit" component={EditPlan}/>
                 <Route exact path="/error" component={NotFound} />
+                <Route exact path="/review" component={Review}/>
                 {/* <Route exact path="/more" component={More} /> */}
                 {/* <Route exact path="/" component={} /> */}
               </div>
