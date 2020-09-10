@@ -8,6 +8,7 @@ import EditPlan from '../DailyPlan/EditPlan';
 // import Navbar from '../Navbar';
 import Today from './Today';
 import './landing.css';
+import NotFound from '../../NotFound';
 
 export default function Landing() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -31,6 +32,7 @@ export default function Landing() {
                 <Route exact path="/priority" component={Priority} />
                 <Route exact path="/schedule" component={Home} />
                 <Route exact path="/editplan" component={EditPlan} />
+                <Route exact path="/error" component={NotFound} />
                 {/* <Route exact path="/more" component={More} /> */}
                 {/* <Route exact path="/" component={} /> */}
               </div>
