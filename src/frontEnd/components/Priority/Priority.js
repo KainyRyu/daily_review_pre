@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Todos from './Todos';
 import PriorityRed from "./PriorityRed";
 import "./priority.css";
@@ -10,7 +10,12 @@ export default function Priority() {
         importance: true
     })
     const [todoList, setTodoList] = useState([]);
-    
+    const databaseURL = 'https://dailyreview-7e684.firebaseio.com/Priority';
+    useEffect(() => {
+        fetch(`${databaseURL}`)
+        .then(reponse => reponse.json())
+    }, [])
+
     const randomId = Math.random().toString(16).slice(2)
     const getTask = e => (setTodo({...todo, task: e.target.value, id: randomId}));
     const urgentSelection = e => setTodo({...todo, urgency: (e.target.value) !== "true" ? false : true});

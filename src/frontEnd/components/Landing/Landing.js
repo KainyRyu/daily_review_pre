@@ -32,7 +32,7 @@ export default function Landing() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/priority" component={Priority} />
                 <Route exact path="/schedule" component={Home} />
-                <Route exact path="/edit" component={EditPlan}/>
+                <Route exact path="/editplan" component={EditPlan}/>
                 <Route exact path="/error" component={NotFound} />
                 <Route exact path="/review" component={Review}/>
                 {/* <Route exact path="/more" component={More} /> */}
