@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
 // import {MyContext} from "../../context/timeSlotsContext";
 import "./dailyPlan.css";
-import { Link } from "react-router-dom";
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
@@ -66,10 +66,10 @@ export default function DailyPlan() {
             } : 00</div>
             <div className="plan-wrapper">
                 <div className="event-slot">
-                  {timeslot.title}<Link to="/" ></Link>
+                  <Link to={`/editplan`} >{timeslot.title}</Link>
                 </div>
                 <div className="review-slot">
-                  {timeslot.review}
+                  <Link to="/review">{timeslot.review}</Link>
                 </div>
             </div>
           </>
@@ -80,11 +80,19 @@ export default function DailyPlan() {
   
   return (
     <div>
+      <Router>
+        <Switch>
+          <Route exact path="/edit" component={EditPlan}/>
+          <Route exact path="/review" component={Review}/>
+        </Switch>
+      </Router>
       {/* <Review timeslots={timeslots} /> */}
-      <EditPlan timeslots={timeslots} />
+      {/* <EditPlan timeslots={timeslots} /> */}
       <h1>
         Daily Review <br /> {current()}
       </h1>
+      <br />
+
       <div className="timeslot-wrapper">
         <div className="timeslot-row">
           <div className="timeslot"></div>

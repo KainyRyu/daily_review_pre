@@ -3,8 +3,8 @@ import './editplan.css';
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
-export default function EditPlan({ timeslots, id }) {
-    
+export default function EditPlan({ id }) {
+    const [timeslots, setTimeslots] = useState([]);
     const [apiData, setApiData] = useState([]);
     const [updateArray, setUpdateArray] = useState([]);
     const [newEvent, setNewEvent] = useState({
@@ -22,6 +22,11 @@ export default function EditPlan({ timeslots, id }) {
     //     .then(res => res.json())
     //     .then(data => setApiData(Object.values(data)));
     // },[])
+    useEffect(() => {
+        fetch(`${databaseURL}timeslots.json`)
+        .then(res => res.json())
+        .then(data => setTimeslots(Object.values(data)));
+      }, [])
 
     const postingTitle = async(data) => {
         const response = await fetch(`${databaseURL}timeslots.json`,{

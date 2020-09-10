@@ -29,7 +29,7 @@ export default function Review({ timeslots }) {
                 <input className="review_button" type="submit" value="Done" />
             </div>
             <div className="review-input-wrapper">
-            <div className="review_input">timeSlot.review[time]</div>
+            <div className="review_input">timeSlot's index(time)</div>
             <select className="percentages">
                 <option value="100">100%</option>
                 <option value="90">90%</option>
