@@ -5,12 +5,13 @@ Daily Review is an app that will help you to spend your time wisely.
 
 ## Check your priorities
 - Classify your todos depends on importance and urgency.
+   (Data will be saved locally.)
 
 
 ## Planning your day
 
 - Make events for your day
-
+  (Data will be save in firebase database)
 
 
 ## Reviewing your time
