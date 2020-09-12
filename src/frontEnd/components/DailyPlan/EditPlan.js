@@ -50,7 +50,7 @@ export default function EditPlan({ id }) {
         });
     }
     
-    async function submitHandler(e) {
+    function submitHandler(e) {
         e.preventDefault();
         postingTitle(replace());
         console.log(timeslots);

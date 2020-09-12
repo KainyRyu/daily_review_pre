@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
 import EditPlan from "./EditPlan";
 import Review from "./Review/Review";
 // import {MyContext} from "../../context/timeSlotsContext";
@@ -33,6 +33,9 @@ export default function DailyPlan() {
     .then(res => res.json())
     .then(data => setTimeslots(Object.values(data)));
   }, [])
+
+  let { path, url } = useRouteMatch();
+  console.log(`path is ${path} and url is ${url}`)
           
             // function totalProductivity() {
             //   console.log(timeslots)
@@ -77,13 +80,6 @@ export default function DailyPlan() {
   
   return (
     <div>
-      <Router>
-        <Switch>
-          
-        </Switch>
-      </Router>
-      {/* <Review timeslots={timeslots} /> */}
-      {/* <EditPlan timeslots={timeslots} /> */}
       <h1>
         Daily Review <br /> {current()}
       </h1>
