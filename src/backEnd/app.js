@@ -6,7 +6,7 @@ const HttpError = require('../../models/http-error')
 
 const app = express();
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use('/api/places', placesRoutes);
 
@@ -25,3 +25,5 @@ app.use((error, req, res, next) => {
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
