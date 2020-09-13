@@ -23,4 +23,4 @@ Daily Review is an app that will help you to spend your time wisely.
 
 
 It's an ongoing mobile friendly webapp (for now).
-
+And working on backend side.
