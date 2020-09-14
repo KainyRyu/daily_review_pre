@@ -1,5 +1,7 @@
 # [Daily Review](https://dailyreview-7e684.web.app/)
 
+It is suitable for mobile interface since the goal is making a mobil application.
+
 Daily Review is an app that will help you to spend your time wisely.
 
 
@@ -21,6 +23,4 @@ Daily Review is an app that will help you to spend your time wisely.
 
 
 
-
-It's an ongoing mobile friendly webapp (for now).
 And working on backend side.
