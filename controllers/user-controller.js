@@ -1,4 +1,5 @@
 const HttpError = require('../models/http-error');
+const { v4: uuid4 } = require('uuid');
 
 const DUMMY = [{
     userData: {
@@ -40,11 +41,12 @@ const createUser = (req, res, next) => {
     const { user, university } = req.body;
     //cosnt userData = req.body.title;
     const createdUser = { 
+        id: uuid4(),
         userData: user, 
         university 
     };
 
-    DUMMY.push(createdUser);
+    DUMMY.push({user: createdUser});
     
     res.status(201).json(createdUser);
 }
