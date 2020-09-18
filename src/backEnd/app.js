@@ -7,6 +7,7 @@ const userRoutes = require('./routes/user-route');
 
 const app = express();
 
+// app.use(bodyParser.json());
 
 app.use('/api/user', userRoutes);
 
