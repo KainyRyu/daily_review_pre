@@ -1,0 +1,10 @@
+
+.check-list-title {
+    margin: 5px;
+}    
+
+.check-list-box {
+    border: #222222 2px solid;
+    box-sizing: border-box;
+    width: 100%;
+}

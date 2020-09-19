@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 
 const HttpError = require('../../models/http-error');
 
-
 const userRoutes = require('./routes/user-route');
 
 const app = express();

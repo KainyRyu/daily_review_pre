@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
-import EditPlan from "./EditPlan";
-import Review from "./Review/Review";
+// import EditPlan from "./EditPlan";
+// import Review from "./Review/Review";
+import Productivity from '../Productivity/Productivity';
 // import {MyContext} from "../../context/timeSlotsContext";
 import "./dailyPlan.css";
 
@@ -84,6 +85,7 @@ export default function DailyPlan() {
         Daily Review <br /> {current()}
       </h1>
       <br />
+      <Productivity />
 
       <div className="timeslot-wrapper">
         <div className="timeslot-row">
