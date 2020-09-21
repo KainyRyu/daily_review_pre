@@ -34,7 +34,7 @@ const getUniversity = (req, res, next) => {
         throw new HttpError('Could not find the provideddata', 404);
     }
 
-    res.json({university})
+    res.json({ university })
 }
 
 const createUser = (req, res, next) => {
@@ -51,6 +51,16 @@ const createUser = (req, res, next) => {
     res.status(201).json(createdUser);
 }
 
+const updateUser = (req, res, next) => {
+    const { user, university } = req.body;
+}
+
+const deleteUser = (req, res, next) => {
+
+}
+
 exports.getUserById = getUserById; //I don't execute it. express will. so don't envoke it
 exports.getUniversity = getUniversity; 
 exports.createUser = createUser; 
+exports.updateUser = updateUser; 
+exports.deleteUSer = deleteUSer; 
