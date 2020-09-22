@@ -55,10 +55,13 @@ const updateUser = (req, res, next) => {
     const { userData, university } = req.body;
     const userId = req.params.uid;
 
-    const updatedUser = { ...DUMMY.find(u => u.id === userId) }; //update immutable way
-    const userIndex = DUMMY.findIndex(u => u.id === userId)
+    const updatedUser = { ...DUMMY.find(u => u.userData.uid === userId) }; //update immutable way
+    const userIndex = DUMMY.findIndex(u => u.userData.uid === userId)
     updatedUser.userData = userData;
+    // updatedUser.userData.uid = uid;
+    // updatedUser.userData.name = name;
     updatedUser.university = university;
+
 
     DUMMY[userIndex] = updatedUser;
 
