@@ -53,14 +53,24 @@ const createUser = (req, res, next) => {
 
 const updateUser = (req, res, next) => {
     const { user, university } = req.body;
-}
+    const userId = req.params.uid;
 
-const deleteUser = (req, res, next) => {
+    const updatedUser = { ...DUMMY.find(u => u.id === userId) }; //update immutable way
+    const userIndex = DUMMY.findIndex(u => u.id === userId)
+    updatedUser.user = user;
+    updatedUser.university = university;
 
-}
+    DUMMY[userIndex] = updatedUser;
+
+    res.status(200).json({user: updatedUser});
+};
+
+// const deleteUser = (req, res, next) => {
+
+// };
 
 exports.getUserById = getUserById; //I don't execute it. express will. so don't envoke it
 exports.getUniversity = getUniversity; 
 exports.createUser = createUser; 
 exports.updateUser = updateUser; 
-exports.deleteUSer = deleteUSer; 
+// exports.deleteUSer = deleteUser; 
