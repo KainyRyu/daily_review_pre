@@ -38,11 +38,11 @@ const getUniversity = (req, res, next) => {
 }
 
 const createUser = (req, res, next) => {
-    const { user, university } = req.body;
+    const { userData, university } = req.body;
     //cosnt userData = req.body.title;
     const createdUser = { 
         id: uuid4(),
-        userData: user, 
+        userData, 
         university 
     };
 
@@ -52,12 +52,12 @@ const createUser = (req, res, next) => {
 }
 
 const updateUser = (req, res, next) => {
-    const { user, university } = req.body;
+    const { userData, university } = req.body;
     const userId = req.params.uid;
 
     const updatedUser = { ...DUMMY.find(u => u.id === userId) }; //update immutable way
     const userIndex = DUMMY.findIndex(u => u.id === userId)
-    updatedUser.user = user;
+    updatedUser.userData = userData;
     updatedUser.university = university;
 
     DUMMY[userIndex] = updatedUser;
