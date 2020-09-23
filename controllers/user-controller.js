@@ -6,7 +6,7 @@ let DUMMY = [{
     name: 'Jade',
     location: 'San Jose',
     university: 'SJSU'
-}]
+}];
 
 
 const getUserById = (req, res, next) => {
