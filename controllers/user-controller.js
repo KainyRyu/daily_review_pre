@@ -2,10 +2,9 @@ const HttpError = require('../models/http-error');
 const { v4: uuid4 } = require('uuid');
 
 const DUMMY = [{
-    userData: {
-        uid: 'u1',
-        name: 'jade'
-    },
+    uid: 'u1',
+    name: 'Jade',
+    location: 'San Jose',
     university: 'SJSU'
 }]
 
@@ -13,7 +12,7 @@ const DUMMY = [{
 const getUserById = (req, res, next) => {
     const userId = req.params.uid;
     const user = DUMMY.find(u => {
-        return u.userData.uid === userId;
+        return u.uid === userId;
     });
 
     if (!user) {
@@ -38,11 +37,13 @@ const getUniversity = (req, res, next) => {
 }
 
 const createUser = (req, res, next) => {
-    const { userData, university } = req.body;
-    //cosnt userData = req.body.title;
+    const { uid, name, location, university } = req.body;
+    //cosnt location = req.body.location;
     const createdUser = { 
-        id: uuid4(),
-        userData, 
+        // id: uuid4(),
+        uid,
+        name,
+        location, 
         university 
     };
 
@@ -52,16 +53,13 @@ const createUser = (req, res, next) => {
 }
 
 const updateUser = (req, res, next) => {
-    const { userData, university } = req.body;
+    const { location, university } = req.body;
     const userId = req.params.uid;
 
-    const updatedUser = { ...DUMMY.find(u => u.userData.uid === userId) }; //update immutable way
-    const userIndex = DUMMY.findIndex(u => u.userData.uid === userId)
-    updatedUser.userData = userData;
-    // updatedUser.userData.uid = uid;
-    // updatedUser.userData.name = name;
+    const updatedUser = { ...DUMMY.find(u => u.uid === userId) }; //update immutable way
+    const userIndex = DUMMY.findIndex(u => u.uid === userId)
+    updatedUser.location = location;
     updatedUser.university = university;
-
 
     DUMMY[userIndex] = updatedUser;
 
