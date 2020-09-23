@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/uni/:univ', userControllers.getUniversity);
 
+router.get('/', userControllers.displayAll);
+
 router.get('/:uid', userControllers.getUserById);
 
 router.post('/', userControllers.createUser);

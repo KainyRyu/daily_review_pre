@@ -36,6 +36,10 @@ const getUniversity = (req, res, next) => {
     res.json({ university })
 }
 
+const displayAll = (req, res, next) => {
+    res.json({ DUMMY })
+}
+
 const createUser = (req, res, next) => {
     const { uid, name, location, university } = req.body;
     //cosnt location = req.body.location;
@@ -47,7 +51,7 @@ const createUser = (req, res, next) => {
         university 
     };
 
-    DUMMY.push({user: createdUser});
+    DUMMY.push({...createdUser});
     
     res.status(201).json(createdUser);
 }
@@ -74,4 +78,5 @@ exports.getUserById = getUserById; //I don't execute it. express will. so don't 
 exports.getUniversity = getUniversity; 
 exports.createUser = createUser; 
 exports.updateUser = updateUser; 
+exports.displayAll = displayAll; 
 // exports.deleteUSer = deleteUser; 
