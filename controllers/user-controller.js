@@ -1,7 +1,7 @@
 const HttpError = require('../models/http-error');
 const { v4: uuid4 } = require('uuid');
 
-const DUMMY = [{
+let DUMMY = [{
     uid: 'u1',
     name: 'Jade',
     location: 'San Jose',
@@ -70,13 +70,15 @@ const updateUser = (req, res, next) => {
     res.status(200).json({user: updatedUser});
 };
 
-// const deleteUser = (req, res, next) => {
-
-// };
+const deleteUser = (req, res, next) => {
+    const userId = req.params.uid;
+    DUMMY = DUMMY.filter(u => u.uid !== userId);
+    res.status(200).json({ message: 'Deleted user' });
+};
 
 exports.getUserById = getUserById; //I don't execute it. express will. so don't envoke it
 exports.getUniversity = getUniversity; 
 exports.createUser = createUser; 
 exports.updateUser = updateUser; 
 exports.displayAll = displayAll; 
-// exports.deleteUSer = deleteUser; 
+exports.deleteUser = deleteUser; 
