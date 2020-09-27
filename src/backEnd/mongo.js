@@ -14,7 +14,7 @@ const createUser = async (req, res, next) => {
         //open the connection
         const db = client.db();
         //got database
-        const result = db.collection('products').insertOne(newUser);//connection is what contained. all t
+        const result = db.collection('products').insertOne(newUser);
         // access to the collection and created a new document
     } catch (error) {
         return res.json({message: 'Could not store data.'});
