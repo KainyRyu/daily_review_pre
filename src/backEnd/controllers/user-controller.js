@@ -1,4 +1,5 @@
 const HttpError = require('../models/http-error');
+const User = require('../models/users');
 const { v4: uuid4 } = require('uuid');
 
 let DUMMY = [{
@@ -9,17 +10,30 @@ let DUMMY = [{
 }];
 
 
-const getUserById = (req, res, next) => {
+const getUserById = async (req, res, next) => {
     const userId = req.params.uid;
-    const user = DUMMY.find(u => {
-        return u.uid === userId;
-    });
+
+    let user;
+    try {
+        user = await User.findById(userId);
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong, could not find a user', 500
+        );
+        return next(error);
+    } // catching if we have missing information 
+
 
     if (!user) {
-        throw new HttpError('Could not find a user for the provided id.', 404);
-    }
+        const error = new HttpError(
+            'Could not find a user for the provided id.', 404
+        );
+        return next(error);
+    } // the request is fine but we just don't have the user.
 
-    res.json({ user });
+    res.json({ user: user.toObject( {getters: true} )})
+    // res.json({ user }); <- the object will be easier to use if we just turn it into a normal javascript object.
+    // {getters: true} <- to make the '_id' to a normal string
 }
 
 const getUniversity = (req, res, next) => {
