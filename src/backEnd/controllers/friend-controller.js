@@ -87,16 +87,29 @@ const createFriend = async (req, res, next) => {
     res.status(201).json(createdFriend);
 }
 
-const updateUser = (req, res, next) => {
+const updateFriend = async (req, res, next) => {
     const { age, location } = req.body;
     const friendId = req.params.fid;
+    
+    let friend;
+    try {
+        friend = await Friend.findById(friendId);
+    } catch (err) {
+        const error = new HttpError(`Something went wrong`, 500);
+        return next(error);
+    }
 
+    friend.age = age;
+    friend.location = location;
 
-    updatedFriend.age = age;
-    updatedFriend.location = location;
-
-
-    res.status(200).json({user: updatedFriend});
+    try {
+        await friend.save();
+    } catch (err) {
+        const error = new HttpError(`Something went wrong, could not update`, 500);
+        return next(error);
+    }
+    
+    res.status(200).json({ user: friend.toObject({ getters: true }) });
 };
 
 const deleteUser = (req, res, next) => {
@@ -109,5 +122,5 @@ exports.getAllFriends = getAllFriends;
 exports.getByLocation = getByLocation; 
 exports.getFriendById = getFriendById; //I don't execute it. express will. so don't envoke it
 exports.createFriend = createFriend; 
-exports.updateUser = updateUser; 
+exports.updateFriend = updateFriend; 
 exports.deleteUser = deleteUser; 

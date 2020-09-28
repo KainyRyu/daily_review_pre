@@ -14,7 +14,7 @@ router.get('/place/:location', friendControllers.getByLocation);
 
 router.get('/:fid', friendControllers.getFriendById);
 
-router.patch('/:uid', friendControllers.updateUser);
+router.patch('/:fid', friendControllers.updateFriend);
 
 router.delete('/:uid', friendControllers.deleteUser);
 
