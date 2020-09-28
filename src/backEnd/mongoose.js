@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const User = require('./models/users');
+const User = require('./models/friend');
 
 mongoose.connect('mongodb+srv://kainy_admin:6PJt5uISlwnILn08@cluster0.osruv.mongodb.net/Daily_Review?retryWrites=true&w=majority')
             //so we don't have to open and close connect each time we create a new user

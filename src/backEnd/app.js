@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 const HttpError = require('./models/http-error');
 
-const userRoutes = require('./routes/user-route');
+const friendRoutes = require('./routes/friend-route');
 
 // const userTestingRoute = require('./routes/routeTesting');//
 
@@ -15,7 +15,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api/user', userRoutes);
+app.use('/api/friend', friendRoutes);
 
 // app.use('/api/users', userTestingRoute);//
 
@@ -33,7 +33,7 @@ app.use((error, req, res, next) => {
 })
 
 mongoose
-    .connect('mongodb+srv://kainy:kainy123@cluster0.osruv.mongodb.net/users?retryWrites=true&w=majority')
+    .connect('mongodb+srv://kainy:kainy123@cluster0.osruv.mongodb.net/friends?retryWrites=true&w=majority')
     .then(() => {
         app.listen(5000);
     })

@@ -1,12 +1,13 @@
-const HttpError = require("../models/http-error");
-const { v4: uuid4 } = require("uuid");
+const HttpError = require('../models/http-error');
+const User = require('../models/friend')
+const { v4: uuid4 } = require('uuid');
 
 let DUMMY = [
   {
-    uid: "u1",
-    name: "Kainy",
-    email: "test@test.com",
-    password: "test",
+    uid: 'u1',
+    name: 'Kainy',
+    email: 'test@test.com',
+    password: 'test',
   },
 ];
 
@@ -42,7 +43,7 @@ const login = (req, res, next) => {
       throw new HttpError(`Could not identify user, credentials seem to be wrong`, 401);
     }
 
-    res.json({ message: "Logged in!" });
+    res.json({ message: 'Logged in!' });
 };
 
 exports.getUsers = getUsers;
