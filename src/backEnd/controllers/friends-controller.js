@@ -2,12 +2,6 @@ const HttpError = require('../models/http-error');
 const Friend = require('../models/friend');
 const { v4: uuid4 } = require('uuid');
 
-let DUMMY = [{
-    uid: 'u1',
-    name: 'Jade',
-    location: 'San Jose',
-    university: 'SJSU'
-}];
 
 const getAllFriends = async (req, res, next) => {
 
