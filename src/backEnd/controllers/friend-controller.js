@@ -112,9 +112,24 @@ const updateFriend = async (req, res, next) => {
     res.status(200).json({ user: friend.toObject({ getters: true }) });
 };
 
-const deleteUser = (req, res, next) => {
-    const userId = req.params.uid;
-    DUMMY = DUMMY.filter(u => u.uid !== userId);
+const deleteFriend = async (req, res, next) => {
+    const friendId = req.params.fid;
+
+    let friend;
+    try {
+        friend = await Friend.findById(friendId);
+    } catch (err) {
+        const error = new HttpError(`Something went wrong. Could not delete the friend`, 500);
+        return next(error);
+    }
+
+    try {
+        await friend.remove() //as .save() method 
+    } catch (err) {
+        const error = new HttpError(`Something went wrong. Could not delete!!!`, 500);
+        return next(error);
+    }
+
     res.status(200).json({ message: 'Deleted user' });
 };
 
@@ -123,4 +138,4 @@ exports.getByLocation = getByLocation;
 exports.getFriendById = getFriendById; //I don't execute it. express will. so don't envoke it
 exports.createFriend = createFriend; 
 exports.updateFriend = updateFriend; 
-exports.deleteUser = deleteUser; 
+exports.deleteFriend = deleteFriend; 
