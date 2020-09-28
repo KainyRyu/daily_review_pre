@@ -9,7 +9,7 @@ const HttpError = require('./models/http-error');
 
 const friendRoutes = require('./routes/friend-route');
 
-// const userTestingRoute = require('./routes/routeTesting');//
+const userRoute = require('./routes/user-route');//
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api/friend', friendRoutes);
 
-// app.use('/api/users', userTestingRoute);//
+app.use('/api/users', userRoute);//
 
 app.use((req, res, next) => {
     const error = new HttpError('Could not find this route.', 404);
