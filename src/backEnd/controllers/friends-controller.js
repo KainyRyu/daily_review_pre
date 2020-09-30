@@ -86,6 +86,7 @@ const createFriend = async (req, res, next) => {
     }
     
     console.log(user);
+    console.log(createdFriend);
 
     try {
         const sess = await mongoose.startSession(); //It's your current session. when you want to create a new friend
@@ -110,7 +111,7 @@ const createFriend = async (req, res, next) => {
         // await createdFriend.save();
     } catch(err) {
         const error = new HttpError(
-            `Creating friend failed, place try again.`, 500
+            `Creating friend failed, please try again.`, 500
         );
         return next(error);
         //this error code could occur either our database server is down 
