@@ -91,20 +91,10 @@ const createFriend = async (req, res, next) => {
     try {
         const sess = await mongoose.startSession(); 
         sess.startTransaction();
-        user.session(sess);
-        assert.ok(user.$session());
-        // await createdFriend.save({ session: sess }); 
+        await createdFriend.save({ session: sess }); 
         user.friends.push(createdFriend); 
-        await user.save(); 
-        let donc = await User.findOne(createdFriend);
-        assert.ok(!doc);
+        await user.save({ session: sess }); 
         await sess.commitTransaction();
-        // const sess = await mongoose.startSession(); 
-        // sess.startTransaction();
-        // await createdFriend.save({ session: sess }); 
-        // user.friends.push(createdFriend); 
-        // await user.save({ session: sess }); 
-        // await sess.commitTransaction();
     } catch(err) {
         const error = new HttpError(
             `Creating friend failed, place try again.`, 500
