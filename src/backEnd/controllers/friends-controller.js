@@ -65,11 +65,7 @@ const createFriend = async (req, res, next) => {
     const { name, sex, age, location, friendOf } = req.body;
     //cosnt location = req.body.location;
     const createdFriend = new Friend ({
-        name, 
-        sex, 
-        age, 
-        location,
-        friendOf
+        name, sex, age, location, friendOf
     });
 
     let user;
@@ -89,15 +85,15 @@ const createFriend = async (req, res, next) => {
     console.log(createdFriend);
 
     try {
-        const sess = await mongoose.startSession(); 
+        const sess = await mongoose.startSession();
         sess.startTransaction();
         await createdFriend.save({ session: sess }); 
-        user.friends.push(createdFriend); 
-        await user.save({ session: sess }); 
-        await sess.commitTransaction();
+        // user.friends.push(createdFriend);
+        // await user.save({ session: sess }); 
+        // await sess.commitTransaction();
     } catch(err) {
         const error = new HttpError(
-            `Creating friend failed, place try again.`, 500
+            `Creating friend failed, please try again.`, 500
         );
         return next(error);
     }
