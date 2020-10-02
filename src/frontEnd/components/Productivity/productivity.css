@@ -15,7 +15,7 @@
     height: var(--size);
     margin: 1em auto;
     border-radius: 50%;
-    background-image: conic-gradient(lightseagreen var(--value), lightgrey var(--value));
+    background-image: conic-gradient(dodgerblue var(--value), red var(--value));
     position: relative;
     display: flex;
     justify-content: center;
