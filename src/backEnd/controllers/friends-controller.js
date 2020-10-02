@@ -86,35 +86,30 @@ const createFriend = async (req, res, next) => {
     }
     
     console.log(user);
+    console.log(createdFriend);
 
     try {
-        const sess = await mongoose.startSession(); //It's your current session. when you want to create a new friend
+        const sess = await mongoose.startSession(); 
         sess.startTransaction();
-        //after this you tell mongoose what you want to do
-        await createdFriend.save({ session: sess }); 
-        //Now we stored the friend
-        user.friends.push(createdFriend); // add createdFriend to friends in user's data.
-        // Push here, kind of allows Mongoose to behind the scene 
-        // establish the connection between the two models we are referring to
-        // so to say very important here behind the scene MongoDB grabs the created friend ID that an integrated Mongoose feature here.
-        // and adds it to the friends feed of the user.
-        // so it only adds the friend's id
-        await user.save({ session: sess }); 
-        // we are saving the updated user (updated current session)
-        //Only all these tasks have succeed 👇
+        user.session(sess);
+        assert.ok(user.$session());
+        // await createdFriend.save({ session: sess }); 
+        user.friends.push(createdFriend); 
+        await user.save(); 
+        let donc = await User.findOne(createdFriend);
+        assert.ok(!doc);
         await sess.commitTransaction();
-        // if anything would've gone wrong in the tasks that are part of the sessions and transactions 
-        // all changes would've been rolled back automatically by MongoDB.
-        //Only if this is successful then the friend will be created and the user will be updated
-
-        // await createdFriend.save();
+        // const sess = await mongoose.startSession(); 
+        // sess.startTransaction();
+        // await createdFriend.save({ session: sess }); 
+        // user.friends.push(createdFriend); 
+        // await user.save({ session: sess }); 
+        // await sess.commitTransaction();
     } catch(err) {
         const error = new HttpError(
             `Creating friend failed, place try again.`, 500
         );
         return next(error);
-        //this error code could occur either our database server is down 
-        //or something related to that or database validation failes
     }
     
     res.status(201).json(createdFriend);
