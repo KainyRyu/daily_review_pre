@@ -151,9 +151,10 @@ const deleteFriend = async (req, res, next) => {
         sess.startTransaction();
         //after starting transaction we can implement the logic for deleting friend
         await friend.remove({ session: sess }); //session property to refer sess(current session)
+        // place.creator.places.pull(place);
         friend.friendOf.friends.pull(friend);
-
-
+        await friend.friendOf.save({ session: sess });
+        await sess.commitTransaction();
 
         // await friend.remove() //as .save() method 
     } catch (err) {
