@@ -132,14 +132,30 @@ const deleteFriend = async (req, res, next) => {
 
     let friend;
     try {
-        friend = await Friend.findById(friendId);
+        friend = await Friend.findById(friendId).populate('friendOf');
     } catch (err) {
         const error = new HttpError(`Something went wrong. Could not delete the friend`, 500);
         return next(error);
     }
 
+    if (!friend) {
+        const error = new HttpError('Coud not find the friend', 404);
+        return next(error); 
+    }
+
     try {
-        await friend.remove() //as .save() method 
+        //remove and pull,  
+        //we need session to start our transaction and only we can delete the friend
+        //and if we can delete the friend the from the corresponding user then the code will be executed..
+        const sess = await mongoose.startSession(); //current session
+        sess.startTransaction();
+        //after starting transaction we can implement the logic for deleting friend
+        await friend.remove({ session: sess }); //session property to refer sess(current session)
+        friend.friendOf.friends.pull(friend);
+
+
+
+        // await friend.remove() //as .save() method 
     } catch (err) {
         const error = new HttpError(`Something went wrong. Could not delete!!!`, 500);
         return next(error);
