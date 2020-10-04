@@ -1,5 +1,7 @@
 const { v4: uuid4 } = require('uuid');
 const mongoose = require('mongoose');
+const db = mongoose.connection;
+
 
 const HttpError = require('../models/http-error');
 const Friend = require('../models/friend');
@@ -63,7 +65,6 @@ const getByLocation = async (req, res, next) => {
 
 const createFriend = async (req, res, next) => {
     const { name, sex, age, location, friendOf } = req.body;
-    //cosnt location = req.body.location;
     const createdFriend = new Friend ({
         name, sex, age, location, friendOf
     });
@@ -87,10 +88,10 @@ const createFriend = async (req, res, next) => {
     try {
         const sess = await mongoose.startSession();
         sess.startTransaction();
-        await createdFriend.save({ session: sess }); 
-        // user.friends.push(createdFriend);
-        // await user.save({ session: sess }); 
-        // await sess.commitTransaction();
+        await createdFriend.save({ session: sess });
+        user.friends.push(createdFriend);
+        await user.save({ session: sess });
+        await sess.commitTransaction();
     } catch(err) {
         const error = new HttpError(
             `Creating friend failed, please try again.`, 500
