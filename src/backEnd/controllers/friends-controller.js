@@ -139,7 +139,7 @@ const deleteFriend = async (req, res, next) => {
     }
 
     if (!friend) {
-        const error = new HttpError('Coud not find the friend', 404);
+        const error = new HttpError('Could not find the friend', 404);
         return next(error); 
     }
 
