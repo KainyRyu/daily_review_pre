@@ -12,7 +12,9 @@ router.get('/', friendControllers.getAllFriends);
 
 router.get('/place/:location', friendControllers.getByLocation);
 
-router.get('/:fid', friendControllers.getFriendById);
+router.get('/user/:uid', friendControllers.getFriendsByUid);
+
+router.get('/:fid', friendControllers.getFriendsById);
 
 router.patch('/:fid', friendControllers.updateFriend);
 

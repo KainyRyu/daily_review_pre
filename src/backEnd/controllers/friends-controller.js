@@ -19,10 +19,11 @@ const getAllFriends = async (req, res, next) => {
     res.json({Friend});
 }
 
-const getFriendById = async (req, res, next) => {
+const getFriendsById = async (req, res, next) => {
     const friendId = req.params.fid;
 
     let friend;
+
     try {
         friend = await Friend.findById(friendId);
         //findById
@@ -44,6 +45,28 @@ const getFriendById = async (req, res, next) => {
     res.json({ friend: friend.toObject( {getters: true} )})
     // res.json({ user }); <- the object will be easier to use if we just turn it into a normal javascript object.
     // {getters: true} <- to make the '_id' to a normal string
+}
+
+const getFriendsByUid = async (req, res, next) => {
+    const userId = req.params.uid;
+
+    let userWithFriends;
+    try {
+        userWithFriends = await User.findById(userId).populate('friends');
+        console.log(User.findById(userId));
+
+    } catch (err) {
+        const error = new HttpError('Fetching friends failed, please try again', 500);
+        return next(error);
+    }
+
+    if(!userWithFriends || userWithFriends.friends.length === 0) {
+        return next(
+            new HttpError ('Could not find friends for the provided user id', 404)
+        );
+    }
+
+    res.json({ friends: userWithFriends.friends.map(friend => friend.toObject({ getters: true }))})
 }
 
 const getByLocation = async (req, res, next) => {
@@ -133,6 +156,7 @@ const deleteFriend = async (req, res, next) => {
     let friend;
     try {
         friend = await Friend.findById(friendId).populate('friendOf');
+        //populate: to get an access to the enter content of a document stored in a different collection
     } catch (err) {
         const error = new HttpError(`Something went wrong. Could not delete the friend`, 500);
         return next(error);
@@ -152,11 +176,10 @@ const deleteFriend = async (req, res, next) => {
         //after starting transaction we can implement the logic for deleting friend
         await friend.remove({ session: sess }); //session property to refer sess(current session)
         // place.creator.places.pull(place);
-        friend.friendOf.friends.pull(friend);
+        friend.friendOf.friends.pull(friend); //pull will automatically remove the id
+        //this will remove a friend from the user
         await friend.friendOf.save({ session: sess });
         await sess.commitTransaction();
-
-        // await friend.remove() //as .save() method 
     } catch (err) {
         const error = new HttpError(`Something went wrong. Could not delete!!!`, 500);
         return next(error);
@@ -167,7 +190,8 @@ const deleteFriend = async (req, res, next) => {
 
 exports.getAllFriends = getAllFriends; 
 exports.getByLocation = getByLocation; 
-exports.getFriendById = getFriendById; //I don't execute it. express will. so don't envoke it
+exports.getFriendsById = getFriendsById; //I don't execute it. express will. so don't envoke it
+exports.getFriendsByUid = getFriendsByUid; //I don't execute it. express will. so don't envoke it
 exports.createFriend = createFriend; 
 exports.updateFriend = updateFriend; 
 exports.deleteFriend = deleteFriend; 
