@@ -1,6 +1,4 @@
-const { v4: uuid4 } = require('uuid');
 const mongoose = require('mongoose');
-const db = mongoose.connection;
 
 
 const HttpError = require('../models/http-error');
@@ -26,7 +24,6 @@ const getFriendsById = async (req, res, next) => {
 
     try {
         friend = await Friend.findById(friendId);
-        //findById
     } catch (err) {
         const error = new HttpError(
             'Something went wrong, could not find a friend', 500
@@ -50,6 +47,7 @@ const getFriendsById = async (req, res, next) => {
 const getFriendsByUid = async (req, res, next) => {
     const userId = req.params.uid;
 
+    // let friends;
     let userWithFriends;
     try {
         userWithFriends = await User.findById(userId).populate('friends');
@@ -59,7 +57,7 @@ const getFriendsByUid = async (req, res, next) => {
         const error = new HttpError('Fetching friends failed, please try again', 500);
         return next(error);
     }
-
+    // if(!friend || friends.length === 0) {
     if(!userWithFriends || userWithFriends.friends.length === 0) {
         return next(
             new HttpError ('Could not find friends for the provided user id', 404)
