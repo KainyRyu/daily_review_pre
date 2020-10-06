@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const HttpError = require('../models/http-error');
 const Friend = require('../models/friend');
 const User = require('../models/user');
