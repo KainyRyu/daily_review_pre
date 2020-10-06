@@ -5,7 +5,7 @@ const plansController = require('../controllers/plansControllers');
 const router = express.Router();
 
 
-router.get('/', plansController.getPlans);
+router.get('/:uid', plansController.getPlansByUid);
 
 router.post('/addplan', plansController.addPlan);
 

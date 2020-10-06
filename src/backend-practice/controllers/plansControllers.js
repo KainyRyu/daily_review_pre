@@ -33,13 +33,32 @@ const addPlan = async (req, res, next) => {
 
 }
 
-const getPlans = (req, res, next) => {
+const getPlansByUid = async (req, res, next) => {
+    const uid = req.params.uid;
 
-    if (!Plan) {
+    let user;
+    try {
+        user = await User.findById(uid);
+    } catch (err) {
+        const error = new HttpError('Could not find the user', 404);
+        return next(error);
+    }
+    
+    let plans;
+    try {
+        plans = await Plan.find({ uid: uid });
+    } catch (err) {
+        const error = new HttpError('Could not find a plan. please add plans', 404);
+        return next(error);
+    }
+
+    if (!plans) {
         const error = new HttpError(`You haven't added a plan yet, please add plans`, 404);
         return next(error);
     }
-    res.json({Plan});
+    
+
+    res.json({plans});
 }
 exports.addPlan = addPlan;
-exports.getPlans = getPlans;
+exports.getPlansByUid = getPlansByUid;
