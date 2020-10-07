@@ -88,8 +88,36 @@ const updatePlan = async (req, res, next) => {
     res.status(200).json({ plan })
 }
 
+const deletePlan = async (req, res, next) => {
+    const pid = req.params.pid;
+
+    let plan;
+    try {
+        plan = await Plan.findById(pid);
+    } catch (err) {
+        const error = new HttpError('Something went wrong. Try again later', 500);
+        return next(error);
+    }
+
+    if (!plan) {
+        const error = new HttpError ('Could not find the plan.', 404);
+        return next(error);
+    }
+
+    try {
+        await plan.remove();
+    } catch (err) {
+        const error = new HttpError('Something went wrong. Could not delete plan', 500);
+        return next(error);
+    }
+
+
+    res.status(200).json({ message: 'Deleted plan' });
+}
+
 
 
 exports.addPlan = addPlan;
 exports.getPlansByUid = getPlansByUid;
 exports.updatePlan = updatePlan;
+exports.deletePlan = deletePlan;

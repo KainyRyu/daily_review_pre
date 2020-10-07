@@ -11,5 +11,6 @@ router.post('/addplan', plansController.addPlan);
 
 router.patch('/editplan/:pid', plansController.updatePlan);
 
+router.delete('/editplan/:pid', plansController.deletePlan);
 
 module.exports = router;
