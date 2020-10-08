@@ -51,25 +51,21 @@ import './App.css';
 //   }
 // }
 
-function App(props) {
-  const [currentUser, setCurrentUser] = useState(false);
-  // const [state, dispatch] = useReducer(reducer, initialState);
+function App(props) {	
+  const [firebaseInitialized, setFirebaseInitialized] = useState(null);
+  // const [state, dispatch] = useReducer(reducer, initialState);	 
 
-  useEffect(() => {
-    async function result () {
-      await firebaseInitializing.isInitialized().then(value => {
-        setCurrentUser(value);
-      });
-      await console.log('user name: ' + currentUser.displayName);
-    }
-    result();
-  }, [currentUser]);
+  useEffect(() => {	  
+    firebaseInitializing.isInitialized().then(value => {	    
+      setFirebaseInitialized(value);
+    });
+  })
 
-  return currentUser !== false ? (
+  return !!firebaseInitialized ? (
     // <MyContext.Provider value={{state, dispatch}}>
-      <Login />
+      <Landing currentUser={firebaseInitialized}/>
     // {/* </MyContext.Provider> */}
-  ) : <Landing />
+  ) : <Loading />
 }
 
 export default App;

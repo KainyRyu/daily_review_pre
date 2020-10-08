@@ -10,41 +10,31 @@ import Today from './Today';
 import './landing.css';
 import NotFound from '../../NotFound';
 import Review from '../DailyPlan/Review/Review';
+import Loading from '../../Loading';
 
-export default function Landing() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(false);
-  useEffect(() => {
-    async function result(){
-      await firebase.auth().onAuthStateChanged((user) => {
-        setIsSignedIn(!!user);
-        currentUser = {user};
-        console.log(user);
-      });
-      await console.log('Current User name: ' + currentUser);
+export default function Landing({ currentUser }) {
+
+  // const [isSignedIn, setIsSignedIn] = useState(false);
+  // const [currentUser, setCurrentUser] = useState(false);
+  // useEffect(() => {
+  //   async function result(){
+  //     await firebase.auth().onAuthStateChanged((user) => {
+  //       setIsSignedIn(!!user);
+  //       setCurrentUser(user);
+  //     });
+  //     await console.log(currentUser);
       
-      const result = await fetch('http://localhost:5000/api/users/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: currentUser.displayName,
-          email: currentUser.email,
-          password: currentUser.uid
-          // email: currentUser.photoURL
-        })
-      })
-      result();
-    }
-  }, []);
+  //   }
+  //   result();
+  // }, []);
 
   return (
     <div className="Landing">
-      {isSignedIn !== false ? (
+      {currentUser ? (
         <>
           <Router>
             <Today />
+            <div>{currentUser.displayName}</div>
             <Switch>
               <div id="content">
                 <Route exact path="/" component={Home} />
@@ -62,7 +52,7 @@ export default function Landing() {
         </>
       ) : (
         <>
-          <Login />
+        Something went wrong! Cannot fetch the user
         </>
       )}
     </div>
