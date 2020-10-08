@@ -13,12 +13,30 @@ import Review from '../DailyPlan/Review/Review';
 
 export default function Landing() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-
+  const [currentUser, setCurrentUser] = useState(false);
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      setIsSignedIn(!!user);
-      console.log('user', user);
-    });
+    async function result(){
+      await firebase.auth().onAuthStateChanged((user) => {
+        setIsSignedIn(!!user);
+        currentUser = {user};
+        console.log(user);
+      });
+      await console.log('Current User name: ' + currentUser);
+      
+      const result = await fetch('http://localhost:5000/api/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: currentUser.displayName,
+          email: currentUser.email,
+          password: currentUser.uid
+          // email: currentUser.photoURL
+        })
+      })
+      result();
+    }
   }, []);
 
   return (

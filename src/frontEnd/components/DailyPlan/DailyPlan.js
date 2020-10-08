@@ -22,12 +22,12 @@ export default function DailyPlan() {
     //the slot time passed, alert for reveiwing
   }
   
-  async function fetchURL() {
-    const response = await fetch(`${databaseURL}timeslots.json`);
-    const result = await response.json();
-    Promise.all([response, result]);
+  // async function fetchURL() {
+  //   const response = await fetch(`${databaseURL}timeslots.json`);
+  //   const result = await response.json();
+  //   Promise.all([response, result]);
     // setEventTimes(() =>  response.json());
-  }
+  // }
 
   useEffect(() => {
     fetch(`${databaseURL}timeslots.json`)
