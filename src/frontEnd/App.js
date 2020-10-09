@@ -56,23 +56,11 @@ function App(props) {
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
   useEffect(() => {	 
-    async function result () {
-      await firebaseInitializing.isInitialized().then(value => {	    
+    function result () {
+      firebaseInitializing.isInitialized().then(value => {	    
         setCurrentUser(value);
+        console.log(value);
       });
-
-      // await fetch('http://localhost:5000/api/users/signin', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     name: currentUser.displayName,
-      //     email: currentUser.email,
-      //     password: currentUser.uid
-      //   })
-      // });
-
     } 
     result();
   }, []);
@@ -80,9 +68,8 @@ function App(props) {
   useEffect(() => {
     async function result() {
       if (currentUser) {
-      } else {
         try{
-          const response = await fetch('http://localhost:5000/api/users/signin', {
+          const response = await fetch('http://localhost:5000/api/users/signup', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -93,12 +80,17 @@ function App(props) {
               password: currentUser.uid
             })
           });
-          
-          const responseData = await response.json()
+          const responseData = await response.json();
           console.log(responseData);
+
+          if (!response.ok) {
+            throw new Error(responseData.message);
+          }
+
         } catch (err) {
           console.log(err);
         }
+      } else {
       }
     }
     result();

@@ -2,7 +2,7 @@ const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
-    const {name, email, password} = req.body;
+    const { name, email, password } = req.body;
 
     let existingUser;   
     try {
@@ -18,7 +18,7 @@ const signup = async (req, res, next) => {
     }
 
     const createdUser = new User({
-        name, eamil, password
+        name, email, password
     });
 
     try {

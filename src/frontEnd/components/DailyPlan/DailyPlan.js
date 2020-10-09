@@ -36,7 +36,7 @@ export default function DailyPlan() {
   }, [])
 
   let { path, url } = useRouteMatch();
-  console.log(`path is ${path} and url is ${url}`)
+  // console.log(`path is ${path} and url is ${url}`)
           
             // function totalProductivity() {
             //   console.log(timeslots)
