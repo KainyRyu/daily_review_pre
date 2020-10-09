@@ -27,6 +27,31 @@ export default function Landing({ currentUser }) {
   //   }
   //   result();
   // }, []);
+  useEffect(() => {
+    async function result () {
+      if (currentUser) {
+      } else {
+        try{
+          const response = await fetch ('http://localhost:5000/api/users/signup', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                name: currentUser.displayName,
+                email: currentUser.email,
+                password: currentUser.uid
+              })
+          });
+
+          const responseData = await response.json();
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }
+    result();
+  }, []);
 
   return (
     <div className="Landing">

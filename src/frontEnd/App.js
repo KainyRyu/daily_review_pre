@@ -55,11 +55,27 @@ function App(props) {
   const [firebaseInitialized, setFirebaseInitialized] = useState(null);
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
-  useEffect(() => {	  
-    firebaseInitializing.isInitialized().then(value => {	    
-      setFirebaseInitialized(value);
-    });
-  })
+  useEffect(() => {	 
+    async function result () {
+      await firebaseInitializing.isInitialized().then(value => {	    
+        setFirebaseInitialized(value);
+      });
+
+      // await fetch('http://localhost:5000/api/users/signin', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     name: firebaseInitialized.displayName,
+      //     email: firebaseInitialized.email,
+      //     password: firebaseInitialized.uid
+      //   })
+      // });
+
+    } 
+    result();
+  }, [firebaseInitialized])
 
   return !!firebaseInitialized ? (
     // <MyContext.Provider value={{state, dispatch}}>
