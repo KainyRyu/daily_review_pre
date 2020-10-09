@@ -52,13 +52,13 @@ import './App.css';
 // }
 
 function App(props) {	
-  const [firebaseInitialized, setFirebaseInitialized] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
   useEffect(() => {	 
     async function result () {
       await firebaseInitializing.isInitialized().then(value => {	    
-        setFirebaseInitialized(value);
+        setCurrentUser(value);
       });
 
       // await fetch('http://localhost:5000/api/users/signin', {
@@ -67,19 +67,46 @@ function App(props) {
       //     'Content-Type': 'application/json'
       //   },
       //   body: JSON.stringify({
-      //     name: firebaseInitialized.displayName,
-      //     email: firebaseInitialized.email,
-      //     password: firebaseInitialized.uid
+      //     name: currentUser.displayName,
+      //     email: currentUser.email,
+      //     password: currentUser.uid
       //   })
       // });
 
     } 
     result();
-  }, [firebaseInitialized])
+  }, []);
 
-  return !!firebaseInitialized ? (
+  useEffect(() => {
+    async function result() {
+      if (currentUser) {
+      } else {
+        try{
+          const response = await fetch('http://localhost:5000/api/users/signin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: currentUser.displayName,
+              email: currentUser.email,
+              password: currentUser.uid
+            })
+          });
+          
+          const responseData = await response.json()
+          console.log(responseData);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+    result();
+  }, [currentUser]);
+
+  return !!currentUser ? (
     // <MyContext.Provider value={{state, dispatch}}>
-      <Landing currentUser={firebaseInitialized}/>
+      <Landing currentUser={currentUser}/>
     // {/* </MyContext.Provider> */}
   ) : <Loading />
 }
