@@ -21,6 +21,7 @@ export default function Login() {
 
     return (
         <>
+        <img className="landing_logo" src={Logo} alt="logo" />
             <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}

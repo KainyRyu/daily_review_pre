@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useReducer} from 'react';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import firebaseInitializing from './utils/firebase'
 import Loading from './Loading';
 import Landing from './components/Landing/Landing';
