@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useReducer} from 'react';
 import firebase from 'firebase/app';
-import firebaseInitializing from './utils/firebase'
+import firebaseInitializing from './shared/utils/firebase'
 import Loading from './Loading';
-import Landing from './components/Landing/Landing';
-import Login from './components/Login';
-import {MyContext} from "./context/timeSlotsContext";
+import Landing from './shared/components/Landing/Landing';
+import Login from './shared/components/Login';
+import {MyContext} from "./shared/context/timeSlotsContext";
 import './App.css';
 
 // const initialState = {timeslots: [

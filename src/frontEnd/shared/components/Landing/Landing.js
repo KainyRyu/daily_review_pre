@@ -7,7 +7,7 @@ import EditPlan from '../DailyPlan/EditPlan';
 // import Navbar from '../Navbar';
 import Today from './Today';
 import './landing.css';
-import NotFound from '../../NotFound';
+import NotFound from '../../../NotFound';
 import Review from '../DailyPlan/Review/Review';
 
 export default function Landing({ currentUser }) {
