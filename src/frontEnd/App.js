@@ -53,6 +53,9 @@ import './App.css';
 
 function App(props) {	
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
   useEffect(() => {	 
@@ -69,6 +72,8 @@ function App(props) {
     async function result() {
       if (currentUser) {
         try{
+          setIsLoading(true);
+
           const response = await fetch('http://localhost:5000/api/users/signup', {
             method: 'POST',
             headers: {
@@ -84,6 +89,7 @@ function App(props) {
           console.log(responseData);
 
           if (!response.ok) {
+            setError(err.message || 'Something went wrong, please try again.');
             throw new Error(responseData.message);
           }
 
@@ -92,6 +98,7 @@ function App(props) {
         }
       } else {
       }
+      setIsLoading(false);
     }
     result();
   }, [currentUser]);
