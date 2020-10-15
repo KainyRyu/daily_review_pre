@@ -24,7 +24,7 @@ export const useHttpClient = () => {
 
             const responseData = await response.json();
 
-            activeHttpRequests.current = activeHttpRequests.current.filter(reqCtrl => reqCtrl != abort());
+            activeHttpRequests.current = activeHttpRequests.current.filter(reqCtrl => reqCtrl.abort());
 
             if (!response.ok) {
                 throw new Error(responseData.message);
@@ -53,6 +53,3 @@ export const useHttpClient = () => {
 
     return { isLoading, error, sendRequest, clearError };
 };
-
-
-module.exports(useHttpClient);

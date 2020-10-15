@@ -1,7 +1,7 @@
 import React from 'react';
-import firebase from 'firebase'
+import firebase, { initializeApp } from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import Logo from '../image/DR.svg'
+import Logo from '../../image/DR.svg'
 
 
 export default function Login() {
@@ -18,7 +18,7 @@ export default function Login() {
             signInSuccess: () => false
         }
     }
-
+    
     return (
         <>
         <img className="landing_logo" src={Logo} alt="logo" />

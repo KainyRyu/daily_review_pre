@@ -100,7 +100,7 @@ function App(props) {
     // <MyContext.Provider value={{state, dispatch}}>
       <Landing currentUser={currentUser}/>
     // {/* </MyContext.Provider> */}
-  ) : <Loading />
+  ) : <Login />
 }
 
 export default App;
