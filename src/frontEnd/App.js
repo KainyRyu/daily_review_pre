@@ -6,6 +6,7 @@ import Landing from './shared/components/Landing/Landing';
 import Login from './shared/components/Login';
 import {MyContext} from "./shared/context/timeSlotsContext";
 import './App.css';
+import { useHttpClient } from './shared/hooks/http-hook';
 
 // const initialState = {timeslots: [
 //   {time: '00', title: '', review: '' },
@@ -53,8 +54,7 @@ import './App.css';
 
 function App(props) {	
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
@@ -72,33 +72,26 @@ function App(props) {
     async function result() {
       if (currentUser) {
         try{
-          setIsLoading(true);
-
-          const response = await fetch('http://localhost:5000/api/users/signup', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
+          await sendRequest(
+            'http://localhost:5000/api/users/signup', 
+            'POST', 
+            JSON.stringify({
               name: currentUser.displayName,
               email: currentUser.email,
               password: currentUser.uid
-            })
-          });
-          const responseData = await response.json();
-          console.log(responseData);
-
-          if (!response.ok) {
-            setError(err.message || 'Something went wrong, please try again.');
-            throw new Error(responseData.message);
-          }
-
+            }),
+            {
+              'Content-Type': 'application/json'
+            },
+          );
+          return currentUser;
         } catch (err) {
-          console.log(err);
+
         }
-      } else {
+      // } else {
+        
       }
-      setIsLoading(false);
+
     }
     result();
   }, [currentUser]);
