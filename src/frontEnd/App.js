@@ -96,10 +96,9 @@ function App(props) {
     async function result() {
       if (isSignedIn) {
         try {
-          await sendRequest(
-            'http://localhost:5000/api/users',
-            
-          )
+          await sendRequest('http://localhost:5000/api/users')
+        } catch (err) {
+          
         }
       }
     }
