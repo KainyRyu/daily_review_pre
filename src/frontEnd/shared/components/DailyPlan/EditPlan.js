@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useHttpClient } from '../../hooks/http-hook';
 import './editplan.css';
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
 export default function EditPlan({ id }) {
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [timeslots, setTimeslots] = useState([]);
     const [apiData, setApiData] = useState([]);
     const [updateArray, setUpdateArray] = useState([]);
@@ -53,7 +55,12 @@ export default function EditPlan({ id }) {
     function submitHandler(e) {
         e.preventDefault();
         postingTitle(replace());
-        console.log(timeslots);
+        sendRequest('http://localhost:5000/api/dailyplan/addplan', 'POST', JSON.stringify({
+            title: newEvent.title, 
+            starts: newEvent.starts, 
+            ends: newEvent.ends, 
+            // uid
+        }))
 
     }
 

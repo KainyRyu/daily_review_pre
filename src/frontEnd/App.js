@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect, useCallback } from 'react';
 import firebase from 'firebase/app';
 import firebaseInitializing from './shared/utils/firebase'
-import Loading from './Loading';
 import Landing from './shared/components/Landing/Landing';
 import Login from './shared/components/Login';
-import {MyContext} from "./shared/context/timeSlotsContext";
+import { AuthContext } from './shared/context/auth-context'
+// import {MyContext} from "./shared/context/timeSlotsContext";
 import './App.css';
 import { useHttpClient } from './shared/hooks/http-hook';
 
@@ -53,7 +53,7 @@ import { useHttpClient } from './shared/hooks/http-hook';
 // }
 
 function App(props) {	
-  const [currentUser, setCurrentUser] = useState(null);
+  const [isSignedIn, setIsSignedIn] = useState(null);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   // const [state, dispatch] = useReducer(reducer, initialState);	 
@@ -61,7 +61,7 @@ function App(props) {
   useEffect(() => {	 
     function result () {
       firebaseInitializing.isInitialized().then(value => {	    
-        setCurrentUser(value);
+        setIsSignedIn(value);
         console.log(value);
       });
     } 
@@ -70,35 +70,46 @@ function App(props) {
 
   useEffect(() => {
     async function result() {
-      if (currentUser) {
+      if (isSignedIn) {
         try{
           await sendRequest(
             'http://localhost:5000/api/users/signup', 
             'POST', 
             JSON.stringify({
-              name: currentUser.displayName,
-              email: currentUser.email,
-              password: currentUser.uid
+              name: isSignedIn.displayName,
+              email: isSignedIn.email,
+              fuid: isSignedIn.uid
             }),
             {
               'Content-Type': 'application/json'
-            },
+            }
           );
-          return currentUser;
+          return isSignedIn;
         } catch (err) {
-
         }
-      // } else {
-        
       }
-
     }
     result();
-  }, [currentUser]);
+  }, [isSignedIn]);
 
-  return !!currentUser ? (
+  useEffect(() => {
+    async function result() {
+      if (isSignedIn) {
+        try {
+          await sendRequest(
+            'http://localhost:5000/api/users',
+            
+          )
+        }
+      }
+    }
+  }, [isSignedIn])
+
+  return !!isSignedIn ? (
+    <AuthContext.Provider value={{}}>
+      <Landing isSignedIn={isSignedIn}/>
+    </AuthContext.Provider>
     // <MyContext.Provider value={{state, dispatch}}>
-      <Landing currentUser={currentUser}/>
     // {/* </MyContext.Provider> */}
   ) : <Login />
 }

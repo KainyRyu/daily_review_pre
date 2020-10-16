@@ -2,7 +2,7 @@ const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, email, fuid } = req.body;
 
     let existingUser;   
     try {
@@ -18,7 +18,7 @@ const signup = async (req, res, next) => {
     }
 
     const createdUser = new User({
-        name, email, password
+        name, email, fuid
     });
 
     try {
@@ -34,7 +34,7 @@ const signup = async (req, res, next) => {
 const getAllUsers = async (req, res, next) => {
     let users;
     try {
-        users = await User.find({}, '-password');
+        users = await User.find({}, '-fuid');
     } catch (err) {
         const error = new HttpError ('Fetching users failed, please try again later.', 500);
         return next(error);
@@ -43,22 +43,25 @@ const getAllUsers = async (req, res, next) => {
 }
 
 const signin = async (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, fuid } = req.body;
 
     let existingUser;
     try {
         existingUser = await User.findOne({ email: email });
     } catch (err) {
-        const error = new HttpError('Logging in failed, please try again later', 500);
+        const error = new HttpError('Signing in failed, please try again later', 500);
         return next(error);
     }
     
-    if (!existingUser || existingUser.password !== password) {
+    if (!existingUser || existingUser.fuid !== fuid) {
         const error = new HttpError('Invalid credentials, could not log you in.', 401);
         return next(error);
     }  
     
-    res.json({message: "Logged in!"});
+    res.json({
+        message: "Signed in!",
+        user: existingUser.toObject({ getters: true })
+    });
 }
 
 exports.signup = signup;

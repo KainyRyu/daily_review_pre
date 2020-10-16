@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 
+
 export const useHttpClient = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
@@ -13,7 +14,7 @@ export const useHttpClient = () => {
         //by using useCallback, this function will never get recreate it when the component that uses ths hook re renders
         setIsLoading(true);
         const httpAbortCtrl = new AbortController();
-        activeHttpRequests.current.push(httpAbortCtrl)
+        activeHttpRequests.current.push(httpAbortCtrl);
         try {
             const response = await fetch(url, {
                 method,

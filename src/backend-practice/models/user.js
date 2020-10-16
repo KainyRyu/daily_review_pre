@@ -6,9 +6,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
-    // fb_uid: { type: String }
-});ee
+    fuid: { type: String, required: true },
+    // fuid: { type: String }
+});
 
 module.exports = mongoose.model('User', userSchema);
 

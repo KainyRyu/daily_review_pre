@@ -1,18 +1,32 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
-// import EditPlan from "./EditPlan";
-// import Review from "./Review/Review";
+// import EditPlan from './EditPlan';
+// import Review from './Review/Review';
 import Productivity from '../Productivity/Productivity';
-// import {MyContext} from "../../context/timeSlotsContext";
-import "./dailyPlan.css";
+// import {MyContext} from '../../context/timeSlotsContext';
+import './dailyPlan.css';
+import { useHttpClient } from '../../hooks/http-hook';
 
-const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
+const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
 export default function DailyPlan() {
-
+  
+  // const { isLoading, error, sendRequest, clearError} = useHttpClient();
   const [timeslots, setTimeslots] = useState([]);
   // const {state, dispatch} = useContext(MyContext);
   // const {timeslots} = state;
+
+  // useEffect(() => {
+  //   const fetchPlans = async () => {
+  //     try {
+  //       const responseData = await sendRequest(`http://localhost:5000/api/dailyplan/${}`);
+  //     } catch (err) {
+
+  //     }
+  //   }
+    
+  //   fetchPlans();
+  // }, [sendRequest]);
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -36,7 +50,7 @@ export default function DailyPlan() {
   }, [])
 
   let { path, url } = useRouteMatch();
-  // console.log(`path is ${path} and url is ${url}`)
+  
           
             // function totalProductivity() {
             //   console.log(timeslots)
