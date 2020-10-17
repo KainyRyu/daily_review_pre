@@ -45,11 +45,12 @@ export const useHttpClient = () => {
 
     useEffect(() => {
         return () => {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             activeHttpRequests.current.forEach(abortCtrl => abortCtrl.abort());
         };
-        //return this function excuted as a cleanup function before the next time useEffect runs again
-        //or also when the component that uses useEffect
-        //So now in this case the component that uses hte custom hook unmout
+        // return this function excuted as a cleanup function before the next time useEffect runs again
+        // or also when the component that uses useEffect
+        // So now in this case the component that uses hte custom hook unmout
     }, []);
 
     return { isLoading, error, sendRequest, clearError };

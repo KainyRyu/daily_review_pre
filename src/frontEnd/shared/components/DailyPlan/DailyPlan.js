@@ -6,10 +6,13 @@ import Productivity from '../Productivity/Productivity';
 // import {MyContext} from '../../context/timeSlotsContext';
 import './dailyPlan.css';
 import { useHttpClient } from '../../hooks/http-hook';
+import { AuthContext } from '../../context/auth-context';
 
 
 const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
 export default function DailyPlan() {
+  const context = useContext(AuthContext);
+  console.log(context);
   
   // const { isLoading, error, sendRequest, clearError} = useHttpClient();
   const [timeslots, setTimeslots] = useState([]);

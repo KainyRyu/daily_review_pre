@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import firebase, { initializeApp } from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebaseInitializing from '../utils/firebase';
 import { useHttpClient } from '../hooks/http-hook';
-import Logo from '../../image/DR.svg'
+import { AuthContext } from '../context/auth-context';
+import Logo from '../../image/DR.svg';
 
 
 export default function Login() {
+    const auth = useContext(AuthContext);
     const [isSignedIn, setIsSignedIn] = useState(null);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -16,24 +18,26 @@ export default function Login() {
                 setIsSignedIn(value);
                 console.log(value);
             });
-
-            try {
-                await sendRequest('http://localhost:5000/api/users/signup',
-                    'POST',
-                    JSON.stringify({
-                        name: isSignedIn.displayName,
-                        email: isSignedIn.email,
-                        fuid: isSignedIn.uid
-                    }),
-                    {
-                        'content-Type': 'application/json'
-                    }
-                );
-            } catch (err) {
-
+            if (isSignedIn) {
+                try {
+                    await sendRequest(
+                        'http://localhost:5000/api/users/signup',
+                        'POST',
+                        JSON.stringify({
+                            name: isSignedIn.displayName,
+                            email: isSignedIn.email,
+                            fuid: isSignedIn.uid
+                        }),
+                        {
+                            'content-Type': 'application/json'
+                        }
+                    );
+                    auth.signIn();
+                } catch (err) {}
             }
         } 
         result();
+
     }, []);
 
 

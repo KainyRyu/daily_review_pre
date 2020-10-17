@@ -53,24 +53,49 @@ import { useHttpClient } from './shared/hooks/http-hook';
 // }
 
 function App(props) {	
-  const [isSignedIn, setIsSignedIn] = useState(null);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
+  const signIn = useCallback(() => {
+    setIsSignedIn(true);
+  },[])
+
+  const signOut = useCallback(() => {
+    setIsSignedIn(false);
+    firebase.auth().signOut();
+  })
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
+
+
   useEffect(() => {	 
-    function result () {
-      firebaseInitializing.isInitialized().then(value => {	    
-        setIsSignedIn(value);
-        console.log(value);
+    async function result () {
+      await firebaseInitializing.isInitialized().then(value => {	    
+        setCurrentUser(value);
       });
+
+      try {
+        await sendRequest(
+          'http://localhost:5000/api/users/signup', 
+          'POST', 
+          JSON.stringify({
+            name: isSignedIn.displayName,
+            email: isSignedIn.email,
+            fuid: isSignedIn.uid
+          }),
+          {
+            'Content-Type': 'application/json'
+          }
+        );
+      } catch (err) {}
     } 
     result();
   }, []);
 
   useEffect(() => {
     async function result() {
-      if (isSignedIn) {
+      if (currentUser) {
         try{
           await sendRequest(
             'http://localhost:5000/api/users/signup', 
@@ -84,13 +109,13 @@ function App(props) {
               'Content-Type': 'application/json'
             }
           );
-          return isSignedIn;
+          console.log(currentUser);
         } catch (err) {
         }
       }
     }
     result();
-  }, [isSignedIn]);
+  }, [currentUser]);
 
   useEffect(() => {
     async function result() {
@@ -98,15 +123,18 @@ function App(props) {
         try {
           await sendRequest('http://localhost:5000/api/users')
         } catch (err) {
-          
+
         }
       }
     }
   }, [isSignedIn])
 
-  return !!isSignedIn ? (
-    <AuthContext.Provider value={{}}>
-      <Landing isSignedIn={isSignedIn}/>
+
+  return !!currentUser ? (
+    <AuthContext.Provider value={{ isSignedIn: isSignedIn, signIn: signIn, signOut: signOut }}>
+      {/* //everytime context render it will rerender */}
+      <Landing currentUser={currentUser}/>
+      <button onClick={signOut}>SignOut</button>
     </AuthContext.Provider>
     // <MyContext.Provider value={{state, dispatch}}>
     // {/* </MyContext.Provider> */}
@@ -114,3 +142,4 @@ function App(props) {
 }
 
 export default App;
+
