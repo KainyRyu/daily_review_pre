@@ -109,7 +109,7 @@ function App(props) {
               'Content-Type': 'application/json'
             }
           );
-          signIn()
+          signIn();
           console.log(currentUser);
         } catch (err) {
         }
@@ -122,13 +122,10 @@ function App(props) {
     async function result() {
       if (isSignedIn) {
         try {
-          await sendRequest('http://localhost:5000/api/users')
-        } catch (err) {
-
-        }
+          await sendRequest('http://localhost:5000/api/users');
+        } catch (err) {}
       }
     }
-    console.log(result());
     result();
   }, [isSignedIn])
 
