@@ -109,6 +109,7 @@ function App(props) {
               'Content-Type': 'application/json'
             }
           );
+          signIn()
           console.log(currentUser);
         } catch (err) {
         }
@@ -127,6 +128,8 @@ function App(props) {
         }
       }
     }
+    console.log(result());
+    result();
   }, [isSignedIn])
 
 

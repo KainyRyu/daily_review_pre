@@ -12,10 +12,10 @@ import { AuthContext } from '../../context/auth-context';
 const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
 export default function DailyPlan() {
   const context = useContext(AuthContext);
+  const [timeslots, setTimeslots] = useState([]);
   console.log(context);
   
   // const { isLoading, error, sendRequest, clearError} = useHttpClient();
-  const [timeslots, setTimeslots] = useState([]);
   // const {state, dispatch} = useContext(MyContext);
   // const {timeslots} = state;
 
