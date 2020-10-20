@@ -33,7 +33,7 @@ import { useHttpClient } from './shared/hooks/http-hook';
 //   {time: '21', title: '', review: '' },
 //   {time: '22', title: '', review: '' },
 //   {time: '23', title: '', review: '' },
-// ]}
+// ]};
 
 // function reducer(state, action) {
 //   switch (action.type) {
@@ -74,21 +74,20 @@ function App(props) {
       await firebaseInitializing.isInitialized().then(value => {	    
         setCurrentUser(value);
       });
-
-      try {
-        await sendRequest(
-          'http://localhost:5000/api/users/signup', 
-          'POST', 
-          JSON.stringify({
-            name: isSignedIn.displayName,
-            email: isSignedIn.email,
-            fuid: isSignedIn.uid
-          }),
-          {
-            'Content-Type': 'application/json'
-          }
-        );
-      } catch (err) {}
+      // try {
+      //   await sendRequest(
+      //     'http://localhost:5000/api/users/signup', 
+      //     'POST', 
+      //     JSON.stringify({
+      //       name: currentUser.displayName,
+      //       email: currentUser.email,
+      //       fuid: currentUser.uid
+      //     }),
+      //     {
+      //       'Content-Type': 'application/json'
+      //     }
+      //   );
+      // } catch (err) {}
     } 
     result();
   }, []);
@@ -101,17 +100,18 @@ function App(props) {
             'http://localhost:5000/api/users/signup', 
             'POST', 
             JSON.stringify({
-              name: isSignedIn.displayName,
-              email: isSignedIn.email,
-              fuid: isSignedIn.uid
+              name: currentUser.displayName,
+              email: currentUser.email,
+              fuid: currentUser.uid
             }),
             {
               'Content-Type': 'application/json'
             }
-          );
-          signIn();
-          console.log(currentUser);
+            );
+            console.log(currentUser);
+            signIn();
         } catch (err) {
+          console.log(err);
         }
       }
     }
