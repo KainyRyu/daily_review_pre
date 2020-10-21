@@ -54,7 +54,6 @@ import { useHttpClient } from './shared/hooks/http-hook';
 
 function App(props) {	
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const signIn = useCallback(() => {
@@ -65,35 +64,26 @@ function App(props) {
     setIsSignedIn(false);
     firebase.auth().signOut();
   })
+  let currentUser;
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
 
 
-  useEffect(() => {	 
-    async function result () {
-      await firebaseInitializing.isInitialized().then(value => {	    
-        setCurrentUser(value);
-      });
-      // try {
-      //   await sendRequest(
-      //     'http://localhost:5000/api/users/signup', 
-      //     'POST', 
-      //     JSON.stringify({
-      //       name: currentUser.displayName,
-      //       email: currentUser.email,
-      //       fuid: currentUser.uid
-      //     }),
-      //     {
-      //       'Content-Type': 'application/json'
-      //     }
-      //   );
-      // } catch (err) {}
-    } 
-    result();
-  }, []);
+  // useEffect(() => {	 
+  //   async function result () {
+  //     await firebaseInitializing.isInitialized().then(value => {	    
+  //       setCurrentUser(value);
+  //     });
+  //   } 
+  //   result();
+  // }, []);
 
   useEffect(() => {
     async function result() {
+      await firebaseInitializing.isInitialized().then(value => {	    
+        currentUser = value;
+      });
+
       if (currentUser) {
         try{
           await sendRequest(
@@ -116,7 +106,7 @@ function App(props) {
       }
     }
     result();
-  }, [currentUser]);
+  }, []);
 
   useEffect(() => {
     async function result() {

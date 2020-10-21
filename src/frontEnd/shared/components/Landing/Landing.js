@@ -12,6 +12,7 @@ import NotFound from '../../../NotFound';
 import Review from '../DailyPlan/Review/Review';
 
 export default function Landing({ currentUser }) {
+  console.log(currentUser);
   const auth = useContext(AuthContext);
 
   return (

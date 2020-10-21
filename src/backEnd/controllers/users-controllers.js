@@ -13,8 +13,10 @@ const signup = async (req, res, next) => {
     }
 
     if (existingUser) {
-        const error = new HttpError('User exist already, please login instead', 422);
-        return next(error);
+        res.json({
+            message: "Signed in!",
+            user: existingUser.toObject({ getters: true })
+        });
     }
 
     const createdUser = new User({
@@ -66,4 +68,4 @@ const signin = async (req, res, next) => {
 
 exports.signup = signup;
 exports.getAllUsers = getAllUsers;
-exports.signin = signin;
+// exports.signin = signin;
