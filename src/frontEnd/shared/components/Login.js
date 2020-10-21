@@ -12,34 +12,6 @@ export default function Login() {
     const [isSignedIn, setIsSignedIn] = useState(null);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-    useEffect(() => {	 
-        async function result () {
-            await firebaseInitializing.isInitialized().then(value => {	    
-                setIsSignedIn(value);
-                console.log(value);
-            });
-            if (isSignedIn) {
-                try {
-                    await sendRequest(
-                        'http://localhost:5000/api/users/signup',
-                        'POST',
-                        JSON.stringify({
-                            name: isSignedIn.displayName,
-                            email: isSignedIn.email,
-                            fuid: isSignedIn.uid
-                        }),
-                        {
-                            'content-Type': 'application/json'
-                        }
-                    );
-                    auth.signIn();
-                } catch (err) {}
-            }
-        } 
-        result();
-
-    }, []);
-
 
     const uiConfig = {
         signInFlow: "popup",
@@ -54,8 +26,6 @@ export default function Login() {
         }
     }
 
-
-    
     return (
         <>
             <img className="landing_logo" src={Logo} alt="logo" />

@@ -86,6 +86,7 @@ function App(props) {
 
       if (currentUser) {
         try{
+          console.log(currentUser);
           await sendRequest(
             'http://localhost:5000/api/users/signup', 
             'POST', 
@@ -98,7 +99,6 @@ function App(props) {
               'Content-Type': 'application/json'
             }
             );
-            console.log(currentUser);
             signIn();
         } catch (err) {
           console.log(err);
