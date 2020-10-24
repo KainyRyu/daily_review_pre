@@ -54,6 +54,7 @@ import { useHttpClient } from './shared/hooks/http-hook';
 
 function App(props) {	
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const signIn = useCallback(() => {
@@ -64,7 +65,7 @@ function App(props) {
     setIsSignedIn(false);
     firebase.auth().signOut();
   })
-  let currentUser;
+
   // const [state, dispatch] = useReducer(reducer, initialState);	 
 
 
@@ -81,7 +82,7 @@ function App(props) {
   useEffect(() => {
     async function result() {
       await firebaseInitializing.isInitialized().then(value => {	    
-        currentUser = value;
+        setCurrentUser(value);
       });
 
       if (currentUser) {

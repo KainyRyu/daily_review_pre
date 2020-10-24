@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AuthContext } from '../../context/auth-context';
 import firebase from 'firebase';
 import Home from '../Home/Home';
-import Priority from '../Priority/Priority'
+import Priority from '../../../pages/Priority/Priority'
 import EditPlan from '../DailyPlan/EditPlan';
 // import Navbar from '../Navbar';
 import Today from './Today';
