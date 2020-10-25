@@ -70,21 +70,17 @@ function App(props) {
 
 
 
-  // useEffect(() => {	 
-  //   async function result () {
-  //     await firebaseInitializing.isInitialized().then(value => {	    
-  //       setCurrentUser(value);
-  //     });
-  //   } 
-  //   result();
-  // }, []);
-
-  useEffect(() => {
-    async function result() {
+  useEffect(() => {	 
+    async function result () {
       await firebaseInitializing.isInitialized().then(value => {	    
         setCurrentUser(value);
       });
+    } 
+    result();
+  }, []);
 
+  useEffect(() => {
+    async function result() {
       if (currentUser) {
         try{
           console.log(currentUser);
@@ -107,7 +103,7 @@ function App(props) {
       }
     }
     result();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     async function result() {

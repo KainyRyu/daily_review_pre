@@ -46,12 +46,6 @@ export default function DailyPlan() {
     // setEventTimes(() =>  response.json());
   // }
 
-  useEffect(() => {
-    fetch(`${databaseURL}timeslots.json`)
-    .then(res => res.json())
-    .then(data => setTimeslots(Object.values(data)));
-  }, [])
-
   let { path, url } = useRouteMatch();
   
           
