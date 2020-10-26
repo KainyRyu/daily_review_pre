@@ -83,22 +83,24 @@ function App(props) {
     async function result() {
       if (currentUser) {
         try{
-          console.log(currentUser);
-          await sendRequest(
-            'http://localhost:5000/api/users/signup', 
-            'POST', 
-            JSON.stringify({
-              name: currentUser.displayName,
-              email: currentUser.email,
-              fuid: currentUser.uid
-            }),
+          console.log('currentUser - ',currentUser);
+          
+          const response = fetch(
             {
-              'Content-Type': 'application/json'
-            }
-            );
+              method: 'POST', 
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                name: currentUser.displayName,
+                email: currentUser.email,
+                fuid: currentUser.uid
+              })
+            });
+            const responseData = await response.json();
+            console.log(responseData);
+         
             signIn();
         } catch (err) {
-          console.log(err);
+          console.log(err); 
         }
       }
     }

@@ -2,6 +2,7 @@ const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
+    //console.log(req);
     const { name, email, fuid } = req.body;
 
     let existingUser;
@@ -18,6 +19,7 @@ const signup = async (req, res, next) => {
             user: existingUser.toObject({ getters: true })
         });
     }
+    console.log(`name : ${name}, email : ${email}, fuid : ${fuid}`);
 
     const createdUser = new User({
         name, email, fuid
@@ -26,6 +28,7 @@ const signup = async (req, res, next) => {
     try {
         await createdUser.save();
     } catch (err) {
+        console.log('catch : ', err);
         const error = new HttpError ('Login failed, please try again', 500);
         return next(error);
     }
