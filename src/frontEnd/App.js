@@ -84,19 +84,29 @@ function App(props) {
       if (currentUser) {
         try{
           console.log('currentUser - ',currentUser);
-          
-          const response = fetch(
-            {
-              method: 'POST', 
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({
-                name: currentUser.displayName,
-                email: currentUser.email,
-                fuid: currentUser.uid
-              })
-            });
-            const responseData = await response.json();
-            console.log(responseData);
+          await sendRequest(
+            'http://localhost:5000/api/users/signup', 
+            'POST',
+            JSON.stringify({
+              name: currentUser.displayName,
+              email: currentUser.email,
+              fuid: currentUser.uid
+            })
+            
+
+          )
+          // const response = fetch(
+          //   {
+          //     method: 'POST', 
+          //     headers: {'Content-Type': 'application/json'},
+          //     body: JSON.stringify({
+          //       name: currentUser.displayName,
+          //       email: currentUser.email,
+          //       fuid: currentUser.uid
+          //     })
+          //   });
+          //   const responseData = await response.json();
+          //   console.log(responseData);
          
             signIn();
         } catch (err) {
