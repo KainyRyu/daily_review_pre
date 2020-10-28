@@ -27,7 +27,10 @@ export const useHttpClient = () => {
             });
 
             const responseData = await response.json();
-            console.log(responseData);
+
+            activeHttpRequests.current = activeHttpRequests.current.filter(
+                reqCtrl => reqCtrl !== httpAbortCtrl
+            );
 
             if (!responseData.ok) {
                 throw new Error(responseData.message)
@@ -40,7 +43,6 @@ export const useHttpClient = () => {
             setIsLoading(false);
             throw err;
         }
-        setIsLoading(false);
     }, []); // this function has no dependencies. So now we won't see infinite loops
 
     const clearError = () => {

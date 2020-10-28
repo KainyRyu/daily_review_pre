@@ -98,20 +98,9 @@ function App(props) {
           signIn();
         } catch (err) {}
       }
-    };
+    }
     result();
   }, [currentUser]);
-
-  // useEffect(() => {
-  //   async function result() {
-  //     if (isSignedIn) {
-  //       try {
-  //         await sendRequest('http://localhost:5000/api/users');
-  //       } catch (err) {}
-  //     }
-  //   }
-  //   result();
-  // }, [isSignedIn])
 
 
   return !!currentUser ? (

@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import Home from '../Home/Home';
 import Priority from '../../../pages/Priority/Priority'
 import EditPlan from '../DailyPlan/EditPlan';
-// import Navbar from '../Navbar';
 import Today from './Today';
 import './landing.css';
 import NotFound from '../../../NotFound';

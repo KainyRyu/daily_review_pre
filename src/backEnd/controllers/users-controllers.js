@@ -7,7 +7,7 @@ const signup = async (req, res, next) => {
 
     let existingUser;
     try {
-        existingUser = await User.findOne({ email: email });
+        existingUser = await User.findOne({ fuid: fuid });
     } catch (err) {
         const error = new HttpError('Something went wrong, try again later', 500);
         return next(error);
