@@ -82,8 +82,7 @@ function App(props) {
   useEffect(() => {
     async function result() {
       if (currentUser) {
-        try{
-          console.log('currentUser - ',currentUser);
+        try {
           await sendRequest(
             'http://localhost:5000/api/users/signup', 
             'POST',
@@ -91,42 +90,28 @@ function App(props) {
               name: currentUser.displayName,
               email: currentUser.email,
               fuid: currentUser.uid
-            })
-            
-
-          )
-          // const response = fetch(
-          //   {
-          //     method: 'POST', 
-          //     headers: {'Content-Type': 'application/json'},
-          //     body: JSON.stringify({
-          //       name: currentUser.displayName,
-          //       email: currentUser.email,
-          //       fuid: currentUser.uid
-          //     })
-          //   });
-          //   const responseData = await response.json();
-          //   console.log(responseData);
-         
-            signIn();
-        } catch (err) {
-          console.log(err); 
-        }
+            }),
+            {
+              'Content-Type': 'application/json'
+            }
+          );
+          signIn();
+        } catch (err) {}
       }
-    }
+    };
     result();
   }, [currentUser]);
 
-  useEffect(() => {
-    async function result() {
-      if (isSignedIn) {
-        try {
-          await sendRequest('http://localhost:5000/api/users');
-        } catch (err) {}
-      }
-    }
-    result();
-  }, [isSignedIn])
+  // useEffect(() => {
+  //   async function result() {
+  //     if (isSignedIn) {
+  //       try {
+  //         await sendRequest('http://localhost:5000/api/users');
+  //       } catch (err) {}
+  //     }
+  //   }
+  //   result();
+  // }, [isSignedIn])
 
 
   return !!currentUser ? (

@@ -13,7 +13,6 @@ const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
 export default function DailyPlan() {
   const context = useContext(AuthContext);
   const [timeslots, setTimeslots] = useState([]);
-  console.log(context);
   
   // const { isLoading, error, sendRequest, clearError} = useHttpClient();
   // const {state, dispatch} = useContext(MyContext);

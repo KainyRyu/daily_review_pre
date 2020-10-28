@@ -8,13 +8,16 @@ export const useHttpClient = () => {
     const activeHttpRequests = useRef([]);
     // a hook that turns into a reference which will not reinitialise
     // It'll basically store data across re render cycle
+    //not managing as a state, for a state react would also manage it to survive
+    //re render cycles, because i don't want to update the UI when i change this data.
 
-
-    const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
-        //by using useCallback, this function will never get recreate it when the component that uses ths hook re renders
+    const sendRequest = useCallback (async (url, method = 'GET', body = null, headers = {}) => {
         setIsLoading(true);
         const httpAbortCtrl = new AbortController();
         activeHttpRequests.current.push(httpAbortCtrl);
+        //this current property holds does array which doesn't change across re render cycles
+        // to this i push the abort controller
+    
         try {
             const response = await fetch(url, {
                 method,
@@ -24,12 +27,12 @@ export const useHttpClient = () => {
             });
 
             const responseData = await response.json();
+            console.log(responseData);
 
-            activeHttpRequests.current = activeHttpRequests.current.filter(reqCtrl => reqCtrl.abort());
-
-            if (!response.ok) {
-                throw new Error(responseData.message);
+            if (!responseData.ok) {
+                throw new Error(responseData.message)
             }
+
             setIsLoading(false);
             return responseData;
         } catch (err) {
@@ -37,7 +40,8 @@ export const useHttpClient = () => {
             setIsLoading(false);
             throw err;
         }
-    }, []);// the function has no dependencies so i add an empty array as a second argument to use callback
+        setIsLoading(false);
+    }, []); // this function has no dependencies. So now we won't see infinite loops
 
     const clearError = () => {
         setError(null);
