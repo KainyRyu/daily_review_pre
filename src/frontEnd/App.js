@@ -82,6 +82,7 @@ function App(props) {
   useEffect(() => {
     async function result() {
       if (currentUser) {
+        signIn();
         try {
           await sendRequest(
             'http://localhost:5000/api/users/signup', 
@@ -95,16 +96,14 @@ function App(props) {
               'Content-Type': 'application/json'
             }
           );
-          signIn();
         } catch (err) {}
       }
     }
     result();
   }, [currentUser]);
 
-
   return !!currentUser ? (
-    <AuthContext.Provider value={{ isSignedIn: isSignedIn, signIn: signIn, signOut: signOut }}>
+    <AuthContext.Provider value={{ isSignedIn: isSignedIn, currentUser: currentUser, signIn: signIn, signOut: signOut }}>
       {/* //everytime context render it will rerender */}
       <Landing currentUser={currentUser}/>
       <button onClick={signOut}>SignOut</button>

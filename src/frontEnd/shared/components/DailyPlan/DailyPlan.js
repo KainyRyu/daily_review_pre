@@ -14,21 +14,9 @@ export default function DailyPlan() {
   const context = useContext(AuthContext);
   const [timeslots, setTimeslots] = useState([]);
   
-  // const { isLoading, error, sendRequest, clearError} = useHttpClient();
-  // const {state, dispatch} = useContext(MyContext);
-  // const {timeslots} = state;
+  useEffect(() => {
 
-  // useEffect(() => {
-  //   const fetchPlans = async () => {
-  //     try {
-  //       const responseData = await sendRequest(`http://localhost:5000/api/dailyplan/${}`);
-  //     } catch (err) {
-
-  //     }
-  //   }
-    
-  //   fetchPlans();
-  // }, [sendRequest]);
+  }, [])
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -38,12 +26,6 @@ export default function DailyPlan() {
     //the slot time passed, alert for reveiwing
   }
   
-  // async function fetchURL() {
-  //   const response = await fetch(`${databaseURL}timeslots.json`);
-  //   const result = await response.json();
-  //   Promise.all([response, result]);
-    // setEventTimes(() =>  response.json());
-  // }
 
   let { path, url } = useRouteMatch();
   
