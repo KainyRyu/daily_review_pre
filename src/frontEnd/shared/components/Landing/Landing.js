@@ -10,14 +10,14 @@ import './landing.css';
 import NotFound from '../../../NotFound';
 import Review from '../DailyPlan/Review/Review';
 
-export default function Landing({ currentUser }) {
+export default function Landing({ firebaseUser }) {
   const auth = useContext(AuthContext);
 
   return (
     <div className="Landing">
       <Router>
         <Today />
-        <div>{currentUser.displayName}</div>
+        <div>{firebaseUser.displayName}</div>
           <div id="content">
             <Switch>
               <Route exact path="/" component={Home} />

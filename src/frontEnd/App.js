@@ -54,7 +54,8 @@ import { useHttpClient } from './shared/hooks/http-hook';
 
 function App(props) {	
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(false);
+  const [firebaseUser, setFirebaseUser] = useState(false);
+  // const [currentUser, setCurrentUser] = useState(null);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const signIn = useCallback(() => {
@@ -73,7 +74,7 @@ function App(props) {
   useEffect(() => {	 
     async function result () {
       await firebaseInitializing.isInitialized().then(value => {	    
-        setCurrentUser(value);
+        setFirebaseUser(value);
       });
     } 
     result();
@@ -81,16 +82,16 @@ function App(props) {
 
   useEffect(() => {
     async function result() {
-      if (currentUser) {
+      if (firebaseUser) {
         signIn();
         try {
           await sendRequest(
             'http://localhost:5000/api/users/signup', 
             'POST',
             JSON.stringify({
-              name: currentUser.displayName,
-              email: currentUser.email,
-              fuid: currentUser.uid
+              name: firebaseUser.displayName,
+              email: firebaseUser.email,
+              fuid: firebaseUser.uid
             }),
             {
               'Content-Type': 'application/json'
@@ -100,12 +101,28 @@ function App(props) {
       }
     }
     result();
-  }, [currentUser]);
+  }, [firebaseUser]);
 
-  return !!currentUser ? (
-    <AuthContext.Provider value={{ isSignedIn: isSignedIn, currentUser: currentUser, signIn: signIn, signOut: signOut }}>
+  // useEffect(() => {
+  //   const singedUser = async () => {
+  //     console.log(currentUser);
+  //     try {
+  //       const responseData = await sendRequest(
+  //         'http://localhost:5000/api/users'
+  //       );
+  //       setCurrentUser(responseData.users.map(user => user.name));
+  //       console.log(currentUser);
+  //       // console.log(responseData.data.filter(user => user.fuid === firebaseUser.uid));
+  //     } catch (err) {}
+  //   };
+  //   singedUser();
+
+  // }, [firebaseUser]);
+
+  return !!firebaseUser ? (
+    <AuthContext.Provider value={{ isSignedIn: isSignedIn, signIn: signIn, signOut: signOut }}>
       {/* //everytime context render it will rerender */}
-      <Landing currentUser={currentUser}/>
+      <Landing firebaseUser={firebaseUser}/>
       <button onClick={signOut}>SignOut</button>
     </AuthContext.Provider>
     // <MyContext.Provider value={{state, dispatch}}>

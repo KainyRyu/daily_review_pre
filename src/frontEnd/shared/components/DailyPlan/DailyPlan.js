@@ -44,6 +44,7 @@ export default function DailyPlan() {
             //   })
             // }
 
+
   function timeTable() {
     return timeslots ? timeslots.map((timeslot, index) => (
       <div 
