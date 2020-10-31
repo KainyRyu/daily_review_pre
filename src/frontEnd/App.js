@@ -103,22 +103,6 @@ function App(props) {
     result();
   }, [firebaseUser]);
 
-  // useEffect(() => {
-  //   const singedUser = async () => {
-  //     console.log(currentUser);
-  //     try {
-  //       const responseData = await sendRequest(
-  //         'http://localhost:5000/api/users'
-  //       );
-  //       setCurrentUser(responseData.users.map(user => user.name));
-  //       console.log(currentUser);
-  //       // console.log(responseData.data.filter(user => user.fuid === firebaseUser.uid));
-  //     } catch (err) {}
-  //   };
-  //   singedUser();
-
-  // }, [firebaseUser]);
-
   return !!firebaseUser ? (
     <AuthContext.Provider value={{ isSignedIn: isSignedIn, signIn: signIn, signOut: signOut }}>
       {/* //everytime context render it will rerender */}

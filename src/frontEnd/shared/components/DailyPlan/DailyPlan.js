@@ -7,6 +7,7 @@ import Productivity from '../Productivity/Productivity';
 import './dailyPlan.css';
 import { useHttpClient } from '../../hooks/http-hook';
 import { AuthContext } from '../../context/auth-context';
+import EditPlan from './EditPlan';
 
 
 const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
@@ -78,8 +79,9 @@ export default function DailyPlan() {
         Daily Review <br /> {current()}
       </h1>
       <br />
-      <Productivity />
-
+      <EditPlan />
+      {/* <Productivity /> */}
+      <Link className="submit-btn">Add Plan</Link>
       <div className="timeslot-wrapper">
         <div className="timeslot-row">
           <div className="timeslot"></div>

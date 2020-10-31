@@ -19,11 +19,6 @@ export default function EditPlan({ id }) {
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
 
-    // useEffect(() => {
-    //     fetch(`${databaseURL}timeslots.json`)
-    //     .then(res => res.json())
-    //     .then(data => setApiData(Object.values(data)));
-    // },[])
     useEffect(() => {
         fetch(`${databaseURL}timeslots.json`)
         .then(res => res.json())
@@ -55,11 +50,13 @@ export default function EditPlan({ id }) {
     function submitHandler(e) {
         e.preventDefault();
         postingTitle(replace());
-        sendRequest('http://localhost:5000/api/dailyplan/addplan', 'POST', JSON.stringify({
-            title: newEvent.title, 
-            starts: newEvent.starts, 
-            ends: newEvent.ends, 
-            // uid
+        sendRequest(
+            'http://localhost:5000/api/dailyplan/addplan', 
+            'POST', 
+            JSON.stringify({
+                title: newEvent.title, 
+                starts: newEvent.starts, 
+                ends: newEvent.ends,
         }))
 
     }
