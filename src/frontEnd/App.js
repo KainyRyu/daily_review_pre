@@ -75,10 +75,12 @@ function App(props) {
     async function result () {
       await firebaseInitializing.isInitialized().then(value => {	    
         setFirebaseUser(value);
+
       });
     } 
     result();
   }, []);
+
 
   useEffect(() => {
     async function result() {
@@ -104,7 +106,7 @@ function App(props) {
   }, [firebaseUser]);
 
   return !!firebaseUser ? (
-    <AuthContext.Provider value={{ isSignedIn: isSignedIn, signIn: signIn, signOut: signOut }}>
+    <AuthContext.Provider value={{ isSignedIn: isSignedIn, fuid: firebaseUser.uid, signIn: signIn, signOut: signOut }}>
       {/* //everytime context render it will rerender */}
       <Landing firebaseUser={firebaseUser}/>
       <button onClick={signOut}>SignOut</button>

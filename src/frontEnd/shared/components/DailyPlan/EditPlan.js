@@ -7,8 +7,7 @@ const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 export default function EditPlan({ id }) {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [timeslots, setTimeslots] = useState([]);
-    const [apiData, setApiData] = useState([]);
-    const [updateArray, setUpdateArray] = useState([]);
+    // const [currentUser, setCurrentUser] = useState(null);
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
@@ -18,46 +17,34 @@ export default function EditPlan({ id }) {
     const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value.trim()})
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
-
-    useEffect(() => {
-        fetch(`${databaseURL}timeslots.json`)
-        .then(res => res.json())
-        .then(data => setTimeslots(Object.values(data)));
-      }, [])
-
-    const postingTitle = async(data) => {
-        const response = await fetch(`${databaseURL}timeslots.json`,{
-            method: 'PUT',
-            body: JSON.stringify(data)
-        })
-        const result = await response.json();
-        if (response.status !== 200) {
-            throw new Error(response.statusText)
-        }
-        Promise.all([response, result])
-    }
     
-    function replace() {
-        return timeslots
-            .map((timeslot, index) => {
-                if(index >= newEvent.starts && index <= newEvent.ends){
-                    return {...timeslot, title: newEvent.title};
-                }
-            return timeslot;
-        });
-    }
+    // function replace() {
+    //     return timeslots
+    //         .map((timeslot, index) => {
+    //             if(index >= newEvent.starts && index <= newEvent.ends){
+    //                 return {...timeslot, title: newEvent.title};
+    //             }
+    //         return timeslot;
+    //     });
+    // }
     
     function submitHandler(e) {
         e.preventDefault();
-        postingTitle(replace());
-        sendRequest(
-            'http://localhost:5000/api/dailyplan/addplan', 
-            'POST', 
-            JSON.stringify({
-                title: newEvent.title, 
-                starts: newEvent.starts, 
-                ends: newEvent.ends,
-        }))
+        // postingTitle(replace());
+        try {
+            sendRequest(
+                'http://localhost:5000/api/dailyplan/addplan', 
+                'POST', 
+                JSON.stringify({
+                    title: newEvent.title, 
+                    starts: newEvent.starts, 
+                    ends: newEvent.ends,
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            )
+        } catch (err) {}
 
     }
 
@@ -80,6 +67,8 @@ export default function EditPlan({ id }) {
                     // }
     // }
 
+    const timeOptions = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
     return (
         <form >
             <div  id="edit-form">
@@ -100,7 +89,7 @@ export default function EditPlan({ id }) {
                         value={newEvent.starts}
                     >
                         {
-                            timeslots.map((hour, index) => {
+                            timeOptions.map((hour, index) => {
                                 return <option key={index}>{index < 10 ? `0${index}` : index}</option>
                             })
                         }
@@ -114,7 +103,7 @@ export default function EditPlan({ id }) {
                         value={newEvent.ends}
                     >     
                         {
-                            timeslots.map((hour, index) => {
+                            timeOptions.map((hour, index) => {
                                 return <option key={index}>{index < 10 ? `0${index}` : index}</option>
                             })
                         }

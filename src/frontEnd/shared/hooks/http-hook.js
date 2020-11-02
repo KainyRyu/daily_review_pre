@@ -11,37 +11,38 @@ export const useHttpClient = () => {
     //not managing as a state, for a state react would also manage it to survive
     //re render cycles, because i don't want to update the UI when i change this data.
 
-    const sendRequest = useCallback (async (url, method = 'GET', body = null, headers = {}) => {
-        setIsLoading(true);
-        const httpAbortCtrl = new AbortController();
-        activeHttpRequests.current.push(httpAbortCtrl);
-        //this current property holds does array which doesn't change across re render cycles
-        // to this i push the abort controller
-    
-        try {
-            const response = await fetch(url, {
-                method,
-                body,
-                headers,
-                signal: httpAbortCtrl.signal
-            });
+    const sendRequest = useCallback(
+        async (url, method = 'GET', body = null, headers = {}) => {
+            setIsLoading(true);
+            const httpAbortCtrl = new AbortController();
+            activeHttpRequests.current.push(httpAbortCtrl);
+            //this current property holds does array which doesn't change across re render cycles
+            // to this i push the abort controller
+        
+            try {
+                const response = await fetch(url, {
+                    method,
+                    body,
+                    headers,
+                    signal: httpAbortCtrl.signal
+                });
 
-            const responseData = await response.json();
+                const responseData = await response.json();
 
-            activeHttpRequests.current = activeHttpRequests.current.filter(
-                reqCtrl => reqCtrl !== httpAbortCtrl
-            );
+                activeHttpRequests.current = activeHttpRequests.current.filter(
+                    reqCtrl => reqCtrl !== httpAbortCtrl
+                );
 
-            if (!responseData.ok) {
-                throw new Error(responseData.message)
-            }
+                if (!responseData.ok) {
+                    throw new Error(responseData.message)
+                }
 
-            setIsLoading(false);
-            return responseData;
-        } catch (err) {
-            setError(err.message);
-            setIsLoading(false);
-            throw err;
+                setIsLoading(false);
+                return responseData;
+            } catch (err) {
+                setError(err.message);
+                setIsLoading(false);
+                throw err;
         }
     }, []); // this function has no dependencies. So now we won't see infinite loops
 
