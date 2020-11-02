@@ -13,11 +13,24 @@ import EditPlan from './EditPlan';
 const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
 export default function DailyPlan() {
   const context = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState(null);
   const [timeslots, setTimeslots] = useState([]);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient;
   
   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          'http://localhost:5000/api/user/'
+        );
 
-  }, [])
+        setCurrentUser(responseData.users);
+        console.log('Line 28 running');
+      } catch (err) {}
+    };
+
+    fetchUsers();
+  }, [sendRequest]);
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -27,10 +40,8 @@ export default function DailyPlan() {
     //the slot time passed, alert for reveiwing
   }
   
-
-  let { path, url } = useRouteMatch();
+  // let { path, url } = useRouteMatch();
   
-          
             // function totalProductivity() {
             //   console.log(timeslots)
             //   const reviews = timeslots.map(timeslot => timeslot.review)
