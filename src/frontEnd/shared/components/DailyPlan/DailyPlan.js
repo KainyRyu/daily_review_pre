@@ -20,10 +20,8 @@ export default function DailyPlan() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const responseData = await sendRequest(
-          'http://localhost:5000/api/user/'
-        );
-
+        const response = await fetch('http://localhost:5000/api/users');
+        const responseData = await response.json();
         setCurrentUser(responseData.users);
         console.log('Line 28 running');
       } catch (err) {}
