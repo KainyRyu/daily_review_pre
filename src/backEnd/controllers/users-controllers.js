@@ -37,7 +37,7 @@ const getAllUsers = async (req, res, next) => {
     console.log('getting user?');
     let users;
     try {
-        users = await User.find({fuid}, '');
+        users = await User.find({}, '');
     } catch (err) {
         const error = new HttpError ('Fetching users failed, please try again later.', 500);
         return next(error);

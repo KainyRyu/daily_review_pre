@@ -17,13 +17,17 @@ export default function DailyPlan() {
   const [timeslots, setTimeslots] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient;
   
+  let currentFuid = useContext(AuthContext);
+  // setCurrentUser(useContext(AuthContext.fuid));
+  console.log(currentFuid);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/users');
         const responseData = await response.json();
-        setCurrentUser(responseData.users);
-        console.log('Line 28 running');
+        // setCurrentUser(responseData.users.find(user => user.fuid));
+        // console.log(setCurrentUser);
       } catch (err) {}
     };
 
