@@ -17,7 +17,12 @@ export default function DailyPlan() {
   const [timeslots, setTimeslots] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient;
   
-  const currentFuid = useContext(AuthContext);
+
+  let currentFuid;
+  if (auth) {
+    currentFuid = auth.fuid;
+  }
+  console.log(currentFuid);
   // setCurrentUser(useContext(AuthContext.fuid));
   // console.log(currentFuid);
 
@@ -33,7 +38,7 @@ export default function DailyPlan() {
     fetchUsers();
   }, [sendRequest]);
 
-  
+
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -86,14 +91,14 @@ export default function DailyPlan() {
       </div>
     )): <></>;
   }        
-  
-  return (
+
+  return auth ? (
     <div>
       <h1>
         Daily Review <br /> {current()}
       </h1>
       <br />
-      <EditPlan currentUser={currentUser}/>
+      <EditPlan currentUser={auth}/>
       {/* <Productivity /> */}
       <Link className="submit-btn">Add Plan</Link>
       <div className="timeslot-wrapper">
@@ -107,5 +112,5 @@ export default function DailyPlan() {
         <div>{timeTable()}</div>
       </div>
     </div>
-  );
+  ) : <></>;
 }

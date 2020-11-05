@@ -52,7 +52,7 @@ import { useHttpClient } from './shared/hooks/http-hook';
 //   }
 // }
 
-function App(props) {	
+function App() {	
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [firebaseUser, setFirebaseUser] = useState(false);
   // const [currentUser, setCurrentUser] = useState(null);

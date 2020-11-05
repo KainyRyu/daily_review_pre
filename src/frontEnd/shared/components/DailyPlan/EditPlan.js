@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHttpClient } from '../../hooks/http-hook';
 import './editplan.css';
+import { AuthContext } from '../../context/auth-context';
 
-const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
-export default function EditPlan({ currentUser }) {
+export default function EditPlan() {
+    const firebaseId = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [timeslots, setTimeslots] = useState([]);
     // const [currentUser, setCurrentUser] = useState(null);
@@ -13,7 +14,7 @@ export default function EditPlan({ currentUser }) {
         starts: 0,
         ends: 0,
     });
-
+    console.log(auth);
     const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value.trim()})
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
