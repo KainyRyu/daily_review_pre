@@ -19,10 +19,7 @@ export default function DailyPlan() {
   
 
   let currentFuid;
-  if (auth) {
-    currentFuid = auth.fuid;
-  }
-  console.log(currentFuid);
+  
   // setCurrentUser(useContext(AuthContext.fuid));
   // console.log(currentFuid);
 
@@ -98,7 +95,7 @@ export default function DailyPlan() {
         Daily Review <br /> {current()}
       </h1>
       <br />
-      <EditPlan currentUser={auth}/>
+      <EditPlan currentUser={currentUser}/>
       {/* <Productivity /> */}
       <Link className="submit-btn">Add Plan</Link>
       <div className="timeslot-wrapper">

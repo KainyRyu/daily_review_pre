@@ -4,17 +4,17 @@ import './editplan.css';
 import { AuthContext } from '../../context/auth-context';
 
 
-export default function EditPlan() {
-    const firebaseId = useContext(AuthContext);
+export default function EditPlan({ currentUser }) {
+
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    const [timeslots, setTimeslots] = useState([]);
+    // const [timeslots, setTimeslots] = useState([]);
     // const [currentUser, setCurrentUser] = useState(null);
     const [newEvent, setNewEvent] = useState({
         title: '',
         starts: 0,
         ends: 0,
     });
-    console.log(auth);
+
     const getTitle = (e) => setNewEvent({...newEvent, title: e.target.value.trim()})
     const getStarts = (e) => setNewEvent({...newEvent, starts: e.target.value})
     const getEnds = (e) => setNewEvent({...newEvent, ends: e.target.value})
@@ -28,11 +28,13 @@ export default function EditPlan() {
     //         return timeslot;
     //     });
     // }
-    
+    console.log(currentUser);
+
     function submitHandler(e) {
         e.preventDefault();
         // postingTitle(replace());
         try {
+            console.log(currentUser.id);
             sendRequest(
                 'http://localhost:5000/api/dailyplan/addplan', 
                 'POST', 
@@ -40,6 +42,7 @@ export default function EditPlan() {
                     title: newEvent.title, 
                     starts: newEvent.starts, 
                     ends: newEvent.ends,
+                    id: currentUser.id
                 }),
                 {
                     'Content-Type': 'application/json'

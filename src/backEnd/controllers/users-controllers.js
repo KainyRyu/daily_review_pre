@@ -34,7 +34,6 @@ const signup = async (req, res, next) => {
 }
 
 const getAllUsers = async (req, res, next) => {
-    console.log('getting user?');
     let users;
     try {
         users = await User.find({}, '');
