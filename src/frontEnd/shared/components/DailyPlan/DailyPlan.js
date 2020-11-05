@@ -12,27 +12,28 @@ import EditPlan from './EditPlan';
 
 const databaseURL = 'https://dailyreview-7e684.firebaseio.com/';
 export default function DailyPlan() {
-  const context = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState(null);
   const [timeslots, setTimeslots] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient;
   
-  let currentFuid = useContext(AuthContext);
+  const currentFuid = useContext(AuthContext);
   // setCurrentUser(useContext(AuthContext.fuid));
-  console.log(currentFuid);
+  // console.log(currentFuid);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/users');
         const responseData = await response.json();
-        // setCurrentUser(responseData.users.find(user => user.fuid));
-        // console.log(setCurrentUser);
+        await setCurrentUser(responseData.users.find(user => user.fuid === auth.fuid));
       } catch (err) {}
     };
-
+    
     fetchUsers();
   }, [sendRequest]);
+
+  
 
   let newDate = new Date();
   let hour = newDate.getHours();
@@ -92,7 +93,7 @@ export default function DailyPlan() {
         Daily Review <br /> {current()}
       </h1>
       <br />
-      <EditPlan />
+      <EditPlan currentUser={currentUser}/>
       {/* <Productivity /> */}
       <Link className="submit-btn">Add Plan</Link>
       <div className="timeslot-wrapper">

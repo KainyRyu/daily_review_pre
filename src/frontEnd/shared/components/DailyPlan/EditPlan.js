@@ -4,7 +4,7 @@ import './editplan.css';
 
 const databaseURL = "https://dailyreview-7e684.firebaseio.com/";
 
-export default function EditPlan({ id }) {
+export default function EditPlan({ currentUser }) {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [timeslots, setTimeslots] = useState([]);
     // const [currentUser, setCurrentUser] = useState(null);
